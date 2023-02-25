@@ -1,6 +1,8 @@
 package com.uni.bakalauras.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "preke")
@@ -14,18 +16,33 @@ public class Products {
     @ManyToOne
     @JoinColumn(name="RUSIES_ID", nullable=false)
     private Groups group;
+
     @Column(name = "PAVADINIMAS")
     private String name;
+
     @Column(name = "SANDELYJE")
     private Integer inStock;
+
     @Column(name = "ISMATAVIMAI")
     private String measurement;
+
     @Column(name = "SPALVA")
     private String color;
+
     @Column(name = "SAVIKAINA")
     private Double primeCost;
+
     @Column(name = "PARDAVIMO_KAINA")
     private Double sellCost;
+
+    @ManyToMany(mappedBy = "product")
+    Set<Places> place = new HashSet<>();
+
+    @ManyToMany(mappedBy = "product")
+    Set<Orders> order = new HashSet<>();
+
+    @ManyToMany(mappedBy = "product")
+    Set<StockOrders> stockOrder = new HashSet<>();
 
     public Products() {
     }

@@ -1,6 +1,7 @@
 package com.uni.bakalauras.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "darbuotojas")
@@ -10,14 +11,24 @@ public class Employees {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "DARBUOTOJO_NR", nullable = false, unique = true)
     private Long id;
+
     @Column(name = "VARDAS")
     private String name;
+
     @Column(name = "PAVARDE")
     private String surname;
+
     @Column(name = "SLAPTAZODIS")
     private String password;
+
     @Column(name = "POZICIJA")
     private String position;
+
+    @OneToMany(mappedBy = "employee")
+    private Set<StockOrders> stockOrder;
+
+    @OneToMany(mappedBy = "employee")
+    private Set<Orders> order;
 
     public Employees() {
     }

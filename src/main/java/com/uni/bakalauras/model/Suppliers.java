@@ -1,6 +1,6 @@
 package com.uni.bakalauras.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tiekejas")

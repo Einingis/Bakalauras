@@ -11,8 +11,10 @@ public class Groups {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "RUSIES_ID", nullable = false, unique = true)
     private Long id;
+
     @Column(name = "PAVADINIMAS")
     private String name;
+
     @OneToMany(mappedBy = "group")
     private Set<Products> products;
 

@@ -10,14 +10,21 @@ public class Clients {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "KLIENTO_ID", nullable = false, unique = true)
     private Long id;
+
     @Column(name = "KLIENTO_VARDAS")
     private String name;
+
     @Column(name = "NUMERIS")
     private String number;
+
     @Column(name = "ADRESAS")
     private String address;
+
     @Column(name = "MIESTAS")
     private String city;
+
+    @OneToMany(mappedBy = "client")
+    private Orders order;
 
     public Clients() {
     }
