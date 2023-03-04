@@ -8,8 +8,12 @@ module com.example.bakalauras {
     requires mysql.connector.java;
 
 
-    opens com.example.bakalauras to javafx.fxml;
+    opens com.uni.bakalauras to javafx.fxml;
     exports com.uni.bakalauras;
-    opens com.uni.bakalauras.model to javafx.fxml, org.hibernate.orm.core, java.persistence;
+    exports com.uni.bakalauras.fxmlControllers;
+    opens com.uni.bakalauras.fxmlControllers to javafx.fxml;
     exports com.uni.bakalauras.model;
+    opens com.uni.bakalauras.model to java.persistence, javafx.fxml, org.hibernate.orm.core;
+    exports com.uni.bakalauras.model.Ids;
+    opens com.uni.bakalauras.model.Ids to java.persistence, javafx.fxml, org.hibernate.orm.core;
 }

@@ -1,7 +1,11 @@
 package com.uni.bakalauras.model;
 
+import com.uni.bakalauras.model.Groups;
+import com.uni.bakalauras.model.Have;
+import com.uni.bakalauras.model.Returning;
+import com.uni.bakalauras.model.Stored;
+
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -10,57 +14,65 @@ public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PREKES_ID", nullable = false, unique = true)
+    @Column(name = "PREKESID", nullable = false, unique = true)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="RUSIES_ID", nullable=false)
+    @JoinColumn(name="RUSIESID", nullable=false)
     private Groups group;
 
     @Column(name = "PAVADINIMAS")
     private String name;
 
-    @Column(name = "SANDELYJE")
-    private Integer inStock;
-
-    @Column(name = "ISMATAVIMAI")
-    private String measurement;
-
     @Column(name = "SPALVA")
     private String color;
+
+    @Column(name = "ISMATAVIMAS")
+    private String measurement;
 
     @Column(name = "SAVIKAINA")
     private Double primeCost;
 
-    @Column(name = "PARDAVIMO_KAINA")
+    @Column(name = "KAINA")
     private Double sellCost;
 
-    @ManyToMany(mappedBy = "product")
-    Set<Places> place = new HashSet<>();
+    @Column(name = "KIEKIS")
+    private Integer inStock;
 
-    @ManyToMany(mappedBy = "product")
-    Set<Orders> order = new HashSet<>();
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
+    private Set<Stored> stored;
 
-    @ManyToMany(mappedBy = "product")
-    Set<StockOrders> stockOrder = new HashSet<>();
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
+    private Set<Have> have;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
+    private Set<Returning> returning;
 
     public Products() {
     }
 
-    public Products(Groups group, String name) {
+    public Products(Groups group, String name, String color, String measurement, Double primeCost, Double sellCost, Integer inStock) {
         this.group = group;
         this.name = name;
-    }
-
-    public Products(Long id, Groups group, String name, Integer inStock, String measurement, String color, Double primeCost, Double sellCost) {
-        this.id = id;
-        this.group = group;
-        this.name = name;
-        this.inStock = inStock;
-        this.measurement = measurement;
         this.color = color;
+        this.measurement = measurement;
         this.primeCost = primeCost;
         this.sellCost = sellCost;
+        this.inStock = inStock;
+    }
+
+    public Products(Groups group, String name, String color, String measurement, Double primeCost,
+                    Double sellCost, Integer inStock, Set<Stored> stored, Set<Have> have, Set<Returning> returning) {
+        this.group = group;
+        this.name = name;
+        this.color = color;
+        this.measurement = measurement;
+        this.primeCost = primeCost;
+        this.sellCost = sellCost;
+        this.inStock = inStock;
+        this.stored = stored;
+        this.have = have;
+        this.returning = returning;
     }
 
     public Long getId() {
@@ -71,11 +83,11 @@ public class Products {
         this.id = id;
     }
 
-    public Groups getType() {
+    public Groups getGroup() {
         return group;
     }
 
-    public void setType(Groups group) {
+    public void setGroup(Groups group) {
         this.group = group;
     }
 
@@ -87,12 +99,12 @@ public class Products {
         this.name = name;
     }
 
-    public Integer getInStock() {
-        return inStock;
+    public String getColor() {
+        return color;
     }
 
-    public void setInStock(Integer inStock) {
-        this.inStock = inStock;
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public String getMeasurement() {
@@ -101,14 +113,6 @@ public class Products {
 
     public void setMeasurement(String measurement) {
         this.measurement = measurement;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public Double getPrimeCost() {
@@ -125,5 +129,37 @@ public class Products {
 
     public void setSellCost(Double sellCost) {
         this.sellCost = sellCost;
+    }
+
+    public Integer getInStock() {
+        return inStock;
+    }
+
+    public void setInStock(Integer inStock) {
+        this.inStock = inStock;
+    }
+
+    public Set<Stored> getStored() {
+        return stored;
+    }
+
+    public void setStored(Set<Stored> stored) {
+        this.stored = stored;
+    }
+
+    public Set<Have> getHave() {
+        return have;
+    }
+
+    public void setHave(Set<Have> have) {
+        this.have = have;
+    }
+
+    public Set<Returning> getReturning() {
+        return returning;
+    }
+
+    public void setReturning(Set<Returning> returning) {
+        this.returning = returning;
     }
 }

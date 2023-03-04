@@ -1,40 +1,53 @@
 package com.uni.bakalauras.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "pirkejas")
+@Table(name = "klientas")
 public class Clients {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "KLIENTO_ID", nullable = false, unique = true)
+    @Column(name = "KLIENTOID", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "KLIENTO_VARDAS")
+    @Column(name = "VARDAS")
     private String name;
 
-    @Column(name = "NUMERIS")
-    private String number;
+    @Column(name = "PAVARDE")
+    private String surname;
 
-    @Column(name = "ADRESAS")
-    private String address;
+    @Column(name = "TELNUMERIS")
+    private String number;
 
     @Column(name = "MIESTAS")
     private String city;
 
-    @OneToMany(mappedBy = "client")
-    private Orders order;
+    @Column(name = "ADRESAS")
+    private String address;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    private Set<Orders> order;
 
     public Clients() {
     }
 
-    public Clients(Long id, String name, String number, String address, String city) {
-        this.id = id;
+    public Clients(String name, String surname, String number, String city, String address) {
         this.name = name;
+        this.surname = surname;
         this.number = number;
-        this.address = address;
         this.city = city;
+        this.address = address;
+    }
+
+    public Clients(String name, String surname, String number, String city, String address, Set<Orders> order) {
+        this.name = name;
+        this.surname = surname;
+        this.number = number;
+        this.city = city;
+        this.address = address;
+        this.order = order;
     }
 
     public Long getId() {
@@ -53,12 +66,28 @@ public class Clients {
         this.name = name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public String getNumber() {
         return number;
     }
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getAddress() {
@@ -69,11 +98,11 @@ public class Clients {
         this.address = address;
     }
 
-    public String getCity() {
-        return city;
+    public Set<Orders> getOrder() {
+        return order;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setOrder(Set<Orders> order) {
+        this.order = order;
     }
 }

@@ -1,8 +1,7 @@
 package com.uni.bakalauras.config;
 
 
-import com.uni.bakalauras.model.Groups;
-import com.uni.bakalauras.model.Products;
+import com.uni.bakalauras.model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -33,9 +32,17 @@ public class HibernateAnnotationUtil {
           .build();
 
         Metadata metadata = new MetadataSources(serviceRegistry)
-          .addAnnotatedClass(Groups.class)
-          .addAnnotatedClass(Products.class)
-          .buildMetadata();
+            .addAnnotatedClass(Clients.class)
+            .addAnnotatedClass(Employees.class)
+            .addAnnotatedClass(Groups.class)
+            .addAnnotatedClass(Have.class)
+            .addAnnotatedClass(Orders.class)
+            .addAnnotatedClass(Places.class)
+            .addAnnotatedClass(Products.class)
+            .addAnnotatedClass(Returning.class)
+            .addAnnotatedClass(Returns.class)
+            .addAnnotatedClass(Stored.class)
+            .buildMetadata();
 
         return metadata.buildSessionFactory();
     }

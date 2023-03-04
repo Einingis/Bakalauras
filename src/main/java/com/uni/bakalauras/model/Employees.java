@@ -9,7 +9,7 @@ public class Employees {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "DARBUOTOJO_NR", nullable = false, unique = true)
+    @Column(name = "DARBUOTOJOID", nullable = false, unique = true)
     private Long id;
 
     @Column(name = "VARDAS")
@@ -21,24 +21,31 @@ public class Employees {
     @Column(name = "SLAPTAZODIS")
     private String password;
 
-    @Column(name = "POZICIJA")
-    private String position;
-
-    @OneToMany(mappedBy = "employee")
-    private Set<StockOrders> stockOrder;
-
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private Set<Orders> order;
 
     public Employees() {
     }
 
-    public Employees(Long id, String name, String surname, String password, String position) {
-        this.id = id;
+    public Employees(String name, String surname, String password) {
         this.name = name;
         this.surname = surname;
         this.password = password;
-        this.position = position;
+    }
+
+    public Employees(String name, String surname, String password, Set<Orders> order) {
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.order = order;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -65,21 +72,11 @@ public class Employees {
         this.password = password;
     }
 
-    public String getPosition() {
-        return position;
+    public Set<Orders> getOrder() {
+        return order;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setOrder(Set<Orders> order) {
+        this.order = order;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
 }

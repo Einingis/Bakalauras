@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.uni.bakalauras.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.HelloController">
+   <children>
+      <Group layoutX="40.0" layoutY="34.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#clickOrders" prefHeight="47.0" prefWidth="158.0" text="Uzsakymai" />
+            <Button alignment="CENTER" layoutX="236.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Inventorius" />
+            <Button layoutY="80.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Ataskaitos" />
+            <Button layoutX="236.0" layoutY="80.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Klientai" />
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

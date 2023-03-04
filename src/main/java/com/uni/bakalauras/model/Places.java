@@ -1,7 +1,6 @@
 package com.uni.bakalauras.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -9,27 +8,27 @@ import java.util.Set;
 public class Places {
 
     @Id
-    @Column(name = "SANDELIS", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "VIETOSID", nullable = false, unique = true)
+    private Long id;
+
+
+    @Column(name = "SANDELIS", nullable = false)
     private String warehouse;
 
-    @Id
-    @Column(name = "LENTYNA", nullable = false, unique = true)
+
+    @Column(name = "LENTYNA", nullable = false)
     private String shelf;
 
-    @Id
-    @Column(name = "VIETA", nullable = false, unique = true)
+
+    @Column(name = "VIETA", nullable = false)
     private String place;
 
     @Column(name = "PILNA")
     private Boolean full;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "sandeliuojama",
-            joinColumns = { @JoinColumn(name = "sandelis"), @JoinColumn(name = "lentyna"), @JoinColumn(name = "vieta")},
-            inverseJoinColumns = { @JoinColumn(name = "prekes_id") }
-    )
-    Set<Products> product = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
+    private Set<Stored> stored;
 
     public Places() {
     }
@@ -39,6 +38,22 @@ public class Places {
         this.shelf = shelf;
         this.place = place;
         this.full = full;
+    }
+
+    public Places(String warehouse, String shelf, String place, Boolean full, Set<Stored> stored) {
+        this.warehouse = warehouse;
+        this.shelf = shelf;
+        this.place = place;
+        this.full = full;
+        this.stored = stored;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getWarehouse() {
@@ -71,5 +86,13 @@ public class Places {
 
     public void setFull(Boolean full) {
         this.full = full;
+    }
+
+    public Set<Stored> getStored() {
+        return stored;
+    }
+
+    public void setStored(Set<Stored> stored) {
+        this.stored = stored;
     }
 }

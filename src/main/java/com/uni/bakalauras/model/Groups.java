@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "rusis")
+@Table(name = "prekiurusis")
 public class Groups {
 
     @Id
@@ -12,11 +12,23 @@ public class Groups {
     @Column(name = "RUSIES_ID", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "PAVADINIMAS")
+    @Column(name = "RUSIESPAVADINIMAS")
     private String name;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
     private Set<Products> products;
+
+    public Groups() {
+    }
+
+    public Groups(String name) {
+        this.name = name;
+    }
+
+    public Groups(String name, Set<Products> products) {
+        this.name = name;
+        this.products = products;
+    }
 
     public Long getId() {
         return id;
