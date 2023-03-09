@@ -49,7 +49,7 @@ public class HibernateAnnotationUtil {
 
     private static Map<String, Object> dbSettings() {
         Map<String, Object> dbSettings = new HashMap<>();
-        dbSettings.put(Environment.URL, "jdbc:mysql://localhost/bakalaurasdb");
+        dbSettings.put(Environment.URL, "jdbc:mysql://localhost/uzsakymovaldymas");
         dbSettings.put(Environment.USER, "root");
         dbSettings.put(Environment.PASS, "");
         dbSettings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");

@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.model.*;
 
 import org.hibernate.Session;
@@ -53,6 +54,8 @@ public class FindAll {
     }
 
     public static List<Orders> findAllOrders() {
+
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);

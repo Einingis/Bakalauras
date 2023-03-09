@@ -5,17 +5,16 @@ import com.uni.bakalauras.model.Ids.ReturningId;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "sandeliuojama")
+@Table(name = "grazina")
 @IdClass(ReturningId.class)
 public class Returning {
 
-    @EmbeddedId
-    private ReturningId id = new ReturningId();
-
+    @Id
     @ManyToOne
     @JoinColumn(name = "GRAZINIMOID")
     private Returns returns;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "PREKESID")
     private Products product;
@@ -30,14 +29,6 @@ public class Returning {
         this.returns = returns;
         this.product = product;
         Quantity = quantity;
-    }
-
-    public ReturningId getId() {
-        return id;
-    }
-
-    public void setId(ReturningId id) {
-        this.id = id;
     }
 
     public Returns getReturns() {

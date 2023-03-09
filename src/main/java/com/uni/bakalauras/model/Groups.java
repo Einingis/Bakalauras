@@ -9,7 +9,7 @@ public class Groups {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "RUSIES_ID", nullable = false, unique = true)
+    @Column(name = "RUSIESID", nullable = false, unique = true)
     private Long id;
 
     @Column(name = "RUSIESPAVADINIMAS")

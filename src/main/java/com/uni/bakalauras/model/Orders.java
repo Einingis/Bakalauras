@@ -22,7 +22,8 @@ public class Orders {
     @JoinColumn(name="DARBUOTOJOID", nullable=false)
     private Employees employee;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "GRAZINIMOID")
     private Returns returns;
 
     @Column(name = "BUSENA")
@@ -95,6 +96,10 @@ public class Orders {
 
     public void setClient(Clients client) {
         this.client = client;
+    }
+
+    public String getClientName() {
+        return getClient().getName();
     }
 
     public Employees getEmployee() {

@@ -1,6 +1,8 @@
 package com.uni.bakalauras;
 
+import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.hibernateOperations.FindAll;
+import com.uni.bakalauras.model.Orders;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +12,7 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main extends Application {
     @Override
@@ -29,24 +32,19 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException {
         launch();
 
-        //RefactorDataBase.refactor();
-
 //        session = HibernateAnnotationUtil.getSessionFactory().openSession();
-//        //transaction = session.beginTransaction();
+//
 //        refreshDataBase = new FindAll(session);
 //
-//        List<Products> list = FindAll.findAllProducts();
+//        List<Orders> list = FindAll.findAllOrders();
 //
-//        List<Clients> clientsList = FindAll.findAllClients();
 //
-//        for (Products element : list) {
-//            transaction = session.beginTransaction();
+//        for (Orders element : list) {
 //
-//            session.delete(element);
-//            transaction.commit();
+//            System.out.println("status= " + element.getStatus());
+//
 //        }
 //
-//        //transaction.rollback();
 //        session.close();
 
 

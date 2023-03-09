@@ -1,10 +1,5 @@
 package com.uni.bakalauras.model;
 
-import com.uni.bakalauras.model.Groups;
-import com.uni.bakalauras.model.Have;
-import com.uni.bakalauras.model.Returning;
-import com.uni.bakalauras.model.Stored;
-
 import javax.persistence.*;
 import java.util.Set;
 

@@ -1,7 +1,8 @@
 package com.uni.bakalauras.fxmlControllers;
 
-import com.uni.bakalauras.fxmlModel.OrderList;
+
 import com.uni.bakalauras.util.MakeObservable;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -13,19 +14,19 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class UzsakymaiController implements Initializable {
+public class UzsakymaiController<Orders> implements Initializable {
 
     @FXML
-    private TableView<OrderList> tableOrders;
+    private TableView<Orders> tableOrders;
 
-    public TableColumn<OrderList, Long> colId;
-    public TableColumn<OrderList, Date> colData;
-    public TableColumn<OrderList, String> colClient;
-    public TableColumn<OrderList, String> colAddress;
-    public TableColumn<OrderList, Boolean> colPayed;
-    public TableColumn<OrderList, Double> colSum;
-    public TableColumn<OrderList, String> colStatus;
-    public TableColumn<OrderList, String> colDeliveryType;
+    public TableColumn<Orders, Long> colId;
+    public TableColumn<Orders, Date> colData;
+    public TableColumn<Orders, String> colClient;
+    public TableColumn<Orders, String> colAddress;
+    public TableColumn<Orders, Boolean> colPayed;
+    public TableColumn<Orders, Double> colSum;
+    public TableColumn<Orders, String> colStatus;
+    public TableColumn<Orders, String> colDeliveryType;
 
 
 
@@ -36,16 +37,16 @@ public class UzsakymaiController implements Initializable {
     }
 
     public void FillTable() {
-        colId.setCellValueFactory(new PropertyValueFactory<>("OrderId"));
-        colData.setCellValueFactory(new PropertyValueFactory<>("OrderDate"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        colData.setCellValueFactory(new PropertyValueFactory<>("Created"));
         colClient.setCellValueFactory(new PropertyValueFactory<>("ClientName"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("OrderAddress"));
-        colPayed.setCellValueFactory(new PropertyValueFactory<>("Payed"));
-        colSum.setCellValueFactory(new PropertyValueFactory<>("OrderSum"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("OrderStatus"));
-        colDeliveryType.setCellValueFactory(new PropertyValueFactory<>("OrderDeliveryType"));
+        colPayed.setCellValueFactory(new PropertyValueFactory<>("PayedFor"));
+        colSum.setCellValueFactory(new PropertyValueFactory<>("Sum"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("Status"));
+        colDeliveryType.setCellValueFactory(new PropertyValueFactory<>("DeliveryType"));
         try {
-            tableOrders.setItems(MakeObservable.GetAllRecipeList());
+            tableOrders.setItems((ObservableList<Orders>) MakeObservable.GetAllOrderList());
         } catch (SQLException e) {
             e.printStackTrace();
         }

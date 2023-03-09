@@ -9,13 +9,12 @@ import javax.persistence.*;
 @IdClass(StoredId.class)
 public class Stored {
 
-    @EmbeddedId
-    private StoredId id = new StoredId();
-
+    @Id
     @ManyToOne
     @JoinColumn(name = "VIETOSID")
     private Places place;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "PREKESID")
     private Products product;
@@ -23,21 +22,10 @@ public class Stored {
     @Column(name = "KIEKIS")
     private Integer Quantity;
 
-    public Stored() {
-    }
-
     public Stored(Places place, Products product, Integer quantity) {
         this.place = place;
         this.product = product;
         Quantity = quantity;
-    }
-
-    public StoredId getId() {
-        return id;
-    }
-
-    public void setId(StoredId id) {
-        this.id = id;
     }
 
     public Places getPlace() {

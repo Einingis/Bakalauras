@@ -1,4 +1,4 @@
-module com.example.bakalauras {
+module com.uni.bakalauras {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.persistence;
@@ -16,4 +16,6 @@ module com.example.bakalauras {
     opens com.uni.bakalauras.model to java.persistence, javafx.fxml, org.hibernate.orm.core;
     exports com.uni.bakalauras.model.Ids;
     opens com.uni.bakalauras.model.Ids to java.persistence, javafx.fxml, org.hibernate.orm.core;
+    exports com.uni.bakalauras.fxmlModel;
+    opens com.uni.bakalauras.fxmlModel to javafx.fxml;
 }

@@ -9,13 +9,12 @@ import javax.persistence.*;
 @IdClass(HaveId.class)
 public class Have {
 
-    @EmbeddedId
-    private HaveId id = new HaveId();
-
+    @Id
     @ManyToOne
     @JoinColumn(name = "PREKESID")
     private Products product;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "UZSAKYMOID")
     private Orders order;
@@ -23,22 +22,7 @@ public class Have {
     @Column(name = "KIEKIS")
     private Integer Quantity;
 
-    public Have() {
-    }
 
-    public Have(Products product, Orders order, Integer quantity) {
-        this.product = product;
-        this.order = order;
-        Quantity = quantity;
-    }
-
-    public HaveId getId() {
-        return id;
-    }
-
-    public void setId(HaveId id) {
-        this.id = id;
-    }
 
     public Products getProduct() {
         return product;

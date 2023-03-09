@@ -14,8 +14,7 @@ public class Returns {
     @Column(name = "GRAZINIMOID", nullable = false, unique = true)
     private Long id;
 
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "UZSAKYMOID")
+    @OneToOne(orphanRemoval = true, mappedBy = "returns")
     private Orders order;
 
     @Column(name = "GRAZINIMODATA")
