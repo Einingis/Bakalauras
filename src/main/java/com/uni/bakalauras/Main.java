@@ -1,18 +1,13 @@
 package com.uni.bakalauras;
 
-import com.uni.bakalauras.config.HibernateAnnotationUtil;
-import com.uni.bakalauras.hibernateOperations.FindAll;
-import com.uni.bakalauras.model.Orders;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+
+
 
 public class Main extends Application {
     @Override
@@ -24,57 +19,7 @@ public class Main extends Application {
         stage.show();
     }
 
-    private static Session session;
-    private static Transaction transaction;
-
-    private static FindAll refreshDataBase;
-
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         launch();
-
-//        session = HibernateAnnotationUtil.getSessionFactory().openSession();
-//
-//        refreshDataBase = new FindAll(session);
-//
-//        List<Orders> list = FindAll.findAllOrders();
-//
-//
-//        for (Orders element : list) {
-//
-//            System.out.println("status= " + element.getStatus());
-//
-//        }
-//
-//        session.close();
-
-
-
-//        Groups group = new Groups("g1");
-//
-//        Products product1 = new Products(group, "pagalve");
-//        Products product2 = new Products(group, "pledas");
-//        Set<Products> itemsSet = new HashSet<>();
-//        itemsSet.add(product1);
-//        itemsSet.add(product2);
-//
-//        group.setProducts(itemsSet);
-//
-//        SessionFactory sessionFactory = HibernateAnnotationUtil.getSessionFactory();
-//        Session session = sessionFactory.getCurrentSession();
-//        System.out.println("Session created");
-//
-//        // start transaction
-//        Transaction tx = session.beginTransaction();
-//
-//        // Save the Model object
-//        session.save(group);
-//        session.save(product1);
-//        session.save(product2);
-//
-//        // Commit transaction
-//        tx.commit();
-//        System.out.println("Types ID= " + group.getId());
-//        System.out.println("product1 ID= " + product1.getId() + ", Foreign Key Types ID= " + product1.getGroup().getId());
-//        System.out.println("product2 ID= " + product2.getId() + ", Foreign Key Types ID= " + product2.getGroup().getId());
     }
 }

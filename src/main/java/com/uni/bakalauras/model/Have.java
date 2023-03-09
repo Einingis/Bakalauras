@@ -22,7 +22,14 @@ public class Have {
     @Column(name = "KIEKIS")
     private Integer Quantity;
 
+    public Have() {
+    }
 
+    public Have(Products product, Orders order, Integer quantity) {
+        this.product = product;
+        this.order = order;
+        Quantity = quantity;
+    }
 
     public Products getProduct() {
         return product;

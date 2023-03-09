@@ -3,6 +3,7 @@ package com.uni.bakalauras.model;
 import javax.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -39,7 +40,7 @@ public class Orders {
     private String deliveryType;
 
     @Column(name = "DATA")
-    private Date created;
+    private LocalDate created;
 
     @Column(name = "UZRASAI")
     private String note;
@@ -47,29 +48,13 @@ public class Orders {
     @Column(name = "SUMA")
     private Double sum;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private Set<Have> have;
 
     public Orders() {
     }
 
-    public Orders(Clients client, Employees employee, Returns returns, String status, Boolean payedFor,
-                  String orderAddress, String deliveryType, Date created, String note, Double sum, Set<Have> have) {
-        this.client = client;
-        this.employee = employee;
-        this.returns = returns;
-        this.status = status;
-        this.payedFor = payedFor;
-        this.orderAddress = orderAddress;
-        this.deliveryType = deliveryType;
-        this.created = created;
-        this.note = note;
-        this.sum = sum;
-        this.have = have;
-    }
-
-    public Orders(Clients client, Employees employee, String status, Boolean payedFor, String orderAddress,
-                  String deliveryType, Date created, String note, Double sum, Set<Have> have) {
+    public Orders(Clients client, Employees employee, String status, Boolean payedFor, String orderAddress, String deliveryType, LocalDate created, Double sum) {
         this.client = client;
         this.employee = employee;
         this.status = status;
@@ -77,9 +62,7 @@ public class Orders {
         this.orderAddress = orderAddress;
         this.deliveryType = deliveryType;
         this.created = created;
-        this.note = note;
         this.sum = sum;
-        this.have = have;
     }
 
     public Long getId() {
@@ -150,11 +133,11 @@ public class Orders {
         this.deliveryType = deliveryType;
     }
 
-    public Date getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 

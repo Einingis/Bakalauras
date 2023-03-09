@@ -28,6 +28,10 @@ public class Stored {
         Quantity = quantity;
     }
 
+    public Stored() {
+
+    }
+
     public Places getPlace() {
         return place;
     }

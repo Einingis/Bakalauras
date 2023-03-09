@@ -26,7 +26,7 @@ public class Returns {
     @Column(name = "GRAZINIMOBUSENA")
     private String status;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "returns")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "returns")
     private Set<Returning> returning;
 
     public Returns() {

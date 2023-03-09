@@ -21,16 +21,20 @@ public class Employees {
     @Column(name = "SLAPTAZODIS")
     private String password;
 
+    @Column(name = "POZICIJA")
+    private String position;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private Set<Orders> order;
 
     public Employees() {
     }
 
-    public Employees(String name, String surname, String password) {
+    public Employees(String name, String surname, String password, String position) {
         this.name = name;
         this.surname = surname;
         this.password = password;
+        this.position = position;
     }
 
     public Employees(String name, String surname, String password, Set<Orders> order) {
@@ -70,6 +74,14 @@ public class Employees {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public Set<Orders> getOrder() {

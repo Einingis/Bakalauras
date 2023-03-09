@@ -34,19 +34,28 @@ public class Products {
     @Column(name = "KIEKIS")
     private Integer inStock;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<Stored> stored;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<Have> have;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<Returning> returning;
 
     public Products() {
     }
 
-    public Products(Groups group, String name, String color, String measurement, Double primeCost, Double sellCost, Integer inStock) {
+    public Products(String name, String color, String measurement, Double primeCost, Double sellCost, Integer inStock) {
+        this.name = name;
+        this.color = color;
+        this.measurement = measurement;
+        this.primeCost = primeCost;
+        this.sellCost = sellCost;
+        this.inStock = inStock;
+    }
+
+    public Products(Groups group, String name, String color, String measurement, Double primeCost, Double sellCost, Integer inStock, Set<Stored> stored) {
         this.group = group;
         this.name = name;
         this.color = color;
@@ -54,6 +63,7 @@ public class Products {
         this.primeCost = primeCost;
         this.sellCost = sellCost;
         this.inStock = inStock;
+        this.stored = stored;
     }
 
     public Products(Groups group, String name, String color, String measurement, Double primeCost,

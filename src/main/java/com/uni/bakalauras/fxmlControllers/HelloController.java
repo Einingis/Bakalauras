@@ -1,6 +1,8 @@
 package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
+import com.uni.bakalauras.scripts.RefactorDataBase;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,5 +27,10 @@ public class HelloController {
         stage.setTitle("Uzsakymai");
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public void update(ActionEvent actionEvent) {
+        RefactorDataBase.refactor();
+
     }
 }
