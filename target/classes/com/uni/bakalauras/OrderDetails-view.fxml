@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="621.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.OrderDetailsView">
+   <children>
+      <TableView layoutX="-7.0" layoutY="60.0" prefHeight="478.0" prefWidth="993.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+        <columns>
+          <TableColumn prefWidth="97.0" text="Prekes rusis" />
+          <TableColumn minWidth="0.0" prefWidth="149.0" text="Pavadinimas" />
+            <TableColumn minWidth="0.0" prefWidth="149.0" text="Išmatavimai" />
+            <TableColumn minWidth="0.0" prefWidth="149.0" text="Spalva" />
+            <TableColumn minWidth="0.0" prefWidth="149.0" text="Kaina" />
+            <TableColumn minWidth="0.0" prefWidth="149.0" text="Užsakytas kiekis" />
+            <TableColumn minWidth="0.0" prefWidth="149.0" text="Iš viso" />
+        </columns>
+      </TableView>
+      <Group layoutX="25.0" layoutY="14.0" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="16.05078125">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Užsakymo Nr." />
+            <Text fx:id="orderNr" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="71.0" />
+         </children>
+      </Group>
+      <Group layoutX="121.0" layoutY="14.0" AnchorPane.leftAnchor="123.0" AnchorPane.topAnchor="16.05078125">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klientas" textAlignment="CENTER" wrappingWidth="75.103515625" />
+            <Text fx:id="client" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="71.0" />
+         </children>
+      </Group>
+      <Group layoutX="210.0" layoutY="14.0" AnchorPane.leftAnchor="212.0" AnchorPane.topAnchor="16.05078125">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miestas" textAlignment="CENTER" wrappingWidth="98.103515625" />
+            <Text fx:id="city" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="90.0" />
+         </children>
+      </Group>
+      <Group layoutX="320.0" layoutY="14.0" AnchorPane.leftAnchor="322.0" AnchorPane.topAnchor="16.0">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas" textAlignment="CENTER" wrappingWidth="226.103515625" />
+            <Text fx:id="address" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="222.0" />
+         </children>
+      </Group>
+      <Group layoutX="561.0" layoutY="14.0">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suma" textAlignment="CENTER" wrappingWidth="75.103515625" />
+            <Text fx:id="sum" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="71.0" />
+         </children>
+      </Group>
+      <Button layoutX="919.0" layoutY="22.0" mnemonicParsing="false" text="Atgal" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="16.0" />
+   </children>
+</AnchorPane>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="561.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.UzsakymaiController">
+<AnchorPane prefHeight="561.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.OrderViewController">
    <children>
-      <TableView fx:id="tableOrders" layoutX="33.0" layoutY="75.0" prefHeight="456.0" prefWidth="921.0">
+      <TableView fx:id="tableOrders" layoutX="33.0" layoutY="75.0" onMouseClicked="#openOrderDetails" prefHeight="456.0" prefWidth="921.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="51.0" text="Nr." />
             <TableColumn fx:id="colData" prefWidth="160.0" text="Data" />

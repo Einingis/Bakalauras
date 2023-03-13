@@ -1,20 +1,30 @@
 package com.uni.bakalauras.fxmlControllers;
 
 
+import com.uni.bakalauras.Main;
+import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.util.MakeObservable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class UzsakymaiController<Orders> implements Initializable {
+public class OrderViewController<Orders> implements Initializable {
 
     @FXML
     private TableView<Orders> tableOrders;
@@ -33,10 +43,10 @@ public class UzsakymaiController<Orders> implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        FillTable();
+        fillTable();
     }
 
-    public void FillTable() {
+    public void fillTable() {
         colId.setCellValueFactory(new PropertyValueFactory<>("Id"));
         colData.setCellValueFactory(new PropertyValueFactory<>("Created"));
         colClient.setCellValueFactory(new PropertyValueFactory<>("ClientName"));
@@ -49,6 +59,23 @@ public class UzsakymaiController<Orders> implements Initializable {
             tableOrders.setItems((ObservableList<Orders>) MakeObservable.GetAllOrderList());
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void openOrderDetails(MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            if (mouseEvent.getClickCount() == 2) {
+                Orders selectedItem = tableOrders.getSelectionModel().getSelectedItem();
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("OrderDetails-view.fxml"));
+                Parent root = loader.load();
+                OrderDetailsView orderDetailsView = loader.getController();
+                orderDetailsView.setFormData((com.uni.bakalauras.model.Orders) selectedItem);
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Update");
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
         }
     }
 }

@@ -2,7 +2,6 @@ package com.uni.bakalauras.model;
 
 import javax.persistence.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -33,6 +32,9 @@ public class Orders {
     @Column(name = "APMOKETAS")
     private Boolean payedFor;
 
+    @Column(name = "MIESTAS")
+    private String orderCity;
+
     @Column(name = "PRISTATYMOADRESAS")
     private String orderAddress;
 
@@ -54,11 +56,12 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(Clients client, Employees employee, String status, Boolean payedFor, String orderAddress, String deliveryType, LocalDate created, Double sum) {
+    public Orders(Clients client, Employees employee, String status, Boolean payedFor, String orderCity, String orderAddress, String deliveryType, LocalDate created, Double sum) {
         this.client = client;
         this.employee = employee;
         this.status = status;
         this.payedFor = payedFor;
+        this.orderCity = orderCity;
         this.orderAddress = orderAddress;
         this.deliveryType = deliveryType;
         this.created = created;
@@ -82,7 +85,7 @@ public class Orders {
     }
 
     public String getClientName() {
-        return getClient().getName();
+        return getClient().getName() + " " + getClient().getSurname();
     }
 
     public Employees getEmployee() {
@@ -115,6 +118,14 @@ public class Orders {
 
     public void setPayedFor(Boolean payedFor) {
         this.payedFor = payedFor;
+    }
+
+    public String getOrderCity() {
+        return orderCity;
+    }
+
+    public void setOrderCity(String orderCity) {
+        this.orderCity = orderCity;
     }
 
     public String getOrderAddress() {
