@@ -92,6 +92,10 @@ public class Products {
         return group;
     }
 
+    public String getGroupName() {
+        return getGroup().getName();
+    }
+
     public void setGroup(Groups group) {
         this.group = group;
     }

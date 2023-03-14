@@ -3,7 +3,10 @@ package com.uni.bakalauras.util;
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.hibernateOperations.FindAll;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
+import com.uni.bakalauras.hibernateOperations.ProductsOperations;
+import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
+import com.uni.bakalauras.model.Products;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hibernate.Session;
@@ -25,8 +28,17 @@ public class MakeObservable {
         List<Orders> orders = OrdersOperations.findAllOrders();
         ArrayList<Orders> orderList = new ArrayList<>(orders);
 
-
         ObservableList<Orders> observableList = FXCollections.observableArrayList(orderList);
+        return observableList;
+    }
+
+    public static ObservableList<Have> getOrdersProducts(Long OrderId) throws SQLException {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+        OrdersOperations ordersOperations = new OrdersOperations(session);
+        List<Have> have = OrdersOperations.findOrdersProduct(OrderId);
+        ArrayList<Have> haveList = new ArrayList<>(have);
+
+        ObservableList<Have> observableList = FXCollections.observableArrayList(haveList);
         return observableList;
     }
 }

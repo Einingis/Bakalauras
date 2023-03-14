@@ -3,6 +3,9 @@ package com.uni.bakalauras.model;
 import com.uni.bakalauras.model.Ids.HaveId;
 
 import javax.persistence.*;
+import java.util.function.DoubleUnaryOperator;
+
+import static java.lang.Math.round;
 
 @Entity
 @Table(name = "turi")
@@ -53,5 +56,29 @@ public class Have {
 
     public void setQuantity(Integer quantity) {
         Quantity = quantity;
+    }
+
+    public String getGroupName() {
+        return getProduct().getGroup().getName();
+    }
+
+    public String getProductName() {
+        return getProduct().getName();
+    }
+
+    public String getProductMeasurements() {
+        return getProduct().getMeasurement();
+    }
+
+    public String getProductColor() {
+        return getProduct().getColor();
+    }
+
+    public Double getProductCost() {
+        return getProduct().getSellCost();
+    }
+
+    public Double getSum() {
+        return round((getProductCost() * getQuantity())*100.0)/100.0;
     }
 }

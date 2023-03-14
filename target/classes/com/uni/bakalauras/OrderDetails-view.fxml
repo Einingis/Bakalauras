@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="621.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.OrderDetailsView">
+<AnchorPane prefHeight="621.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.OrderDetailsView">
    <children>
-      <TableView layoutX="-7.0" layoutY="60.0" prefHeight="478.0" prefWidth="993.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <TableView fx:id="tableOrderProducts" layoutX="-7.0" layoutY="60.0" prefHeight="478.0" prefWidth="993.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
         <columns>
-          <TableColumn prefWidth="97.0" text="Prekes rusis" />
-          <TableColumn minWidth="0.0" prefWidth="149.0" text="Pavadinimas" />
-            <TableColumn minWidth="0.0" prefWidth="149.0" text="Išmatavimai" />
-            <TableColumn minWidth="0.0" prefWidth="149.0" text="Spalva" />
-            <TableColumn minWidth="0.0" prefWidth="149.0" text="Kaina" />
-            <TableColumn minWidth="0.0" prefWidth="149.0" text="Užsakytas kiekis" />
-            <TableColumn minWidth="0.0" prefWidth="149.0" text="Iš viso" />
+          <TableColumn fx:id="colType" prefWidth="97.0" text="Prekes rusis" />
+          <TableColumn fx:id="colName" minWidth="0.0" prefWidth="149.0" text="Pavadinimas" />
+            <TableColumn fx:id="colMeasurement" minWidth="0.0" prefWidth="149.0" text="Išmatavimai" />
+            <TableColumn fx:id="colColor" minWidth="0.0" prefWidth="149.0" text="Spalva" />
+            <TableColumn fx:id="colCost" minWidth="0.0" prefWidth="149.0" text="Kaina" />
+            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="149.0" text="Užsakytas kiekis" />
+            <TableColumn fx:id="colSum" minWidth="0.0" prefWidth="149.0" text="Iš viso" />
         </columns>
       </TableView>
       <Group layoutX="25.0" layoutY="14.0" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="16.05078125">

@@ -1,7 +1,9 @@
 package com.uni.bakalauras.hibernateOperations;
 
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
+import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
+import com.uni.bakalauras.model.Products;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -45,6 +47,20 @@ public class OrdersOperations {
         cq.select(root).where(predicates);
 
         Query<Orders> query = session.createQuery(cq);
+        return query.getResultList();
+    }
+
+    public static List<Have> findOrdersProduct(Long orderId) {
+
+        cb = session.getCriteriaBuilder();
+        CriteriaQuery<Have> cq = cb.createQuery(Have.class);
+        Root<Have> root = cq.from(Have.class);
+
+        Predicate[] predicates = new Predicate[1];
+        predicates[0] = cb.equal(root.get("order"), orderId);
+        cq.select(root).where(predicates);
+
+        Query<Have> query = session.createQuery(cq);
         return query.getResultList();
     }
 }
