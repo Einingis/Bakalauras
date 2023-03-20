@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="547.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.CreateOrderController">
+   <children>
+      <Group layoutX="14.0" layoutY="179.0">
+         <children>
+            <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miestas" />
+            <TextField fx:id="fldCity" layoutY="21.0" />
+         </children>
+      </Group>
+      <Group layoutX="14.0" layoutY="224.0">
+         <children>
+            <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas" />
+            <TextField fx:id="fldAddress" layoutY="22.94921875" />
+         </children>
+      </Group>
+      <Group layoutX="14.0" layoutY="271.0">
+         <children>
+            <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pristatymo būdas" />
+            <TextField fx:id="fldDeliveryType" layoutY="22.94921875" />
+         </children>
+      </Group>
+      <Group layoutX="14.0" layoutY="23.0">
+         <children>
+            <Group>
+               <children>
+                  <Text layoutY="1.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="Klientas" />
+                  <ComboBox fx:id="cbClient" layoutY="7.0" onAction="#clientSelected" prefHeight="25.0" prefWidth="170.0" />
+                  <TextField fx:id="fldClient" layoutX="1.0" layoutY="7.0" onKeyReleased="#showClientsByText" />
+               </children>
+            </Group>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

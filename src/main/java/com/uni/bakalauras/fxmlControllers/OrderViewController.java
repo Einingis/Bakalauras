@@ -2,14 +2,15 @@ package com.uni.bakalauras.fxmlControllers;
 
 
 import com.uni.bakalauras.Main;
-import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.util.MakeObservable;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +28,8 @@ import java.util.ResourceBundle;
 public class OrderViewController<Orders> implements Initializable {
 
     @FXML
+    public Button btnCreate;
+    @FXML
     private TableView<Orders> tableOrders;
 
     public TableColumn<Orders, Long> colId;
@@ -37,7 +40,6 @@ public class OrderViewController<Orders> implements Initializable {
     public TableColumn<Orders, Double> colSum;
     public TableColumn<Orders, String> colStatus;
     public TableColumn<Orders, String> colDeliveryType;
-
 
 
     @Override
@@ -66,9 +68,9 @@ public class OrderViewController<Orders> implements Initializable {
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             if (mouseEvent.getClickCount() == 2) {
                 Orders selectedItem = tableOrders.getSelectionModel().getSelectedItem();
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("OrderDetails-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("orderDetails-view.fxml"));
                 Parent root = loader.load();
-                OrderDetailsView orderDetailsView = loader.getController();
+                OrderDetailsController orderDetailsView = loader.getController();
                 orderDetailsView.setFormData((com.uni.bakalauras.model.Orders) selectedItem);
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -77,5 +79,17 @@ public class OrderViewController<Orders> implements Initializable {
                 stage.show();
             }
         }
+    }
+
+    public void openCreateWindow(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("createOrder-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+
+        stage.initModality(Modality.NONE);
+        stage.setTitle("Naujas uzsakymas");
+        stage.setScene(new Scene(root));
+        stage.show();
+
     }
 }

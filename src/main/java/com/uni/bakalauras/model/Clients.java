@@ -74,6 +74,10 @@ public class Clients {
         this.surname = surname;
     }
 
+    public String getFullName() {
+        return getName() + " " + getSurname();
+    }
+
     public String getNumber() {
         return number;
     }

@@ -3,7 +3,6 @@ package com.uni.bakalauras.fxmlControllers;
 import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
 
-import com.uni.bakalauras.model.Products;
 import com.uni.bakalauras.util.MakeObservable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +13,7 @@ import javafx.scene.text.Text;
 
 import java.sql.SQLException;
 
-public class OrderDetailsView {
+public class OrderDetailsController {
 
     Orders selectedOrder;
     @FXML
