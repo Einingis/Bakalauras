@@ -17,13 +17,11 @@ public class Create {
     }
 
     public static void createAllInList(List<?> list) {
-
         for (Object element : list) {
             transaction = session.beginTransaction();
             session.save(element);
 
             transaction.commit();
         }
-
     }
 }

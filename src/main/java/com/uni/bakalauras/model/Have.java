@@ -34,6 +34,10 @@ public class Have {
         Quantity = quantity;
     }
 
+    public Have(Products product) {
+        this.product = product;
+    }
+
     public Products getProduct() {
         return product;
     }

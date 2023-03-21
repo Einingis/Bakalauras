@@ -3,6 +3,7 @@ package com.uni.bakalauras.model;
 import javax.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity

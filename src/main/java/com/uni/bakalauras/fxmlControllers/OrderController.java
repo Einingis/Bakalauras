@@ -1,8 +1,8 @@
 package com.uni.bakalauras.fxmlControllers;
 
-
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.util.MakeObservable;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +25,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class OrderViewController<Orders> implements Initializable {
+public class OrderController<Orders> implements Initializable {
 
     @FXML
     public Button btnCreate;
@@ -41,11 +41,17 @@ public class OrderViewController<Orders> implements Initializable {
     public TableColumn<Orders, String> colStatus;
     public TableColumn<Orders, String> colDeliveryType;
 
+    private static OrderController orderController;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         fillTable();
+    }
+
+    public void setController(OrderController orderController) {
+        this.orderController = orderController;
     }
 
     public void fillTable() {
@@ -85,6 +91,9 @@ public class OrderViewController<Orders> implements Initializable {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("createOrder-view.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
+
+        CreateOrderController createOrderController = loader.getController();
+        createOrderController.setController(createOrderController, orderController);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Naujas uzsakymas");

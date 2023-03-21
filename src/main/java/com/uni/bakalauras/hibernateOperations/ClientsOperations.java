@@ -47,4 +47,6 @@ public class ClientsOperations {
         Query<Clients> query = session.createQuery(cq);
         return query.getResultList();
     }
+
+
 }

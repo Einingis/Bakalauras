@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="566.0" prefWidth="1025.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.ProductsController">
+   <children>
+      <TableView fx:id="tableProducts" layoutX="25.0" layoutY="135.0" onMouseClicked="#onClick" prefHeight="336.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="120.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="59.0" text="PrekesNr." />
+          <TableColumn fx:id="colGroup" prefWidth="129.0" text="Rušis" />
+            <TableColumn fx:id="colName" prefWidth="150.0" text="Pavadinimas" />
+            <TableColumn fx:id="colColor" minWidth="7.0" prefWidth="125.0" text="Spalva" />
+            <TableColumn fx:id="colMeasurement" minWidth="0.0" prefWidth="121.0" text="Išmatavimai" />
+            <TableColumn fx:id="colPrimeCost" minWidth="0.0" prefWidth="96.0" text="Savikaina" />
+            <TableColumn fx:id="colSellCost" prefWidth="97.0" text="Kaina" />
+            <TableColumn fx:id="colStock" prefWidth="82.0" text="Kiekis" />
+        </columns>
+      </TableView>
+      <TextField fx:id="fldOrderAmount" layoutX="15.0" layoutY="75.0" prefHeight="25.0" prefWidth="90.0" />
+   </children>
+</AnchorPane>

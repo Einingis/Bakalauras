@@ -8,7 +8,6 @@ import com.uni.bakalauras.model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -35,7 +34,7 @@ public class RefactorDataBase {
 
         fillProducts();
 
-      fillOrders();
+        fillOrders();
 
         addProductsToOrders();
 
@@ -85,10 +84,10 @@ public class RefactorDataBase {
 
 
         List<Clients> clients = ClientsOperations.findAllClients();
-        List<Employees> employees = EmployeesOperations.findEmployeesByName("Jurgita");
+        Employees employees = EmployeesOperations.findEmployeesByName("Jurgita");
 
-        Orders order = new Orders(clients.get(0), employees.get(0), "sukurtas", false,"Telsiai", "gatve1", "kurjeris", LocalDate.of(2023, 3, 1), 25.5);
-        Orders order1 = new Orders(clients.get(1), employees.get(0), "sukurtas", false,"Vilnius" ,"gatve2", "Atvaziuos", LocalDate.of(2023, 3, 5), 50.0);
+        Orders order = new Orders(clients.get(0), employees, "sukurtas", false,"Telsiai", "gatve1", "kurjeris", LocalDate.of(2023, 3, 1), 25.5);
+        Orders order1 = new Orders(clients.get(1), employees, "sukurtas", false,"Vilnius" ,"gatve2", "Atvaziuos", LocalDate.of(2023, 3, 5), 50.0);
 
         ordersList.add(order);
         ordersList.add(order1);

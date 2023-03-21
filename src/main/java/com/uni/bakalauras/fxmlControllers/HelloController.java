@@ -23,6 +23,9 @@ public class HelloController {
         Parent root = loader.load();
         Stage stage = new Stage();
 
+        OrderController orderController = loader.getController();
+        orderController.setController(orderController);
+
         stage.initModality(Modality.NONE);
         stage.setTitle("Uzsakymai");
         stage.setScene(new Scene(root));
@@ -32,5 +35,16 @@ public class HelloController {
     public void update(ActionEvent actionEvent) {
         RefactorDataBase.refactor();
 
+    }
+
+    public void clickProducts(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("products-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+
+        stage.initModality(Modality.NONE);
+        stage.setTitle("Prekės");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

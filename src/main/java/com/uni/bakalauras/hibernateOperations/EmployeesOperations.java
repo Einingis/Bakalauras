@@ -34,7 +34,7 @@ public class EmployeesOperations {
         return allQuery.getResultList();
     }
 
-    public static List<Employees> findEmployeesByName(String condition) {
+    public static Employees findEmployeesByName(String condition) {
 
         cb = session.getCriteriaBuilder();
         cq = cb.createQuery(Employees.class);
@@ -45,6 +45,7 @@ public class EmployeesOperations {
         cq.select(root).where(predicates);
 
         Query<Employees> query = session.createQuery(cq);
-        return query.getResultList();
+
+        return query.getSingleResult();
     }
 }
