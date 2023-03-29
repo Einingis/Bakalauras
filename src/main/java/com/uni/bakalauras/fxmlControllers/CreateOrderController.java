@@ -124,7 +124,7 @@ public class CreateOrderController implements Initializable {
         Stage stage = new Stage();
 
         ProductsController productsController = loader.getController();
-        productsController.setUp("CreateOrder", createOrderController);
+        productsController.setUp("CreateOrder", createOrderController, productsList);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Prekės");

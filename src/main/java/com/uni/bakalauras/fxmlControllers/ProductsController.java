@@ -1,4 +1,6 @@
 package com.uni.bakalauras.fxmlControllers;
+import com.uni.bakalauras.config.HibernateAnnotationUtil;
+import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.Products;
 import com.uni.bakalauras.util.MakeObservable;
 
@@ -10,10 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import org.hibernate.Session;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ProductsController implements Initializable {
 
@@ -35,15 +38,18 @@ public class ProductsController implements Initializable {
     public String fromWhere = "main";
     public CreateOrderController createOrderController;
 
+    static List<Products> productsList = new ArrayList<>();
+    static List<Products> productsInList = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fillTable();
     }
 
-    public void setUp(String fromWhere, CreateOrderController createOrderController) {
+    public void setUp(String fromWhere, CreateOrderController createOrderController,List<Products> productsInList ) {
         this.fromWhere = fromWhere;
         this.createOrderController = createOrderController;
-        fillTable();
+        this.productsInList = productsInList;
     }
 
     public void fillTable() {
@@ -56,7 +62,17 @@ public class ProductsController implements Initializable {
         colSellCost.setCellValueFactory(new PropertyValueFactory<>("SellCost"));
         colStock.setCellValueFactory(new PropertyValueFactory<>("InStock"));
         try {
-            tableProducts.setItems(MakeObservable.GetAllProductsList());
+            Session session = HibernateAnnotationUtil.getSessionFactory().openSession();
+            ProductsOperations productsOperations = new ProductsOperations(session);
+
+            productsList = ProductsOperations.findAllProducts();
+
+            for (Products productIn : productsInList) {
+                Long id = productIn.getId();
+                productsList.removeIf(products -> Objects.equals(products.getId(), id));
+            }
+
+            tableProducts.setItems(MakeObservable.GetAllProductsList(productsList));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -72,6 +88,8 @@ public class ProductsController implements Initializable {
                     case "CreateOrder":
                         tableProducts.getSelectionModel().getSelectedItem().setInStock(Integer.valueOf(fldOrderAmount.getText()));
                         createOrderController.addProduct(tableProducts.getSelectionModel().getSelectedItem());
+                        productsList.remove(tableProducts.getSelectionModel().getSelectedItem());
+                        tableProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
 
                         break;
                     case "main":

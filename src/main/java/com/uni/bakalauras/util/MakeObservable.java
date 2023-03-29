@@ -42,11 +42,7 @@ public class MakeObservable {
         return observableList;
     }
 
-    public static ObservableList<Products> GetAllProductsList() throws SQLException {
-        session = HibernateAnnotationUtil.getSessionFactory().openSession();
-        ProductsOperations productsOperations = new ProductsOperations(session);
-
-        List<Products> products = ProductsOperations.findAllProducts();
+    public static ObservableList<Products> GetAllProductsList(List<Products> products) throws SQLException {
         ArrayList<Products> productsList = new ArrayList<>(products);
 
         ObservableList<Products> observableList = FXCollections.observableArrayList(productsList);
