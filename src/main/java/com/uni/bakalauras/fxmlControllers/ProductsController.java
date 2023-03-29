@@ -70,8 +70,9 @@ public class ProductsController implements Initializable {
             if (mouseEvent.getClickCount() == 2) {
                 switch (fromWhere) {
                     case "CreateOrder":
-                        createOrderController.addProduct(tableProducts.getSelectionModel().getSelectedItem(),
-                                                        Integer.valueOf(fldOrderAmount.getText()));
+                        tableProducts.getSelectionModel().getSelectedItem().setInStock(Integer.valueOf(fldOrderAmount.getText()));
+                        createOrderController.addProduct(tableProducts.getSelectionModel().getSelectedItem());
+
                         break;
                     case "main":
                         break;
