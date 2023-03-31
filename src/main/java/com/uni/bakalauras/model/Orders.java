@@ -113,6 +113,13 @@ public class Orders {
         this.status = status;
     }
 
+    public String getPayedForString() {
+        if (getPayedFor() == true) {
+            return "Apmoketas";
+        } else
+            return "Neapmoketas";
+    }
+
     public Boolean getPayedFor() {
         return payedFor;
     }

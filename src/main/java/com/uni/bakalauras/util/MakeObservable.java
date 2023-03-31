@@ -20,18 +20,6 @@ public class MakeObservable {
 
     private static Session session;
 
-
-    public static ObservableList<Orders> GetAllOrderList() throws SQLException {
-        session = HibernateAnnotationUtil.getSessionFactory().openSession();
-        OrdersOperations ordersOperations = new OrdersOperations(session);
-
-        List<Orders> orders = OrdersOperations.findAllOrders();
-        ArrayList<Orders> orderList = new ArrayList<>(orders);
-
-        ObservableList<Orders> observableList = FXCollections.observableArrayList(orderList);
-        return observableList;
-    }
-
     public static ObservableList<Have> getOrdersProducts(Long OrderId) throws SQLException {
         session = HibernateAnnotationUtil.getSessionFactory().openSession();
         OrdersOperations ordersOperations = new OrdersOperations(session);
@@ -56,6 +44,11 @@ public class MakeObservable {
 
     public static ObservableList<Clients> MakeClientsListObservable(List list) {
         ObservableList<Clients> observableList = FXCollections.observableArrayList(list);
+        return observableList;
+    }
+
+    public static ObservableList<Orders>  MakeOrderListObservable(List orderList) {
+        ObservableList<Orders> observableList = FXCollections.observableArrayList(orderList);
         return observableList;
     }
 }
