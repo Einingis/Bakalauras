@@ -16,8 +16,9 @@ public class Delete {
         this.transaction = transaction;
     }
 
-    public static void deleteAll(List<?> list) {
+    public static void delete(List<?> list) {
         for (Object element : list) {
+
             transaction = session.beginTransaction();
 
             session.delete(element);

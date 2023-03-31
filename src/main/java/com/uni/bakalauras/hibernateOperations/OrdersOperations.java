@@ -6,6 +6,7 @@ import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.model.Products;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import javax.persistence.TypedQuery;
@@ -22,6 +23,7 @@ import java.util.Objects;
 public class OrdersOperations {
 
     private static Session session;
+    private static Transaction transaction;
     private static CriteriaBuilder cb;
     private static CriteriaQuery<Orders> cq;
 
@@ -31,9 +33,6 @@ public class OrdersOperations {
     }
 
     public static List<Orders> findAllOrders() {
-
-        session = HibernateAnnotationUtil.getSessionFactory().openSession();
-
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
         Root<Orders> rootEntry = cq.from(Orders.class);
@@ -127,5 +126,4 @@ public class OrdersOperations {
 
         return query.getResultList();
     }
-
 }

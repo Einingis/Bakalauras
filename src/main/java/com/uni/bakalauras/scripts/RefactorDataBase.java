@@ -78,7 +78,7 @@ public class RefactorDataBase {
         EmployeesOperations employeesOperations = new EmployeesOperations(session);
 
         List<Orders> ordersList = OrdersOperations.findAllOrders();
-        Delete.deleteAll(ordersList);
+        Delete.delete(ordersList);
 
         ordersList.clear();
 
@@ -102,7 +102,7 @@ public class RefactorDataBase {
         GroupsOperations groupsOperations = new GroupsOperations(session);
 
         List<Products> productsList = ProductsOperations.findAllProducts();
-        Delete.deleteAll(productsList);
+        Delete.delete(productsList);
 
         productsList.clear();
 
@@ -143,7 +143,7 @@ public class RefactorDataBase {
         ClientsOperations clientsOperations = new ClientsOperations(session);
 
         List<Clients> clientsList = clientsOperations.findAllClients();
-        Delete.deleteAll(clientsList);
+        Delete.delete(clientsList);
 
         clientsList.clear();
 
@@ -162,7 +162,7 @@ public class RefactorDataBase {
         EmployeesOperations employeesOperations = new EmployeesOperations(session);
 
         List<Employees> employeesList = employeesOperations.findAllEmployees();
-        Delete.deleteAll(employeesList);
+        Delete.delete(employeesList);
 
         employeesList.clear();
 
@@ -181,7 +181,7 @@ public class RefactorDataBase {
         GroupsOperations groupsOperations = new GroupsOperations(session);
 
         List<Groups> groupsList = groupsOperations.findAllGroups();
-        Delete.deleteAll(groupsList);
+        Delete.delete(groupsList);
 
         groupsList.clear();
 
@@ -204,7 +204,7 @@ public class RefactorDataBase {
         PlacesOperations placesOperations = new PlacesOperations(session);
 
         List<Places> placesList = placesOperations.findAllPlaces();
-        Delete.deleteAll(placesList);
+        Delete.delete(placesList);
 
         placesList.clear();
 

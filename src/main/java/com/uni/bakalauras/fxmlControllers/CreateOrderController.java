@@ -185,7 +185,6 @@ public class CreateOrderController implements Initializable {
         if (tableOrderProducts.getSelectionModel().getSelectedItem() == null) {
             PopupOperations.alertMessage("Pasirinkite produkta");
         } else {
-
             Dialog<String> dialog = new Dialog<>();
             dialog.setTitle("pasalinti produkta ");
 
@@ -197,22 +196,17 @@ public class CreateOrderController implements Initializable {
             grid.setHgap(10);
             grid.setVgap(10);
             grid.setPadding(new Insets(20, 150, 10, 10));
-
             dialog.getDialogPane().setContent(grid);
-
 
             dialog.setResultConverter(dialogButton -> {
                 if (dialogButton == btnConfirm) {
-
                     productsList.remove(tableOrderProducts.getSelectionModel().getSelectedItem());
                     tableOrderProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
                 }
                 return null;
             });
             dialog.showAndWait();
-
         }
-
     }
 
     public void ChangeQuantity(ActionEvent actionEvent) {

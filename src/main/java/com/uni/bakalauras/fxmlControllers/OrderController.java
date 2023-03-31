@@ -3,31 +3,33 @@ package com.uni.bakalauras.fxmlControllers;
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
-import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.Orders;
-import com.uni.bakalauras.model.Products;
+import com.uni.bakalauras.scripts.Delete;
 import com.uni.bakalauras.util.MakeObservable;
-
-import javafx.collections.ObservableList;
+import com.uni.bakalauras.util.PopupOperations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
+import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class OrderController implements Initializable {
 
@@ -60,10 +62,14 @@ public class OrderController implements Initializable {
     static List<Orders> orderList = new ArrayList<>();
 
     private static Session session;
+    private static Transaction transaction;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
+        Delete delete = new Delete(session, transaction);
 
         payedFilter.getItems().add("Visi");
         payedFilter.getItems().add("Neapmoketi");
@@ -86,7 +92,6 @@ public class OrderController implements Initializable {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("Status"));
         colDeliveryType.setCellValueFactory(new PropertyValueFactory<>("DeliveryType"));
 
-        Session session = HibernateAnnotationUtil.getSessionFactory().openSession();
         OrdersOperations ordersOperations  = new OrdersOperations(session);
 
         orderList = OrdersOperations.findAllOrders();
@@ -101,7 +106,7 @@ public class OrderController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(Main.class.getResource("orderDetails-view.fxml"));
                 Parent root = loader.load();
                 OrderDetailsController orderDetailsView = loader.getController();
-                orderDetailsView.setFormData((com.uni.bakalauras.model.Orders) selectedItem);
+                orderDetailsView.setFormData(selectedItem);
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setTitle("Update");
@@ -123,9 +128,7 @@ public class OrderController implements Initializable {
         stage.setTitle("Naujas uzsakymas");
         stage.setScene(new Scene(root));
         stage.show();
-
     }
-
 
     public void filterOrders(ActionEvent actionEvent) {
         List<String> filters = new ArrayList<>();
@@ -144,9 +147,41 @@ public class OrderController implements Initializable {
         orderList = OrdersOperations.findOrderByFilters(filters);
 
         tableOrders.setItems(MakeObservable.MakeOrderListObservable(orderList));
+    }
 
+    public void updateOrder(ActionEvent actionEvent) {
 
+    }
 
+    public void deleteOrder(ActionEvent actionEvent) {
+        if (tableOrders.getSelectionModel().getSelectedItem() == null) {
+            PopupOperations.alertMessage("Pasirinkite produkta");
+        } else {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("pasalinti produkta ");
 
+            ButtonType btnConfirm = new ButtonType("pasalinti", ButtonBar.ButtonData.OK_DONE);
+            ButtonType btnCancel = new ButtonType("atšaukti", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(btnConfirm, btnCancel);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+            dialog.getDialogPane().setContent(grid);
+
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == btnConfirm) {
+                    List<Orders> deleteList = new ArrayList<>();
+                    deleteList.add(tableOrders.getSelectionModel().getSelectedItem());
+                    Delete.delete(deleteList);
+                    orderList.remove(tableOrders.getSelectionModel().getSelectedItem());
+
+                    tableOrders.setItems(MakeObservable.MakeOrderListObservable(orderList));
+                }
+                return null;
+            });
+            dialog.showAndWait();
+        }
     }
 }
