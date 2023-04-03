@@ -1,14 +1,15 @@
 package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
-import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.hibernateOperations.ClientsOperations;
 import com.uni.bakalauras.hibernateOperations.EmployeesOperations;
+import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.model.Clients;
 import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.model.Products;
 import com.uni.bakalauras.scripts.Create;
+import com.uni.bakalauras.scripts.Delete;
 import com.uni.bakalauras.util.MakeObservable;
 import com.uni.bakalauras.util.PopupOperations;
 import javafx.application.Platform;
@@ -25,8 +26,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,17 +54,21 @@ public class CreateOrderController implements Initializable {
     public TableColumn<Products, Double> colSellCost;
     public TableColumn<Products, Integer> colStock;
 
-    private static Session session;
-
     private static CreateOrderController createOrderController;
     private static OrderController orderController;
 
+    private static Boolean statusUpdate;
+
     static List<Products> productsList = new ArrayList<>();
     static List<Clients> clientsList = new ArrayList<>();
+    static Orders updateOrder;
 
+    public Button btnCreateUpdate;
 
 
     public void setController(CreateOrderController createOrderController, OrderController orderController) {
+        btnCreateUpdate.setText("Sukurti");
+        statusUpdate = false;
         this.createOrderController = createOrderController;
         this.orderController = orderController;
     }
@@ -78,8 +81,6 @@ public class CreateOrderController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        session = HibernateAnnotationUtil.getSessionFactory().openSession();
-        ClientsOperations clientsOperations = new ClientsOperations(session);
         clientsList = ClientsOperations.findAllClients();
 
         clientsList.forEach(clients1 ->cbClient.getItems().add(clients1.getFullName()));
@@ -89,6 +90,26 @@ public class CreateOrderController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setOrder(Orders updateOrder) throws SQLException {
+        this.updateOrder = updateOrder;
+        btnCreateUpdate.setText("Pakeisti");
+
+        statusUpdate = true;
+
+        fldClient.setText(updateOrder.getClientName());
+        fldCity.setText(updateOrder.getOrderCity());
+        fldAddress.setText(updateOrder.getOrderAddress());
+        fldDeliveryType.setText(updateOrder.getDeliveryType());
+
+        productsList.clear();
+
+        for (Have have : OrdersOperations.findOrdersProduct(updateOrder.getId())) {
+            have.getProduct().setInStock(have.getQuantity());
+            productsList.add(have.getProduct());
+        }
+        fillTable();
     }
 
     public void fillTable() throws SQLException {
@@ -133,42 +154,52 @@ public class CreateOrderController implements Initializable {
     }
 
     public void CreateOrder(ActionEvent actionEvent) {
-        Transaction transaction = null;
-        EmployeesOperations employeesOperations = new EmployeesOperations(session);
-        Create create =new Create(session, transaction);
 
         Double OrderSum = 0.0;
 
-        for ( Products product: productsList) {
+        for (Products product : productsList) {
             OrderSum += product.getSellCost() * product.getInStock();
         }
 
-        Orders order = new Orders(clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().get(),
-                EmployeesOperations.findEmployeesByName("Mintautas"),
-                "sukurtas",
-                false,
-                fldCity.getText(),
-                fldAddress.getText(),
-                fldDeliveryType.getText(),
-                now(),
-                OrderSum);
-
+        if (statusUpdate) {
+            updateOrder.setClient(clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().get());
+            updateOrder.setEmployee(EmployeesOperations.findEmployeesByName("Mintautas"));
+            updateOrder.setStatus("sukurtas");
+            updateOrder.setPayedFor(false);
+            updateOrder.setOrderCity(fldCity.getText());
+            updateOrder.setOrderAddress(fldAddress.getText());
+            updateOrder.setDeliveryType(fldDeliveryType.getText());
+            updateOrder.setSum(OrderSum);
+            Delete.delete(OrdersOperations.findOrdersProduct(updateOrder.getId()));
+        }
+        else {
+            updateOrder = new Orders(clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().get(),
+                    EmployeesOperations.findEmployeesByName("Mintautas"),
+                    "sukurtas",
+                    false,
+                    fldCity.getText(),
+                    fldAddress.getText(),
+                    fldDeliveryType.getText(),
+                    now(),
+                    OrderSum);
+        }
         List<Orders> ordersList = new ArrayList<>();
 
-        ordersList.add(order);
+        ordersList.add(updateOrder);
+
         Create.createAllInList(ordersList);
 
         List<Have> haveList = new ArrayList<>();
 
-        for ( Products product: productsList) {
+        for (Products product : productsList) {
             Have h = new Have();
             h.setProduct(product);
-            h.setOrder(order);
+            h.setOrder(updateOrder);
             h.setQuantity(product.getInStock());
 
             haveList.add(h);
         }
-        Create.createAllInList(haveList);
+            Create.createAllInList(haveList);
 
         orderController.fillTable();
 
@@ -179,6 +210,7 @@ public class CreateOrderController implements Initializable {
         fldDeliveryType.clear();
 
         tableOrderProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
+
     }
 
     public void deleteProduct(ActionEvent actionEvent) {

@@ -2,16 +2,11 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
-
-import com.uni.bakalauras.util.MakeObservable;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-
-import java.sql.SQLException;
 
 public class OrderDetailsController {
 
@@ -57,10 +52,10 @@ public class OrderDetailsController {
         colCost.setCellValueFactory(new PropertyValueFactory<>("ProductCost"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         colSum.setCellValueFactory(new PropertyValueFactory<>("Sum"));
-        try {
-            tableOrderProducts.setItems((ObservableList<Have>) MakeObservable.getOrdersProducts(selectedOrder.getId()));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            tableOrderProducts.setItems((ObservableList<Have>) MakeObservable.getOrdersProducts(selectedOrder.getId()));
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 }

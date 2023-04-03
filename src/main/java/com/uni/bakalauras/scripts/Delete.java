@@ -1,5 +1,6 @@
 package com.uni.bakalauras.scripts;
 
+import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,19 +11,14 @@ public class Delete {
     private static Session session;
     private static Transaction transaction;
 
-    public Delete(Session session, Transaction transaction) {
-        super();
-        this.session = session;
-        this.transaction = transaction;
-    }
-
     public static void delete(List<?> list) {
         for (Object element : list) {
-
+            session = HibernateAnnotationUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
 
             session.delete(element);
             transaction.commit();
+            session.close();
         }
     }
 }

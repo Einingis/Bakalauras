@@ -4,16 +4,12 @@ import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.model.Clients;
 import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
-import com.uni.bakalauras.model.Products;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -27,20 +23,21 @@ public class OrdersOperations {
     private static CriteriaBuilder cb;
     private static CriteriaQuery<Orders> cq;
 
-    public OrdersOperations(Session session) {
-        super();
-        this.session = session;
-    }
-
     public static List<Orders> findAllOrders() {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
         Root<Orders> rootEntry = cq.from(Orders.class);
         CriteriaQuery<Orders> all = cq.select(rootEntry);
         TypedQuery<Orders> allQuery = session.createQuery(all);
-        return allQuery.getResultList();
+        List<Orders> results = allQuery.getResultList();
+        session.close();
+        return results;
+
     }
-    public static List<Orders> findOrdersById(String condition) {
+    public static List<Orders> findOrdersById(Long condition) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         cb = session.getCriteriaBuilder();
         cq = cb.createQuery(Orders.class);
@@ -51,10 +48,13 @@ public class OrdersOperations {
         cq.select(root).where(predicates);
 
         Query<Orders> query = session.createQuery(cq);
-        return query.getResultList();
+        List<Orders> results = query.getResultList();
+        session.close();
+        return results;
     }
 
     public static List<Have> findOrdersProduct(Long orderId) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         cb = session.getCriteriaBuilder();
         CriteriaQuery<Have> cq = cb.createQuery(Have.class);
@@ -65,10 +65,14 @@ public class OrdersOperations {
         cq.select(root).where(predicates);
 
         Query<Have> query = session.createQuery(cq);
-        return query.getResultList();
+
+        List<Have> results = query.getResultList();
+        session.close();
+        return results;
     }
 
     public static List<Orders> findOrderByFilters(List<String> filters) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         List<Predicate> conditionsList = new ArrayList<Predicate>();
 
@@ -93,20 +97,18 @@ public class OrdersOperations {
             conditionsList.add(cb.lessThanOrEqualTo(root.get("created"), date));
         }
         if (!Objects.equals(filters.get(3), "")) {
-            ClientsOperations clientsOperations = new ClientsOperations(session);
 
-           List<Clients> clients =  ClientsOperations.findByNamePart(filters.get(3));
+            List<Clients> clients = ClientsOperations.findByNamePart(filters.get(3));
             conditionsList.add(root.get("client").in(clients));
 
         }
         if (!Objects.equals(filters.get(4), "")) {
-            conditionsList.add(cb.equal(root.get("orderAddress"), "%"+filters.get(4)+"%"));
+            conditionsList.add(cb.equal(root.get("orderAddress"), "%" + filters.get(4) + "%"));
         }
         if (!Objects.equals(filters.get(5), "") && !Objects.equals(filters.get(5), "Visi")) {
             if (Objects.equals(filters.get(5), "Neapmoketi")) {
                 conditionsList.add(cb.equal(root.get("payedFor"), false));
-            }
-            else if (Objects.equals(filters.get(5), "Apmoketi")) {
+            } else if (Objects.equals(filters.get(5), "Apmoketi")) {
                 conditionsList.add(cb.equal(root.get("payedFor"), true));
             }
         }
@@ -114,16 +116,18 @@ public class OrdersOperations {
             conditionsList.add(cb.equal(root.get("sum"), Double.parseDouble(filters.get(6))));
         }
         if (!Objects.equals(filters.get(7), "")) {
-            conditionsList.add(cb.equal(root.get("status"), "%"+filters.get(7)+"%"));
+            conditionsList.add(cb.equal(root.get("status"), "%" + filters.get(7) + "%"));
         }
         if (!Objects.equals(filters.get(8), "")) {
-            conditionsList.add(cb.equal(root.get("deliveryType"), "%"+filters.get(8)+"%"));
+            conditionsList.add(cb.equal(root.get("deliveryType"), "%" + filters.get(8) + "%"));
         }
 
         cq.select(root).where(cb.and(conditionsList.toArray(new Predicate[]{})));
 
         Query<Orders> query = session.createQuery(cq);
 
-        return query.getResultList();
+        List<Orders> results = query.getResultList();
+        session.close();
+        return results;
     }
 }

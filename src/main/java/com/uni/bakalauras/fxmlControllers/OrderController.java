@@ -1,7 +1,6 @@
 package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
-import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.scripts.Delete;
@@ -21,11 +20,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -61,15 +59,8 @@ public class OrderController implements Initializable {
 
     static List<Orders> orderList = new ArrayList<>();
 
-    private static Session session;
-    private static Transaction transaction;
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        session = HibernateAnnotationUtil.getSessionFactory().openSession();
-
-        Delete delete = new Delete(session, transaction);
 
         payedFilter.getItems().add("Visi");
         payedFilter.getItems().add("Neapmoketi");
@@ -91,8 +82,6 @@ public class OrderController implements Initializable {
         colSum.setCellValueFactory(new PropertyValueFactory<>("Sum"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("Status"));
         colDeliveryType.setCellValueFactory(new PropertyValueFactory<>("DeliveryType"));
-
-        OrdersOperations ordersOperations  = new OrdersOperations(session);
 
         orderList = OrdersOperations.findAllOrders();
 
@@ -149,7 +138,19 @@ public class OrderController implements Initializable {
         tableOrders.setItems(MakeObservable.MakeOrderListObservable(orderList));
     }
 
-    public void updateOrder(ActionEvent actionEvent) {
+    public void openUpdateWindow(ActionEvent actionEvent) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("createOrder-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+
+        CreateOrderController createOrderController = loader.getController();
+        createOrderController.setController(createOrderController, orderController);
+        createOrderController.setOrder(tableOrders.getSelectionModel().getSelectedItem());
+
+        stage.initModality(Modality.NONE);
+        stage.setTitle("Naujas uzsakymas");
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
 

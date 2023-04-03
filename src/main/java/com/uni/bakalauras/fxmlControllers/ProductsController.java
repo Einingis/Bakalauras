@@ -1,9 +1,8 @@
 package com.uni.bakalauras.fxmlControllers;
-import com.uni.bakalauras.config.HibernateAnnotationUtil;
+
 import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.Products;
 import com.uni.bakalauras.util.MakeObservable;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -12,11 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import org.hibernate.Session;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class ProductsController implements Initializable {
 
@@ -62,8 +63,6 @@ public class ProductsController implements Initializable {
         colSellCost.setCellValueFactory(new PropertyValueFactory<>("SellCost"));
         colStock.setCellValueFactory(new PropertyValueFactory<>("InStock"));
         try {
-            Session session = HibernateAnnotationUtil.getSessionFactory().openSession();
-            ProductsOperations productsOperations = new ProductsOperations(session);
 
             productsList = ProductsOperations.findAllProducts();
 

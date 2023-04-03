@@ -1,7 +1,7 @@
 package com.uni.bakalauras.hibernateOperations;
 
+import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.model.Employees;
-import com.uni.bakalauras.model.Groups;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -18,12 +18,8 @@ public class EmployeesOperations {
     private static CriteriaBuilder cb;
     private static CriteriaQuery<Employees> cq;
 
-    public EmployeesOperations(Session session) {
-        super();
-        this.session = session;
-    }
-
     public static List<Employees> findAllEmployees() {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         cb = session.getCriteriaBuilder();
         cq = cb.createQuery(Employees.class);
@@ -31,10 +27,13 @@ public class EmployeesOperations {
 
         CriteriaQuery<Employees> all = cq.select(rootEntry);
         TypedQuery<Employees> allQuery = session.createQuery(all);
-        return allQuery.getResultList();
+        List<Employees> results = allQuery.getResultList();
+        session.close();
+        return results;
     }
 
     public static Employees findEmployeesByName(String condition) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         cb = session.getCriteriaBuilder();
         cq = cb.createQuery(Employees.class);
@@ -45,7 +44,8 @@ public class EmployeesOperations {
         cq.select(root).where(predicates);
 
         Query<Employees> query = session.createQuery(cq);
-
-        return query.getSingleResult();
+        Employees result = query.getSingleResult();
+        session.close();
+        return result;
     }
 }

@@ -59,7 +59,7 @@
       <TextField fx:id="statusFilter" layoutX="689.0" layoutY="66.0" prefHeight="25.0" prefWidth="104.0" />
       <TextField fx:id="deliveryFilter" layoutX="800.0" layoutY="66.0" />
       <Button layoutX="967.0" layoutY="66.0" mnemonicParsing="false" onAction="#filterOrders" text="Filtruoti" />
-      <Button layoutX="956.0" layoutY="160.0" mnemonicParsing="false" onAction="#updateOrder" text="Redaguoti" />
+      <Button layoutX="956.0" layoutY="160.0" mnemonicParsing="false" onAction="#openUpdateWindow" text="Redaguoti" />
       <Button layoutX="956.0" layoutY="202.0" mnemonicParsing="false" onAction="#deleteOrder" text="Ištrinti" />
    </children>
 </AnchorPane>

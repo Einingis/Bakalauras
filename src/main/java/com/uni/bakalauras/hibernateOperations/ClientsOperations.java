@@ -1,7 +1,7 @@
 package com.uni.bakalauras.hibernateOperations;
 
+import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.model.Clients;
-import com.uni.bakalauras.model.Groups;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -18,22 +18,22 @@ public class ClientsOperations {
     private static CriteriaBuilder cb;
     private static CriteriaQuery<Clients> cq;
 
-    public ClientsOperations(Session session) {
-        super();
-        this.session = session;
-    }
-
     public static List<Clients> findAllClients() {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         cb = session.getCriteriaBuilder();
         cq = cb.createQuery(Clients.class);
         Root<Clients> rootEntry = cq.from(Clients.class);
         CriteriaQuery<Clients> all = cq.select(rootEntry);
         TypedQuery<Clients> allQuery = session.createQuery(all);
-        return allQuery.getResultList();
+        List<Clients> results = allQuery.getResultList();
+        session.close();
+        return results;
+
     }
 
     public static List<Clients> findByNamePart(String condition) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         cb = session.getCriteriaBuilder();
         cq = cb.createQuery(Clients.class);
@@ -45,7 +45,11 @@ public class ClientsOperations {
         cq.select(root).where(cb.or(predicates));
 
         Query<Clients> query = session.createQuery(cq);
-        return query.getResultList();
+        List<Clients> results = query.getResultList();
+
+        session.close();
+
+        return results;
     }
 
 

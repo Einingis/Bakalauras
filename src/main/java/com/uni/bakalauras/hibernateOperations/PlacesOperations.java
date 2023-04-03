@@ -1,5 +1,6 @@
 package com.uni.bakalauras.hibernateOperations;
 
+import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.model.Places;
 import org.hibernate.Session;
 
@@ -13,18 +14,17 @@ public class PlacesOperations {
 
     private static Session session;
 
-    public PlacesOperations(Session session) {
-        super();
-        this.session = session;
-    }
-
     public static List<Places> findAllPlaces() {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Places> cq = cb.createQuery(Places.class);
         Root<Places> rootEntry = cq.from(Places.class);
         CriteriaQuery<Places> all = cq.select(rootEntry);
         TypedQuery<Places> allQuery = session.createQuery(all);
-        return allQuery.getResultList();
+
+        List<Places> results = allQuery.getResultList();
+        session.close();
+        return results;
     }
 }
