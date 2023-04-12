@@ -1,21 +1,25 @@
 package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
+import com.uni.bakalauras.model.Employees;
 import com.uni.bakalauras.scripts.RefactorDataBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
+
+    private static Employees employee;
+
+    public void setEmployee(Employees employee) {
+        this.employee = employee;
+    }
 
     @FXML
     protected void clickOrders() throws IOException {
@@ -41,6 +45,9 @@ public class HelloController {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("products-view.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
+
+        ProductsController productsController = loader.getController();
+        productsController.setUpFromMain("main", productsController);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Prekės");

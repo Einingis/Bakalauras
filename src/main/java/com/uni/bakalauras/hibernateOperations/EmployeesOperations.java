@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
 
 public class EmployeesOperations {
 
@@ -45,6 +46,24 @@ public class EmployeesOperations {
 
         Query<Employees> query = session.createQuery(cq);
         Employees result = query.getSingleResult();
+        session.close();
+        return result;
+    }
+
+    public static Optional<Employees> findEmployeesLogin(String name, String password) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
+        cb = session.getCriteriaBuilder();
+        cq = cb.createQuery(Employees.class);
+        Root<Employees> root = cq.from(Employees.class);
+
+        Predicate[] predicates = new Predicate[2];
+        predicates[0] = cb.equal(root.get("name"), name);
+        predicates[1] = cb.equal(root.get("password"), password);
+        cq.select(root).where(predicates);
+
+        Query<Employees> query = session.createQuery(cq);
+        Optional<Employees> result = query.uniqueResultOptional();
         session.close();
         return result;
     }

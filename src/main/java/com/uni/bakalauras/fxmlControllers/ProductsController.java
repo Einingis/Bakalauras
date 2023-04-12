@@ -38,6 +38,7 @@ public class ProductsController implements Initializable {
 
     public String fromWhere = "main";
     public CreateOrderController createOrderController;
+    public ProductsController productsController;
 
     static List<Products> productsList = new ArrayList<>();
     static List<Products> productsInList = new ArrayList<>();
@@ -46,11 +47,18 @@ public class ProductsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fillTable();
     }
+    public void setUpFromMain(String fromWhere, ProductsController productsController) {
+        this.fromWhere = fromWhere;
+        this.productsController = productsController;
+        fldOrderAmount.setVisible(false);
+    }
 
-    public void setUp(String fromWhere, CreateOrderController createOrderController,List<Products> productsInList ) {
+    public void setUpFromOrder(String fromWhere, CreateOrderController createOrderController, List<Products> productsInList ) {
         this.fromWhere = fromWhere;
         this.createOrderController = createOrderController;
         this.productsInList = productsInList;
+        fldOrderAmount.setVisible(true);
+
     }
 
     public void fillTable() {
