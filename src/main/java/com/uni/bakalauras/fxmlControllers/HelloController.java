@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 public class HelloController {
 
     private static Employees employee;
+    public Button btnLogoff;
 
     public void setEmployee(Employees employee) {
         this.employee = employee;
@@ -53,5 +55,30 @@ public class HelloController {
         stage.setTitle("Prekės");
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public void logoff(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = (Stage) btnLogoff.getScene().getWindow();
+
+        stage.setTitle("prisijungti!");
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    public void openSettings(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("settings-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = (Stage) btnLogoff.getScene().getWindow();
+
+        SettingsController settingsController = loader.getController();
+        settingsController.setEmployee(employee);
+
+        stage.setTitle("Nustatymai");
+        stage.setScene(scene);
+        stage.show();
+
     }
 }

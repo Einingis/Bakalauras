@@ -15,5 +15,7 @@
          </children>
       </Group>
       <Button layoutX="382.0" layoutY="342.0" mnemonicParsing="false" onAction="#update" text="Button" />
+      <Button fx:id="btnLogoff" layoutX="24.0" layoutY="342.0" mnemonicParsing="false" onAction="#logoff" text="Atsijungti" />
+      <Button layoutX="382.0" layoutY="294.0" mnemonicParsing="false" onAction="#openSettings" text="Nustatymai" />
    </children>
 </AnchorPane>

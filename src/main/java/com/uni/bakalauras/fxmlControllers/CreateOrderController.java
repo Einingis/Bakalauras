@@ -64,6 +64,8 @@ public class CreateOrderController implements Initializable {
     static Orders updateOrder;
 
     public Button btnCreateUpdate;
+    public Button btnDelete;
+    public Button btnChangeQuantity;
 
 
     public void setController(CreateOrderController createOrderController, OrderController orderController) {

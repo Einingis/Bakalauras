@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.SettingsController">
+   <children>
+      <Text layoutX="21.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vardas:" />
+      <Text fx:id="textName" layoutX="71.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Test" />
+      <PasswordField fx:id="fldOldPassword" layoutX="18.0" layoutY="60.0" />
+      <PasswordField fx:id="fldNewPassword" layoutX="18.0" layoutY="119.0" />
+      <PasswordField fx:id="fldNewRepeat" layoutX="18.0" layoutY="175.0" />
+      <Text layoutX="21.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senas slaptažodis" />
+      <Text layoutX="21.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Naujas slaptažodis" />
+      <Text layoutX="21.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pakartoti nauja slaptažodi" />
+      <Button layoutX="17.0" layoutY="220.0" mnemonicParsing="false" onAction="#changePassword" text="Pakeisti slaptažodi" />
+      <Button layoutX="510.0" layoutY="220.0" mnemonicParsing="false" onAction="#Back" text="Atgal" />
+   </children>
+</AnchorPane>
