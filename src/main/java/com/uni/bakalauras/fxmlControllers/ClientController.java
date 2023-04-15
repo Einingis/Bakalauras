@@ -2,18 +2,21 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.ClientsOperations;
+import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.model.Clients;
 import com.uni.bakalauras.model.Orders;
+import com.uni.bakalauras.scripts.Delete;
 import com.uni.bakalauras.util.MakeObservable;
 import com.uni.bakalauras.util.PopupOperations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,6 +37,11 @@ public class ClientController implements Initializable {
 
     static List<Clients> clientList = new ArrayList<>();
     public TableView<Clients> tableClients;
+    public TextField fldName;
+    public TextField fldSurname;
+    public TextField fldNumber;
+    public TextField fldCity;
+    public TextField fldAddress;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -86,5 +94,52 @@ public class ClientController implements Initializable {
             stage.setScene(new Scene(root));
             stage.show();
         }
+    }
+
+    public void deleteClient(ActionEvent actionEvent) {
+        if (tableClients.getSelectionModel().getSelectedItem() == null) {
+            PopupOperations.alertMessage("Pasirinkite klienta");
+        } else {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("pasalinti klienta ");
+
+            ButtonType btnConfirm = new ButtonType("pasalinti", ButtonBar.ButtonData.OK_DONE);
+            ButtonType btnCancel = new ButtonType("atšaukti", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(btnConfirm, btnCancel);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+            dialog.getDialogPane().setContent(grid);
+
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == btnConfirm) {
+                    List<Clients> deleteList = new ArrayList<>();
+                    deleteList.add(tableClients.getSelectionModel().getSelectedItem());
+                    Delete.delete(deleteList);
+                    clientList.remove(tableClients.getSelectionModel().getSelectedItem());
+
+                    tableClients.setItems(MakeObservable.MakeClientsListObservable(clientList));
+                }
+                return null;
+            });
+            dialog.showAndWait();
+        }
+    }
+
+    public void filterClients(ActionEvent actionEvent) {
+        List<String> filters = new ArrayList<>();
+
+        filters.add(fldName.getText());
+        filters.add(fldSurname.getText());
+        filters.add(fldNumber.getText());
+        filters.add(fldCity.getText());
+        filters.add(fldAddress.getText());
+
+        clientList.clear();
+        clientList = ClientsOperations.findClientsByFilters(filters);
+
+        tableClients.setItems(MakeObservable.MakeClientsListObservable(clientList));
     }
 }

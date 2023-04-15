@@ -2,6 +2,7 @@ package com.uni.bakalauras.hibernateOperations;
 
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.model.Clients;
+import com.uni.bakalauras.model.Orders;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -10,7 +11,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.DoubleStream;
 
@@ -75,4 +80,38 @@ public class ClientsOperations {
     }
 
 
+    public static List<Clients> findClientsByFilters(List<String> filters) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
+        List<Predicate> conditionsList = new ArrayList<Predicate>();
+
+        cb = session.getCriteriaBuilder();
+        cq = cb.createQuery(Clients.class);
+        Root<Clients> root = cq.from(Clients.class);
+
+        if (!Objects.equals(filters.get(0), "")) {
+            conditionsList.add(cb.like(root.get("name"), "%"+filters.get(0)+"%"));
+        }
+        if (!Objects.equals(filters.get(1), "")) {
+            conditionsList.add(cb.like(root.get("surname"), "%"+filters.get(1)+"%"));
+        }
+        if (!Objects.equals(filters.get(2), "")) {
+            conditionsList.add(cb.like(root.get("number"), "%"+filters.get(2)+"%"));
+        }
+        if (!Objects.equals(filters.get(3), "")) {
+            conditionsList.add(cb.like(root.get("city"), "%"+filters.get(3)+"%"));
+        }
+        if (!Objects.equals(filters.get(4), "")) {
+            conditionsList.add(cb.like(root.get("address"), "%"+filters.get(4)+"%"));
+        }
+        
+        cq.select(root).where(cb.and(conditionsList.toArray(new Predicate[]{})));
+
+        Query<Clients> query = session.createQuery(cq);
+
+        List<Clients> results = query.getResultList();
+        session.close();
+        return results;
+
+    }
 }

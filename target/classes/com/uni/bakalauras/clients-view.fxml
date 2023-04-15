@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.ClientController">
+<AnchorPane prefHeight="400.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.ClientController">
    <children>
       <TableView fx:id="tableClients" layoutX="14.0" layoutY="100.0" prefHeight="200.0" prefWidth="681.0">
         <columns>
@@ -16,5 +20,17 @@
       </TableView>
       <Button layoutX="732.0" layoutY="100.0" mnemonicParsing="false" onAction="#openCreateClient" text="Sukurti klienta" />
       <Button layoutX="732.0" layoutY="142.0" mnemonicParsing="false" onAction="#openUpdateClient" text="Atnaujinti Klienta" />
+      <Button layoutX="732.0" layoutY="188.0" mnemonicParsing="false" onAction="#deleteClient" text="Ištrinti klienta" />
+      <TextField fx:id="fldName" layoutX="14.0" layoutY="62.0" prefHeight="25.0" prefWidth="113.0" />
+      <Text layoutX="14.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vardas" />
+      <TextField fx:id="fldSurname" layoutX="143.0" layoutY="62.0" prefHeight="25.0" prefWidth="113.0" />
+      <Text layoutX="143.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pavarde" />
+      <TextField fx:id="fldNumber" layoutX="265.0" layoutY="62.0" prefHeight="25.0" prefWidth="113.0" />
+      <Text layoutX="265.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numeris" />
+      <TextField fx:id="fldCity" layoutX="387.0" layoutY="62.0" prefHeight="25.0" prefWidth="113.0" />
+      <Text layoutX="387.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miestas" />
+      <TextField fx:id="fldAddress" layoutX="507.0" layoutY="62.0" prefHeight="25.0" prefWidth="113.0" />
+      <Text layoutX="507.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas" />
+      <Button layoutX="636.0" layoutY="62.0" mnemonicParsing="false" onAction="#filterClients" text="Filtruoti" />
    </children>
 </AnchorPane>

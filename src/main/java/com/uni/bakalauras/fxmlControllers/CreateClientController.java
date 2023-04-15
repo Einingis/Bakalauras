@@ -72,7 +72,7 @@ public class CreateClientController {
             PopupOperations.alertMessage("Toks klientas jau egzistuoja");
         }
     }
-    
+
     public void setOrder(Clients client) {
         this.client = client;
 
