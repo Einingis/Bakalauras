@@ -30,7 +30,7 @@ public class HelloController {
         Stage stage = new Stage();
 
         OrderController orderController = loader.getController();
-        orderController.setController(orderController);
+        orderController.setController(orderController, employee);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Uzsakymai");

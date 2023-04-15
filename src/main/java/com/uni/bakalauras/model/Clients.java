@@ -41,6 +41,13 @@ public class Clients {
         this.address = address;
     }
 
+    public Clients(String name, String surname, String city, String address) {
+        this.name = name;
+        this.surname = surname;
+        this.city = city;
+        this.address = address;
+    }
+
     public Clients(String name, String surname, String number, String city, String address, Set<Orders> order) {
         this.name = name;
         this.surname = surname;

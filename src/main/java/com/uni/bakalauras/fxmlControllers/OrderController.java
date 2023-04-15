@@ -2,6 +2,7 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
+import com.uni.bakalauras.model.Employees;
 import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.scripts.Delete;
 import com.uni.bakalauras.util.MakeObservable;
@@ -56,6 +57,7 @@ public class OrderController implements Initializable {
     public TableColumn<Orders, String> colDeliveryType;
 
     private static OrderController orderController;
+    private static Employees employee;
 
     static List<Orders> orderList = new ArrayList<>();
 
@@ -69,8 +71,9 @@ public class OrderController implements Initializable {
         fillTable();
     }
 
-    public void setController(OrderController orderController) {
+    public void setController(OrderController orderController, Employees employee) {
         this.orderController = orderController;
+        this.employee = employee;
     }
 
     public void fillTable() {
@@ -111,7 +114,7 @@ public class OrderController implements Initializable {
         Stage stage = new Stage();
 
         CreateOrderController createOrderController = loader.getController();
-        createOrderController.setController(createOrderController, orderController);
+        createOrderController.setController(createOrderController, orderController, employee);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Naujas uzsakymas");
@@ -147,7 +150,7 @@ public class OrderController implements Initializable {
             Stage stage = new Stage();
 
             CreateOrderController createOrderController = loader.getController();
-            createOrderController.setController(createOrderController, orderController);
+            createOrderController.setController(createOrderController, orderController, employee);
             createOrderController.setOrder(tableOrders.getSelectionModel().getSelectedItem());
 
             stage.initModality(Modality.NONE);

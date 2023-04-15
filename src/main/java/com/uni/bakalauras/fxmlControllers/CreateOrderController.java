@@ -4,10 +4,7 @@ import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.ClientsOperations;
 import com.uni.bakalauras.hibernateOperations.EmployeesOperations;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
-import com.uni.bakalauras.model.Clients;
-import com.uni.bakalauras.model.Have;
-import com.uni.bakalauras.model.Orders;
-import com.uni.bakalauras.model.Products;
+import com.uni.bakalauras.model.*;
 import com.uni.bakalauras.scripts.Create;
 import com.uni.bakalauras.scripts.Delete;
 import com.uni.bakalauras.util.MakeObservable;
@@ -30,10 +27,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static java.time.LocalDate.now;
 
@@ -62,17 +56,19 @@ public class CreateOrderController implements Initializable {
     static List<Products> productsList = new ArrayList<>();
     static List<Clients> clientsList = new ArrayList<>();
     static Orders updateOrder;
+    static Employees employee;
 
     public Button btnCreateUpdate;
     public Button btnDelete;
     public Button btnChangeQuantity;
 
 
-    public void setController(CreateOrderController createOrderController, OrderController orderController) {
+    public void setController(CreateOrderController createOrderController, OrderController orderController, Employees employee) {
         btnCreateUpdate.setText("Sukurti");
         statusUpdate = false;
         this.createOrderController = createOrderController;
         this.orderController = orderController;
+        this.employee = employee;
     }
 
     public void addProduct(Products selectedItem) {
@@ -158,14 +154,33 @@ public class CreateOrderController implements Initializable {
     public void CreateOrder(ActionEvent actionEvent) {
 
         Double OrderSum = 0.0;
+        Clients client;
 
         for (Products product : productsList) {
             OrderSum += product.getSellCost() * product.getInStock();
         }
 
+        if (clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().isEmpty()) {
+
+            String[] parts = fldClient.getText().split(" ", 2);
+            client = new Clients(parts[0], parts[1], fldCity.getText(), fldAddress.getText());
+
+            List<Clients> clientsList = new ArrayList<>();
+
+            clientsList.add(client);
+
+            Create.createAllInList(clientsList);
+
+            client = ClientsOperations.findByFullNameAllways(client.getName(), client.getSurname());
+
+        }
+        else {
+            client = clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().get();
+        }
+
         if (statusUpdate) {
-            updateOrder.setClient(clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().get());
-            updateOrder.setEmployee(EmployeesOperations.findEmployeesByName("Mintautas"));
+            updateOrder.setClient(client);
+            updateOrder.setEmployee(employee);
             updateOrder.setStatus("sukurtas");
             updateOrder.setPayedFor(false);
             updateOrder.setOrderCity(fldCity.getText());
@@ -175,8 +190,8 @@ public class CreateOrderController implements Initializable {
             Delete.delete(OrdersOperations.findOrdersProduct(updateOrder.getId()));
         }
         else {
-            updateOrder = new Orders(clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().get(),
-                    EmployeesOperations.findEmployeesByName("Mintautas"),
+            updateOrder = new Orders(client,
+                    employee,
                     "sukurtas",
                     false,
                     fldCity.getText(),

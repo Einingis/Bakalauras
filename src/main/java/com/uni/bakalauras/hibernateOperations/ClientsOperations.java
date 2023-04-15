@@ -104,7 +104,7 @@ public class ClientsOperations {
         if (!Objects.equals(filters.get(4), "")) {
             conditionsList.add(cb.like(root.get("address"), "%"+filters.get(4)+"%"));
         }
-        
+
         cq.select(root).where(cb.and(conditionsList.toArray(new Predicate[]{})));
 
         Query<Clients> query = session.createQuery(cq);
@@ -112,6 +112,27 @@ public class ClientsOperations {
         List<Clients> results = query.getResultList();
         session.close();
         return results;
+
+    }
+
+    public static Clients findByFullNameAllways(String name, String surname) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
+        cb = session.getCriteriaBuilder();
+        cq = cb.createQuery(Clients.class);
+        Root<Clients> root = cq.from(Clients.class);
+
+        Predicate[] predicates = new Predicate[2];
+        predicates[0] = cb.like(root.get("name"), name);
+        predicates[1] = cb.like(root.get("surname"), surname);
+        cq.select(root).where(cb.and(predicates));
+
+        Query<Clients> query = session.createQuery(cq);
+        Clients result = query.getSingleResult();
+
+        session.close();
+
+        return result;
 
     }
 }
