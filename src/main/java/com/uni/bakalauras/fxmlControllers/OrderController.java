@@ -139,18 +139,22 @@ public class OrderController implements Initializable {
     }
 
     public void openUpdateWindow(ActionEvent actionEvent) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("createOrder-view.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
+        if (tableOrders.getSelectionModel().getSelectedItem() == null) {
+            PopupOperations.alertMessage("Pasirinkite produkta");
+        } else {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("createOrder-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
 
-        CreateOrderController createOrderController = loader.getController();
-        createOrderController.setController(createOrderController, orderController);
-        createOrderController.setOrder(tableOrders.getSelectionModel().getSelectedItem());
+            CreateOrderController createOrderController = loader.getController();
+            createOrderController.setController(createOrderController, orderController);
+            createOrderController.setOrder(tableOrders.getSelectionModel().getSelectedItem());
 
-        stage.initModality(Modality.NONE);
-        stage.setTitle("Naujas uzsakymas");
-        stage.setScene(new Scene(root));
-        stage.show();
+            stage.initModality(Modality.NONE);
+            stage.setTitle("Naujas uzsakymas");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
 
     }
 

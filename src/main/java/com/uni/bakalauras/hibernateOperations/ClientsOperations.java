@@ -11,6 +11,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.DoubleStream;
 
 public class ClientsOperations {
 
@@ -50,6 +52,26 @@ public class ClientsOperations {
         session.close();
 
         return results;
+    }
+
+    public static Optional<Clients> findByFullName(String name, String surname) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
+        cb = session.getCriteriaBuilder();
+        cq = cb.createQuery(Clients.class);
+        Root<Clients> root = cq.from(Clients.class);
+
+        Predicate[] predicates = new Predicate[2];
+        predicates[0] = cb.like(root.get("name"), name);
+        predicates[1] = cb.like(root.get("surname"), surname);
+        cq.select(root).where(cb.and(predicates));
+
+        Query<Clients> query = session.createQuery(cq);
+        Optional<Clients> result = query.uniqueResultOptional();
+
+        session.close();
+
+        return result;
     }
 
 

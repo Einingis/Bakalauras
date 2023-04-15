@@ -14,5 +14,7 @@
             <TableColumn fx:id="colAddress" prefWidth="183.0" text="Adresas" />
         </columns>
       </TableView>
+      <Button layoutX="732.0" layoutY="100.0" mnemonicParsing="false" onAction="#openCreateClient" text="Sukurti klienta" />
+      <Button layoutX="732.0" layoutY="142.0" mnemonicParsing="false" onAction="#openUpdateClient" text="Atnaujinti Klienta" />
    </children>
 </AnchorPane>

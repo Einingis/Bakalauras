@@ -88,6 +88,7 @@ public class HelloController {
         Stage stage = new Stage();
 
         ClientController clientController = loader.getController();
+        clientController.setController(clientController);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Klientai");
