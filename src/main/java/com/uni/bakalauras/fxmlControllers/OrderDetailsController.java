@@ -40,8 +40,6 @@ public class OrderDetailsController {
         sum.setText(String.valueOf(selectedOrder.getSum()));
 
         fillTable();
-
-
     }
 
     public void fillTable() {

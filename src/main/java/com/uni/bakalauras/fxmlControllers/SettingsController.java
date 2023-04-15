@@ -27,6 +27,8 @@ public class SettingsController {
 
     public void setEmployee(Employees employee) {
         this.employee = employee;
+
+        textName.setText(employee.getName());
     }
 
     public void changePassword(ActionEvent actionEvent) {

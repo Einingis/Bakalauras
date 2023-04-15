@@ -79,6 +79,19 @@ public class HelloController {
         stage.setTitle("Nustatymai");
         stage.setScene(scene);
         stage.show();
+    }
 
+
+    public void openClients(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("clients-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+
+        ClientController clientController = loader.getController();
+
+        stage.initModality(Modality.NONE);
+        stage.setTitle("Klientai");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

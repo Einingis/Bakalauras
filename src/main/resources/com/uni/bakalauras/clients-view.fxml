@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="851.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.ClientController">
+   <children>
+      <TableView fx:id="tableClients" layoutX="14.0" layoutY="100.0" prefHeight="200.0" prefWidth="681.0">
+        <columns>
+          <TableColumn fx:id="colName" prefWidth="114.0" text="Vardas" />
+          <TableColumn fx:id="colSurname" prefWidth="105.0" text="Pavarde" />
+            <TableColumn fx:id="colNumber" prefWidth="135.0" text="Tel. numeris" />
+            <TableColumn fx:id="colCity" prefWidth="140.0" text="Miestas" />
+            <TableColumn fx:id="colAddress" prefWidth="183.0" text="Adresas" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -134,9 +134,9 @@ public class RefactorDataBase {
 
         clientsList.clear();
 
-        Clients client = new Clients("Jonas", "Jonaitis", "860350957", "gatve 1123", "Vilnius");
-        Clients client2 = new Clients("Petras", "Petraitis", "+37069888", "Kauno 1", "Siauliai");
-        Clients client3= new Clients("Onute", "Onyte", "86995599", "Grybiskiu 13", "Grybiskes");
+        Clients client = new Clients("Jonas", "Jonaitis", "860350957", "Vilnius", "gatve 1123");
+        Clients client2 = new Clients("Petras", "Petraitis", "+37069888", "Siauliai", "Kauno 1");
+        Clients client3= new Clients("Onute", "Onyte", "86995599", "Grybiskes", "Grybiskiu 13");
 
         clientsList.add(client);
         clientsList.add(client2);
