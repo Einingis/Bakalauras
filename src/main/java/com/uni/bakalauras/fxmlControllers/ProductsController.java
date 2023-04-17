@@ -1,6 +1,7 @@
 package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
+import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.model.Products;
@@ -230,6 +231,26 @@ public class ProductsController implements Initializable {
     }
 
     public void filterProducts(ActionEvent actionEvent) {
+        List<String> filters = new ArrayList<>();
 
+        filters.add(fldFilterId.getText());
+        filters.add(fldFilterType.getText());
+        filters.add(fldFilterName.getText());
+        filters.add(fldFilterColor.getText());
+        filters.add(fldFilterMeasurement.getText());
+
+        filters.add(fldFilterPrimeCostMin.getText());
+        filters.add(fldFilterPrimeCostMax.getText());
+
+        filters.add(fldFilterPriceMin.getText());
+        filters.add(fldFilterPriceMax.getText());
+
+        filters.add(fldFilterStockMin.getText());
+        filters.add(fldFilterStockMax.getText());
+
+        productsList.clear();
+        productsList = ProductsOperations.findProductsByFilters(filters);
+
+        tableProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
     }
 }
