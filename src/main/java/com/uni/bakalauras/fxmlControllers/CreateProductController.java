@@ -3,20 +3,22 @@ package com.uni.bakalauras.fxmlControllers;
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.GroupsOperations;
 import com.uni.bakalauras.hibernateOperations.ProductsOperations;
-import com.uni.bakalauras.model.Groups;
-import com.uni.bakalauras.model.Places;
-import com.uni.bakalauras.model.Products;
-import com.uni.bakalauras.model.Stored;
+import com.uni.bakalauras.model.*;
 import com.uni.bakalauras.scripts.Create;
 import com.uni.bakalauras.util.MakeObservable;
+import com.uni.bakalauras.util.PopupOperations;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -40,7 +42,7 @@ public class CreateProductController implements Initializable {
 
     public Button btnCreate;
 
-    public TableView tablePlaces;
+    public TableView<Places> tablePlaces;
 
     public TableColumn<Places, String> clmWarehouse;
     public TableColumn<Places, String> clmShelf;
@@ -146,7 +148,23 @@ public class CreateProductController implements Initializable {
 
         Create.createAllInList(productsList);
 
+        List<Stored> storedList = new ArrayList<>();
+
+        for (Places place : placesList) {
+            Stored s = new Stored();
+            s.setProduct(product);
+            s.setPlace(place);
+            s.setQuantity(place.getQuantity());
+
+            storedList.add(s);
+        }
+        Create.createAllInList(storedList);
+
         productsController.fillTable();
+
+        placesList.clear();
+
+        tablePlaces.setItems(MakeObservable.MakePlacesListObservable(placesList));
 
         fldType.clear();
         fldName.clear();
@@ -169,17 +187,92 @@ public class CreateProductController implements Initializable {
         stage.setTitle("Prekės");
         stage.setScene(new Scene(root));
         stage.show();
-
     }
 
     public void addPlace(Places selectedItem) {
         placesList.add(selectedItem);
-        tablePlaces.setItems(MakeObservable.MakeProductListObservable(placesList));
+        tablePlaces.setItems(MakeObservable.MakePlacesListObservable(placesList));
     }
 
-    public void updatePlaced(ActionEvent actionEvent) {
+    public void updatePlaced(ActionEvent actionEvent) throws IOException {
+        if (tablePlaces.getSelectionModel().getSelectedItem() == null) {
+            PopupOperations.alertMessage("Pasirinkite Vietą");
+        } else {
+
+            Places selectedItem = tablePlaces.getSelectionModel().getSelectedItem();
+
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("Pakeisti kieki");
+
+            ButtonType btnConfirm = new ButtonType("Pakeisti", ButtonBar.ButtonData.OK_DONE);
+            ButtonType btnCancel = new ButtonType("atšaukti", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(btnConfirm, btnCancel);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+            TextField quantity = new TextField(String.valueOf(selectedItem.getQuantity()));
+            quantity.setPromptText(String.valueOf(selectedItem.getQuantity()));
+
+            grid.add(new Label("Kiekis:"), 0, 0);
+            grid.add(quantity, 1, 0);
+
+            Node confirm = dialog.getDialogPane().lookupButton(btnConfirm);
+            confirm.setDisable(true);
+
+
+            quantity.textProperty().addListener((observable, oldValue, newValue) -> {
+                confirm.setDisable(newValue.trim().isEmpty());
+                if (!newValue.matches("\\d*")) {
+                    quantity.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            });
+
+            dialog.getDialogPane().setContent(grid);
+
+
+            Platform.runLater(() -> quantity.requestFocus());
+
+
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == btnConfirm) {
+
+                    selectedItem.setQuantity(Integer.valueOf(quantity.getText()));
+                    tablePlaces.refresh();
+                }
+                return null;
+            });
+            dialog.showAndWait();
+        }
     }
 
     public void deletePlace(ActionEvent actionEvent) {
+        if (tablePlaces.getSelectionModel().getSelectedItem() == null) {
+            PopupOperations.alertMessage("Pasirinkite Vietą");
+        } else {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("pašalinti Vietą ");
+
+            ButtonType btnConfirm = new ButtonType("pasalinti", ButtonBar.ButtonData.OK_DONE);
+            ButtonType btnCancel = new ButtonType("atšaukti", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(btnConfirm, btnCancel);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+            dialog.getDialogPane().setContent(grid);
+
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == btnConfirm) {
+                    placesList.remove(tablePlaces.getSelectionModel().getSelectedItem());
+                    tablePlaces.setItems(MakeObservable.MakePlacesListObservable(placesList));
+                }
+                return null;
+            });
+            dialog.showAndWait();
+        }
     }
 }
