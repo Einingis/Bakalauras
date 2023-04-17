@@ -1,10 +1,10 @@
 package com.uni.bakalauras.hibernateOperations;
 
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
-import com.uni.bakalauras.model.Clients;
 import com.uni.bakalauras.model.Groups;
-import com.uni.bakalauras.model.Orders;
+import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Products;
+import com.uni.bakalauras.model.Stored;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -14,8 +14,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -102,6 +100,25 @@ public class ProductsOperations {
         List<Products> results = query.getResultList();
         session.close();
         return results;
+    }
+
+    public static List<Stored> findProductPlaces(Long ProductId) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
+        cb = session.getCriteriaBuilder();
+        CriteriaQuery<Stored> cq = cb.createQuery(Stored.class);
+        Root<Stored> root = cq.from(Stored.class);
+
+        Predicate[] predicates = new Predicate[1];
+        predicates[0] = cb.equal(root.get("product"), ProductId);
+        cq.select(root).where(predicates);
+
+        Query<Stored> query = session.createQuery(cq);
+
+        List<Stored> results = query.getResultList();
+        session.close();
+        return results;
+
     }
 
 }

@@ -1,20 +1,27 @@
 package com.uni.bakalauras.fxmlControllers;
 
-import com.uni.bakalauras.hibernateOperations.ClientsOperations;
+import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.GroupsOperations;
-import com.uni.bakalauras.model.Clients;
+import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.Groups;
+import com.uni.bakalauras.model.Places;
 import com.uni.bakalauras.model.Products;
+import com.uni.bakalauras.model.Stored;
 import com.uni.bakalauras.scripts.Create;
+import com.uni.bakalauras.util.MakeObservable;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,9 +40,17 @@ public class CreateProductController implements Initializable {
 
     public Button btnCreate;
 
+    public TableView tablePlaces;
+
+    public TableColumn<Places, String> clmWarehouse;
+    public TableColumn<Places, String> clmShelf;
+    public TableColumn<Places, String> clmPlace;
+    public TableColumn<Stored, Integer> clmPlaced;
+
     static List<Groups> groupsList = new ArrayList<>();
     static Products product;
 
+    private List<Places> placesList = new ArrayList<>();
     public ProductsController productsController;
     public CreateProductController createProductController;
 
@@ -44,12 +59,23 @@ public class CreateProductController implements Initializable {
         groupsList = GroupsOperations.findAllGroups();
 
         groupsList.forEach(group ->cbType.getItems().add(group.getName()));
+
     }
 
     public void setController(ProductsController productsController, CreateProductController createProductController) {
         this.productsController = productsController;
         this.createProductController = createProductController;
         btnCreate.setText("Sukurti");
+    }
+
+    public void fillTable() {
+        clmWarehouse.setCellValueFactory(new PropertyValueFactory<>("Warehouse"));
+        clmShelf.setCellValueFactory(new PropertyValueFactory<>("Shelf"));
+        clmPlace.setCellValueFactory(new PropertyValueFactory<>("Place"));
+        clmPlaced.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+
+        tablePlaces.setItems(MakeObservable.MakePlacesListObservable(placesList));
+
     }
 
     public void setProduct(Products product) {
@@ -63,6 +89,13 @@ public class CreateProductController implements Initializable {
         fldPrimeCost.setText(String.valueOf(product.getPrimeCost()));
         fldPrice.setText(String.valueOf(product.getSellCost()));
         fldStock.setText(String.valueOf(product.getInStock()));
+
+        for (Stored stored : ProductsOperations.findProductPlaces(product.getId())) {
+            stored.getPlace().setQuantity(stored.getQuantity());
+            placesList.add(stored.getPlace());
+        }
+
+        fillTable();
     }
 
     public void typeSelected(ActionEvent actionEvent) {
@@ -122,5 +155,31 @@ public class CreateProductController implements Initializable {
         fldPrimeCost.clear();
         fldPrice.clear();
         fldStock.clear();
+    }
+
+    public void openAddPlaces(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("places-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+
+        PlacesController placesController = loader.getController();
+        placesController.setUpFromProduct("CreateProduct", createProductController, placesList);
+
+        stage.initModality(Modality.NONE);
+        stage.setTitle("Prekės");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+    }
+
+    public void addPlace(Places selectedItem) {
+        placesList.add(selectedItem);
+        tablePlaces.setItems(MakeObservable.MakeProductListObservable(placesList));
+    }
+
+    public void updatePlaced(ActionEvent actionEvent) {
+    }
+
+    public void deletePlace(ActionEvent actionEvent) {
     }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.PlacesController">
+    <TableView fx:id="tablePlaces" layoutX="31.0" layoutY="30.0" onMouseClicked="#addPlace" prefHeight="342.0" prefWidth="299.0">
+        <columns>
+            <TableColumn fx:id="clmWarehouse" prefWidth="92.0" text="Sandelis" />
+            <TableColumn fx:id="clmShelf" prefWidth="107.0" text="Lentyna" />
+            <TableColumn fx:id="clmPlace" prefWidth="98.0" text="Vieta" />
+        </columns>
+    </TableView>
+   <Text layoutX="353.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis" />
+   <TextField fx:id="fldQuantity" layoutX="339.0" layoutY="47.0" prefHeight="25.0" prefWidth="59.0" />
+   <Button layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#addPlace" text="Pridėti vietą" />
+
+</AnchorPane>

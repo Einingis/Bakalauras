@@ -30,6 +30,8 @@ public class Places {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
     private Set<Stored> stored;
 
+    private Integer Quantity;
+
     public Places() {
     }
 
@@ -94,5 +96,13 @@ public class Places {
 
     public void setStored(Set<Stored> stored) {
         this.stored = stored;
+    }
+
+    public Integer getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        Quantity = quantity;
     }
 }
