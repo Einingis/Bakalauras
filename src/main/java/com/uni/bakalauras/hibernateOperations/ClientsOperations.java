@@ -2,7 +2,6 @@ package com.uni.bakalauras.hibernateOperations;
 
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.model.Clients;
-import com.uni.bakalauras.model.Orders;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -11,13 +10,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.DoubleStream;
 
 public class ClientsOperations {
 
@@ -115,7 +111,7 @@ public class ClientsOperations {
 
     }
 
-    public static Clients findByFullNameAllways(String name, String surname) {
+    public static Clients findByFullNameAlways(String name, String surname) {
         session = HibernateAnnotationUtil.getSessionFactory().openSession();
 
         cb = session.getCriteriaBuilder();

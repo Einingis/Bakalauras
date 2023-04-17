@@ -46,6 +46,16 @@ public class Products {
     public Products() {
     }
 
+    public Products(Groups group, String name, String color, String measurement, Double primeCost, Double sellCost, Integer inStock) {
+        this.group = group;
+        this.name = name;
+        this.color = color;
+        this.measurement = measurement;
+        this.primeCost = primeCost;
+        this.sellCost = sellCost;
+        this.inStock = inStock;
+    }
+
     public Products(String name, String color, String measurement, Double primeCost, Double sellCost, Integer inStock) {
         this.name = name;
         this.color = color;

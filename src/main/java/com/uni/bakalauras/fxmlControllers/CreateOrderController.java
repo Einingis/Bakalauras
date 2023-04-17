@@ -2,7 +2,6 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.ClientsOperations;
-import com.uni.bakalauras.hibernateOperations.EmployeesOperations;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.model.*;
 import com.uni.bakalauras.scripts.Create;
@@ -171,7 +170,7 @@ public class CreateOrderController implements Initializable {
 
             Create.createAllInList(clientsList);
 
-            client = ClientsOperations.findByFullNameAllways(client.getName(), client.getSurname());
+            client = ClientsOperations.findByFullNameAlways(client.getName(), client.getSurname());
 
         }
         else {
