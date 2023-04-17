@@ -25,6 +25,6 @@
     <Text fx:id="txtCost" layoutX="143.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kaina" />
     <TextField fx:id="fldStock" layoutX="27.0" layoutY="96.0" prefHeight="25.0" prefWidth="90.0" />
     <Text fx:id="txtStock" layoutX="26.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis" />
-   <Button layoutX="29.0" layoutY="232.0" mnemonicParsing="false" onAction="#createProduct" text="Sukurti" />
+   <Button fx:id="btnCreate" layoutX="29.0" layoutY="232.0" mnemonicParsing="false" onAction="#createProduct" text="Sukurti" />
 
 </AnchorPane>

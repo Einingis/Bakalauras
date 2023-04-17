@@ -8,6 +8,7 @@ import com.uni.bakalauras.model.Products;
 import com.uni.bakalauras.scripts.Create;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -30,7 +31,10 @@ public class CreateProductController implements Initializable {
     public TextField fldPrice;
     public TextField fldStock;
 
+    public Button btnCreate;
+
     static List<Groups> groupsList = new ArrayList<>();
+    static Products product;
 
     public ProductsController productsController;
     public CreateProductController createProductController;
@@ -45,6 +49,20 @@ public class CreateProductController implements Initializable {
     public void setController(ProductsController productsController, CreateProductController createProductController) {
         this.productsController = productsController;
         this.createProductController = createProductController;
+        btnCreate.setText("Sukurti");
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
+        btnCreate.setText("Pakeisti");
+
+        fldType.setText(product.getGroup().getName());
+        fldName.setText(product.getName());
+        fldColor.setText(product.getColor());
+        fldMeasurement.setText(product.getMeasurement());
+        fldPrimeCost.setText(String.valueOf(product.getPrimeCost()));
+        fldPrice.setText(String.valueOf(product.getSellCost()));
+        fldStock.setText(String.valueOf(product.getInStock()));
     }
 
     public void typeSelected(ActionEvent actionEvent) {
@@ -82,7 +100,6 @@ public class CreateProductController implements Initializable {
             group = groupsList.stream().filter(g -> Objects.equals(g.getName(), fldType.getText())).findFirst().get();
         }
 
-        Products product = new Products();
         product.setGroup(group);
         product.setName(fldName.getText());
         product.setColor(fldColor.getText());
@@ -106,5 +123,4 @@ public class CreateProductController implements Initializable {
         fldPrice.clear();
         fldStock.clear();
     }
-
 }
