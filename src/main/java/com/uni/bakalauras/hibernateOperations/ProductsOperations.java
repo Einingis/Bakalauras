@@ -1,10 +1,7 @@
 package com.uni.bakalauras.hibernateOperations;
 
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
-import com.uni.bakalauras.model.Groups;
-import com.uni.bakalauras.model.Have;
-import com.uni.bakalauras.model.Products;
-import com.uni.bakalauras.model.Stored;
+import com.uni.bakalauras.model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -17,6 +14,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class ProductsOperations {
 
@@ -119,6 +117,23 @@ public class ProductsOperations {
         session.close();
         return results;
 
+    }
+
+    public static Products findProduct(Long productId) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
+        cb = session.getCriteriaBuilder();
+        cq = cb.createQuery(Products.class);
+        Root<Products> root = cq.from(Products.class);
+
+        Predicate[] predicates = new Predicate[1];
+        predicates[0] = cb.equal(root.get("id"), productId);
+        cq.select(root).where(predicates);
+
+        Query<Products> query = session.createQuery(cq);
+        Products result = query.getSingleResult();
+        session.close();
+        return result;
     }
 
 }

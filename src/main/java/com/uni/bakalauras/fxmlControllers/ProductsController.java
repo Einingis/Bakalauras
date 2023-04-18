@@ -5,6 +5,7 @@ import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.model.Products;
+import com.uni.bakalauras.scripts.Create;
 import com.uni.bakalauras.scripts.Delete;
 import com.uni.bakalauras.util.MakeObservable;
 import com.uni.bakalauras.util.PopupOperations;
@@ -151,10 +152,15 @@ public class ProductsController implements Initializable {
             if (mouseEvent.getClickCount() == 2) {
                 switch (fromWhere) {
                     case "CreateOrder":
-                        tableProducts.getSelectionModel().getSelectedItem().setInStock(Integer.valueOf(fldOrderAmount.getText()));
-                        createOrderController.addProduct(tableProducts.getSelectionModel().getSelectedItem());
-                        productsList.remove(tableProducts.getSelectionModel().getSelectedItem());
-                        tableProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
+                        if (Integer.valueOf(fldOrderAmount.getText()) > tableProducts.getSelectionModel().getSelectedItem().getInStock()) {
+                            PopupOperations.alertMessage("Nepakankamas prekių likutis");
+                        }
+                        else {
+                            tableProducts.getSelectionModel().getSelectedItem().setInStock(Integer.valueOf(fldOrderAmount.getText()));
+                            createOrderController.addProduct(tableProducts.getSelectionModel().getSelectedItem());
+                            productsList.remove(tableProducts.getSelectionModel().getSelectedItem());
+                            tableProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
+                        }
                         break;
                     case "main":
                         break;

@@ -3,6 +3,7 @@ package com.uni.bakalauras.fxmlControllers;
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.ClientsOperations;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
+import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.*;
 import com.uni.bakalauras.scripts.Create;
 import com.uni.bakalauras.scripts.Delete;
@@ -54,6 +55,7 @@ public class CreateOrderController implements Initializable {
 
     static List<Products> productsList = new ArrayList<>();
     static List<Clients> clientsList = new ArrayList<>();
+    static List<Products> updateProductsStock = new ArrayList<>();
     static Orders updateOrder;
     static Employees employee;
 
@@ -71,6 +73,7 @@ public class CreateOrderController implements Initializable {
     }
 
     public void addProduct(Products selectedItem) {
+        updateProductInStock(selectedItem, -selectedItem.getInStock());
         productsList.add(selectedItem);
         tableOrderProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
     }
@@ -205,6 +208,8 @@ public class CreateOrderController implements Initializable {
 
         Create.createAllInList(ordersList);
 
+        Create.createAllInList(updateProductsStock);
+
         List<Have> haveList = new ArrayList<>();
 
         for (Products product : productsList) {
@@ -248,8 +253,12 @@ public class CreateOrderController implements Initializable {
 
             dialog.setResultConverter(dialogButton -> {
                 if (dialogButton == btnConfirm) {
+                    updateProductInStock(tableOrderProducts.getSelectionModel().getSelectedItem(),
+                                         tableOrderProducts.getSelectionModel().getSelectedItem().getInStock());
+
                     productsList.remove(tableOrderProducts.getSelectionModel().getSelectedItem());
                     tableOrderProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
+
                 }
                 return null;
             });
@@ -301,13 +310,28 @@ public class CreateOrderController implements Initializable {
 
             dialog.setResultConverter(dialogButton -> {
                 if (dialogButton == btnConfirm) {
+                    if (ProductsOperations.findProduct(selectedItem.getId()).getInStock() + selectedItem.getInStock() < Integer.valueOf(quantity.getText())) {
+                        PopupOperations.alertMessage("Nepakankamas prekių kiekis");
+                    }
+
+                    updateProductInStock(selectedItem, selectedItem.getInStock() - Integer.valueOf(quantity.getText()));
 
                     selectedItem.setInStock(Integer.valueOf(quantity.getText()));
                     tableOrderProducts.refresh();
+
                 }
                 return null;
             });
             dialog.showAndWait();
         }
+    }
+
+    private static void updateProductInStock(Products product, Integer amount) {
+        Products updateProduct = ProductsOperations.findProduct(product.getId());
+        updateProduct.setInStock(updateProduct.getInStock() + amount);
+
+        updateProductsStock.removeIf(products -> Objects.equals(products.getId(), updateProduct.getId()));
+        updateProductsStock.add(updateProduct);
+
     }
 }
