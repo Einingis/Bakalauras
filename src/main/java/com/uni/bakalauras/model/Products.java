@@ -43,6 +43,8 @@ public class Products {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<Returning> returning;
 
+    private Double sum;
+
     public Products() {
     }
 
@@ -88,6 +90,21 @@ public class Products {
         this.stored = stored;
         this.have = have;
         this.returning = returning;
+    }
+
+    public Products(Products selectedItem) {
+        this.id = selectedItem.getId();
+        this.group = selectedItem.getGroup();
+        this.name = selectedItem.getName();
+        this.color = selectedItem.getColor();
+        this.measurement = selectedItem.getMeasurement();
+        this.primeCost = selectedItem.getPrimeCost();
+        this.sellCost = selectedItem.getSellCost();
+        this.inStock = selectedItem.getInStock();
+        this.stored = selectedItem.getStored();
+        this.have = selectedItem.getHave();
+        this.returning = selectedItem.getReturning();
+        this.sum = selectedItem.getSum();
     }
 
     public Long getId() {
@@ -180,5 +197,13 @@ public class Products {
 
     public void setReturning(Set<Returning> returning) {
         this.returning = returning;
+    }
+
+    public Double getSum() {
+        return sum;
+    }
+
+    public void setSum(Double sum) {
+        this.sum = sum;
     }
 }

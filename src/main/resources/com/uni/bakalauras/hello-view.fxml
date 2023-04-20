@@ -10,8 +10,8 @@
          <children>
             <Button mnemonicParsing="false" onAction="#clickOrders" prefHeight="47.0" prefWidth="158.0" text="Uzsakymai" />
             <Button alignment="CENTER" layoutX="236.0" mnemonicParsing="false" onAction="#clickProducts" prefHeight="47.0" prefWidth="158.0" text="Prekės" />
-            <Button layoutY="80.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Ataskaitos" />
             <Button layoutX="236.0" layoutY="80.0" mnemonicParsing="false" onAction="#openClients" prefHeight="47.0" prefWidth="158.0" text="Klientai" />
+            <Button layoutY="80.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Ataskaitos" />
          </children>
       </Group>
       <Button layoutX="382.0" layoutY="342.0" mnemonicParsing="false" onAction="#update" text="Button" />

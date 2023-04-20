@@ -37,9 +37,23 @@ public class RefactorDataBase {
 
         fillReturns();
 
+        addReturn();
+
         System.out.println("done");
 
         session.close();
+    }
+
+    private static void addReturn() {
+        List<Orders> orders = OrdersOperations.findAllOrders();
+
+        Returns returns = new Returns(orders.get(0));
+
+        List<Returns> returnsList = new ArrayList<>();
+
+        returnsList.add(returns);
+
+        Create.createAllInList(returnsList);
     }
 
     private static void addProductsToOrders() {

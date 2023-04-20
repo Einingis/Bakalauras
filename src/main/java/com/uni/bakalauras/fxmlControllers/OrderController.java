@@ -16,8 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -89,23 +87,6 @@ public class OrderController implements Initializable {
         orderList = OrdersOperations.findAllOrders();
 
         tableOrders.setItems(MakeObservable.MakeOrderListObservable(orderList));
-    }
-
-    public void openOrderDetails(MouseEvent mouseEvent) throws IOException {
-        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            if (mouseEvent.getClickCount() == 2) {
-                Orders selectedItem = tableOrders.getSelectionModel().getSelectedItem();
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("orderDetails-view.fxml"));
-                Parent root = loader.load();
-                OrderDetailsController orderDetailsView = loader.getController();
-                orderDetailsView.setFormData(selectedItem);
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Update");
-                stage.setScene(new Scene(root));
-                stage.show();
-            }
-        }
     }
 
     public void openCreateWindow(ActionEvent actionEvent) throws IOException {
@@ -191,5 +172,18 @@ public class OrderController implements Initializable {
             });
             dialog.showAndWait();
         }
+    }
+
+    public void createReturn(ActionEvent actionEvent) throws IOException {
+        Orders selectedItem = tableOrders.getSelectionModel().getSelectedItem();
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("createReturns-view.fxml"));
+        Parent root = loader.load();
+        CreateReturnsController createReturnsController = loader.getController();
+        createReturnsController.setFormData(selectedItem);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Update");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
