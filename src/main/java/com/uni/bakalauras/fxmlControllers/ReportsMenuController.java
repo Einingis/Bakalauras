@@ -19,11 +19,30 @@ public class ReportsMenuController {
         Stage stage = new Stage();
 
         SellReportController sellReportController = loader.getController();
+        sellReportController.setFromData(false);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Klientai");
         stage.setScene(new Scene(root));
         stage.show();
 
+    }
+
+    public void sellsReportWithProducts(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("sellReport-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+
+        SellReportController sellReportController = loader.getController();
+        sellReportController.setFromData(true);
+
+        stage.initModality(Modality.NONE);
+        stage.setTitle("Klientai");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+    }
+
+    public void productInStock(ActionEvent actionEvent) {
     }
 }

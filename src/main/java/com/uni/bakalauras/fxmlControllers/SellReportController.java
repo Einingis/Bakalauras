@@ -2,6 +2,8 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.itextpdf.text.DocumentException;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
+import com.uni.bakalauras.model.Employees;
+import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.util.MakeObservable;
 import javafx.event.ActionEvent;
@@ -31,6 +33,8 @@ public class SellReportController implements Initializable {
     public TextField fldStatus;
     public DatePicker fldStartDate;
     public DatePicker fldEndDate;
+
+    public Boolean witchOption;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,12 +74,16 @@ public class SellReportController implements Initializable {
 
     }
 
+    public void setFromData(Boolean witchOption) {
+        this.witchOption =witchOption;
+    }
+
 
     public void createReport(ActionEvent actionEvent) throws FileNotFoundException, DocumentException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH;mm;ss");
         LocalDateTime now = LocalDateTime.now();
 
-        List<Orders> orderList = new ArrayList<>();
+        List<Orders> orderList;
 
         String dateInterval = "Data";
 
@@ -103,7 +111,7 @@ public class SellReportController implements Initializable {
         document.add(pDateInterval);
         document.add(Chunk.NEWLINE);
 
-        PdfPTable table = new PdfPTable(6);
+        PdfPTable table = new PdfPTable(7);
 
         PdfPCell c2 = new PdfPCell(new Phrase("Data"));
         PdfPCell c3 = new PdfPCell(new Phrase("Klientas"));
@@ -111,6 +119,14 @@ public class SellReportController implements Initializable {
         PdfPCell c5 = new PdfPCell(new Phrase("Būsena"));
         PdfPCell c6= new PdfPCell(new Phrase("Pristatymo būsena"));
         PdfPCell c7 = new PdfPCell(new Phrase("Suma"));
+        PdfPCell c8 = new PdfPCell(new Phrase(""));
+        PdfPCell c9 = new PdfPCell(new Phrase("Rušis"));
+        PdfPCell c10 = new PdfPCell(new Phrase("Pavadinimas"));
+        PdfPCell c11 = new PdfPCell(new Phrase("Spalva"));
+        PdfPCell c12 = new PdfPCell(new Phrase("Išmatavimas"));
+        PdfPCell c13 = new PdfPCell(new Phrase("Kaina"));
+        PdfPCell c14 = new PdfPCell(new Phrase("Kiekis"));
+
 
         table.addCell(c2);
         table.addCell(c3);
@@ -118,6 +134,7 @@ public class SellReportController implements Initializable {
         table.addCell(c5);
         table.addCell(c6);
         table.addCell(c7);
+        table.addCell(c8);
 
         List<String> filters = new ArrayList<>();
 
@@ -135,16 +152,40 @@ public class SellReportController implements Initializable {
 
         orderList.sort(Comparator.comparing(Orders::getCreated));
 
-        for(int i = 0; i<orderList.size(); i++){
+        for(int i = 0; i<orderList.size(); i++) {
+            List<Have> haveList = OrdersOperations.findOrdersProduct(orderList.get(i).getId());
             table.addCell(String.valueOf(orderList.get(i).getCreated()));
             table.addCell(orderList.get(i).getClientName());
             table.addCell(orderList.get(i).getOrderAddress());
             table.addCell(orderList.get(i).getStatus());
             table.addCell(orderList.get(i).getDeliveryType());
             table.addCell(String.valueOf(orderList.get(i).getSum()));
+            table.addCell(c8);
+            if (witchOption && 0<haveList.size()) {
+                table.addCell(c8);
+                table.addCell(c9);
+                table.addCell(c10);
+                table.addCell(c11);
+                table.addCell(c12);
+                table.addCell(c13);
+                table.addCell(c14);
+
+                for(int j = 0; j<haveList.size(); j++) {
+                    table.addCell(c8);
+                    table.addCell(haveList.get(j).getProduct().getGroupName());
+                    table.addCell(haveList.get(j).getProduct().getName());
+                    table.addCell(haveList.get(j).getProduct().getColor());
+                    table.addCell(haveList.get(j).getProduct().getMeasurement());
+                    table.addCell(String.valueOf(haveList.get(j).getProduct().getSellCost()));
+                    table.addCell(String.valueOf(haveList.get(j).getQuantity()));
+                }
+            }
+
         }
         document.add(table);
         document.close();
-
     }
+
+
+
 }
