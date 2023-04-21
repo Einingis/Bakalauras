@@ -37,7 +37,7 @@ public class RefactorDataBase {
 
         fillReturns();
 
-        addReturn();
+        //addReturn();
 
         System.out.println("done");
 
@@ -93,9 +93,14 @@ public class RefactorDataBase {
 
         Orders order = new Orders(clients.get(0), employees, "sukurtas", false,"Telsiai", "gatve1", "kurjeris", LocalDate.of(2023, 3, 1), 25.5);
         Orders order1 = new Orders(clients.get(1), employees, "sukurtas", false,"Vilnius" ,"gatve2", "Atvaziuos", LocalDate.of(2023, 3, 5), 50.0);
+        Orders order2 = new Orders(clients.get(1), employees, "sukurtas", true,"Vilnius" ,"gatve3", "kurjeris", LocalDate.of(2023, 4, 15), 25.0);
+        Orders order3 = new Orders(clients.get(2), employees, "sukurtas", true,"Siauliai" ,"gatve3", "kurjeris", LocalDate.of(2023, 1, 21), 100.0);
+
 
         ordersList.add(order);
         ordersList.add(order1);
+        ordersList.add(order2);
+        ordersList.add(order3);
 
         Create.createAllInList(ordersList);
     }

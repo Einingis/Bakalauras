@@ -103,7 +103,7 @@ public class OrdersOperations {
 
         }
         if (!Objects.equals(filters.get(4), "")) {
-            conditionsList.add(cb.equal(root.get("orderAddress"), "%" + filters.get(4) + "%"));
+            conditionsList.add(cb.like(root.get("orderAddress"), "%" + filters.get(4) + "%"));
         }
         if (!Objects.equals(filters.get(5), "") && !Objects.equals(filters.get(5), "Visi")) {
             if (Objects.equals(filters.get(5), "Neapmoketi")) {
@@ -116,10 +116,11 @@ public class OrdersOperations {
             conditionsList.add(cb.equal(root.get("sum"), Double.parseDouble(filters.get(6))));
         }
         if (!Objects.equals(filters.get(7), "")) {
-            conditionsList.add(cb.equal(root.get("status"), "%" + filters.get(7) + "%"));
+
+            conditionsList.add(cb.like(root.get("status"), "%" + filters.get(7) + "%"));
         }
         if (!Objects.equals(filters.get(8), "")) {
-            conditionsList.add(cb.equal(root.get("deliveryType"), "%" + filters.get(8) + "%"));
+            conditionsList.add(cb.like(root.get("deliveryType"), "%" + filters.get(8) + "%"));
         }
 
         cq.select(root).where(cb.and(conditionsList.toArray(new Predicate[]{})));

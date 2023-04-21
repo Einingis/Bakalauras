@@ -19,23 +19,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class OrderController implements Initializable {
 
     @FXML
     public Button btnCreate;
 
-    public TextField startDateFilter;
+    public DatePicker startDateFilter;
     public TextField IdFilter;
-    public TextField endDateFilter;
+    public DatePicker endDateFilter;
     public TextField clientFilter;
     public TextField addressFilter;
     public ComboBox<String> payedFilter;
@@ -61,6 +61,40 @@ public class OrderController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        startDateFilter.setConverter(
+                new StringConverter<>() {
+                    final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                    @Override
+                    public String toString(LocalDate date) {
+                        return (date != null) ? dateFormatter.format(date) : "";
+                    }
+
+                    @Override
+                    public LocalDate fromString(String string) {
+                        return (string != null && !string.isEmpty())
+                                ? LocalDate.parse(string, dateFormatter)
+                                : null;
+                    }
+                });
+
+        endDateFilter.setConverter(
+                new StringConverter<>() {
+                    final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                    @Override
+                    public String toString(LocalDate date) {
+                        return (date != null) ? dateFormatter.format(date) : "";
+                    }
+
+                    @Override
+                    public LocalDate fromString(String string) {
+                        return (string != null && !string.isEmpty())
+                                ? LocalDate.parse(string, dateFormatter)
+                                : null;
+                    }
+                });
 
         payedFilter.getItems().add("Visi");
         payedFilter.getItems().add("Neapmoketi");
@@ -104,11 +138,22 @@ public class OrderController implements Initializable {
     }
 
     public void filterOrders(ActionEvent actionEvent) {
+        String startDateString = "";
+        String endDateString = "";
+
+        if (!Objects.equals(startDateFilter.getValue(), null)) {
+            startDateString = String.valueOf(startDateFilter.getValue());
+        }
+
+        if (!Objects.equals(endDateFilter.getValue(), null)) {
+            endDateString = String.valueOf(endDateFilter.getValue());
+        }
+
         List<String> filters = new ArrayList<>();
 
         filters.add(IdFilter.getText());
-        filters.add(startDateFilter.getText());
-        filters.add(endDateFilter.getText());
+        filters.add(startDateString);
+        filters.add(endDateString);
         filters.add(clientFilter.getText());
         filters.add(addressFilter.getText());
         filters.add(payedFilter.getValue());

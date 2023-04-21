@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.HelloController">
    <children>
       <Group layoutX="40.0" layoutY="34.0">
          <children>
             <Button mnemonicParsing="false" onAction="#clickOrders" prefHeight="47.0" prefWidth="158.0" text="Uzsakymai" />
             <Button alignment="CENTER" layoutX="236.0" mnemonicParsing="false" onAction="#clickProducts" prefHeight="47.0" prefWidth="158.0" text="Prekės" />
             <Button layoutX="236.0" layoutY="80.0" mnemonicParsing="false" onAction="#openClients" prefHeight="47.0" prefWidth="158.0" text="Klientai" />
-            <Button layoutY="80.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Ataskaitos" />
+            <Button layoutY="80.0" mnemonicParsing="false" onAction="#openReports" prefHeight="47.0" prefWidth="158.0" text="Ataskaitos" />
          </children>
       </Group>
       <Button layoutX="382.0" layoutY="342.0" mnemonicParsing="false" onAction="#update" text="Button" />
