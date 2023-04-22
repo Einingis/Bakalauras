@@ -43,6 +43,17 @@ public class ReportsMenuController {
 
     }
 
-    public void productInStock(ActionEvent actionEvent) {
+    public void productInStock(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("productInStock-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+
+        ProductInStockController productInStockController = loader.getController();
+
+        stage.initModality(Modality.NONE);
+        stage.setTitle("Klientai");
+        stage.setScene(new Scene(root));
+        stage.show();
+
     }
 }

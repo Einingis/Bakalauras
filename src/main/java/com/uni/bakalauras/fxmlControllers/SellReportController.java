@@ -185,7 +185,4 @@ public class SellReportController implements Initializable {
         document.add(table);
         document.close();
     }
-
-
-
 }

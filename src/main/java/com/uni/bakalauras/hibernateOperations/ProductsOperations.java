@@ -1,7 +1,9 @@
 package com.uni.bakalauras.hibernateOperations;
 
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
-import com.uni.bakalauras.model.*;
+import com.uni.bakalauras.model.Groups;
+import com.uni.bakalauras.model.Products;
+import com.uni.bakalauras.model.Stored;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -14,12 +16,10 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class ProductsOperations {
 
     private static Session session;
-    private static Transaction transaction;
     private static CriteriaBuilder cb;
     private static CriteriaQuery<Products> cq;
 
@@ -133,6 +133,29 @@ public class ProductsOperations {
         Query<Products> query = session.createQuery(cq);
         Products result = query.getSingleResult();
         session.close();
+        return result;
+    }
+
+    public static List<Products> findProductsInStock (Long groupId) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
+        cb = session.getCriteriaBuilder();
+        cq = cb.createQuery(Products.class);
+        Root<Products> root = cq.from(Products.class);
+
+        List<Predicate> conditionsList = new ArrayList<Predicate>();
+
+        if (!Objects.equals(groupId, null)) {
+            conditionsList.add(cb.equal(root.get("group"), groupId));
+        }
+
+        cq.select(root).where(cb.and(conditionsList.toArray(new Predicate[]{})));
+
+        Query<Products> query = session.createQuery(cq);
+        List<Products> result = query.getResultList();
+
+        session.close();
+
         return result;
     }
 

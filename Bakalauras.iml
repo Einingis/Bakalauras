@@ -24,6 +24,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="hibernate.core" level="project" />
     <orderEntry type="library" name="mysql.connector.java" level="project" />
+    <orderEntry type="library" name="itextpdf" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:17.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:17.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:17.0.1" level="project" />
@@ -56,6 +57,6 @@
     <orderEntry type="library" name="Maven: javax.persistence:javax.persistence-api:2.2" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.27" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.11.4" level="project" />
-    <orderEntry type="library" name="itextpdf" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.10" level="project" />
   </component>
 </module>
