@@ -5,7 +5,6 @@ import com.uni.bakalauras.model.Groups;
 import com.uni.bakalauras.model.Products;
 import com.uni.bakalauras.model.Stored;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import javax.persistence.TypedQuery;

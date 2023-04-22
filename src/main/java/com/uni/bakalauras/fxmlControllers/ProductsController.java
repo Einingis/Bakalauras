@@ -1,11 +1,8 @@
 package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
-import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.hibernateOperations.ProductsOperations;
-import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.model.Products;
-import com.uni.bakalauras.scripts.Create;
 import com.uni.bakalauras.scripts.Delete;
 import com.uni.bakalauras.util.MakeObservable;
 import com.uni.bakalauras.util.PopupOperations;

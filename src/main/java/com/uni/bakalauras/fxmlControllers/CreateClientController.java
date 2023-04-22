@@ -2,7 +2,6 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.hibernateOperations.ClientsOperations;
 import com.uni.bakalauras.model.Clients;
-import com.uni.bakalauras.model.Orders;
 import com.uni.bakalauras.scripts.Create;
 import com.uni.bakalauras.util.PopupOperations;
 import javafx.event.ActionEvent;

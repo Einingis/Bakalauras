@@ -19,7 +19,6 @@ import java.util.Objects;
 public class OrdersOperations {
 
     private static Session session;
-    private static Transaction transaction;
     private static CriteriaBuilder cb;
     private static CriteriaQuery<Orders> cq;
 

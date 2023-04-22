@@ -1,22 +1,16 @@
 package com.uni.bakalauras.fxmlControllers;
 
-import com.itextpdf.text.DocumentException;
-import com.uni.bakalauras.hibernateOperations.OrdersOperations;
-import com.uni.bakalauras.model.Employees;
-import com.uni.bakalauras.model.Have;
-import com.uni.bakalauras.model.Orders;
-import com.uni.bakalauras.util.MakeObservable;
-import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPRow;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.uni.bakalauras.hibernateOperations.OrdersOperations;
+import com.uni.bakalauras.model.Have;
+import com.uni.bakalauras.model.Orders;
+import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 
 import java.io.FileNotFoundException;
@@ -25,8 +19,8 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class SellReportController implements Initializable {
 
