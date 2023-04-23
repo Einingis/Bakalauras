@@ -5,11 +5,13 @@ import com.uni.bakalauras.model.Clients;
 import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -127,6 +129,25 @@ public class OrdersOperations {
         Query<Orders> query = session.createQuery(cq);
 
         List<Orders> results = query.getResultList();
+        session.close();
+        return results;
+    }
+
+
+    public static List<Have> findOrdersProductByDate(Long orderId) {
+        session = HibernateAnnotationUtil.getSessionFactory().openSession();
+
+        cb = session.getCriteriaBuilder();
+        CriteriaQuery<Have> cq = cb.createQuery(Have.class);
+        Root<Have> root = cq.from(Have.class);
+
+        Predicate[] predicates = new Predicate[1];
+        predicates[0] = cb.equal(root.get("order"), orderId);
+        cq.select(root).where(predicates);
+
+        Query<Have> query = session.createQuery(cq);
+
+        List<Have> results = query.getResultList();
         session.close();
         return results;
     }

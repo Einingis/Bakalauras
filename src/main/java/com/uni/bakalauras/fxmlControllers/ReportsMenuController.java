@@ -22,7 +22,7 @@ public class ReportsMenuController {
         sellReportController.setFromData(false);
 
         stage.initModality(Modality.NONE);
-        stage.setTitle("Klientai");
+        stage.setTitle("Ataskaita");
         stage.setScene(new Scene(root));
         stage.show();
 
@@ -37,7 +37,7 @@ public class ReportsMenuController {
         sellReportController.setFromData(true);
 
         stage.initModality(Modality.NONE);
-        stage.setTitle("Klientai");
+        stage.setTitle("Ataskaita");
         stage.setScene(new Scene(root));
         stage.show();
 
@@ -51,9 +51,21 @@ public class ReportsMenuController {
         ProductInStockController productInStockController = loader.getController();
 
         stage.initModality(Modality.NONE);
-        stage.setTitle("Klientai");
+        stage.setTitle("Ataskaita");
         stage.setScene(new Scene(root));
         stage.show();
+    }
 
+    public void popularProducts(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("popularProducts-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+
+         PopularProductsController popularProductsController = loader.getController();
+
+        stage.initModality(Modality.NONE);
+        stage.setTitle("Ataskaita");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
