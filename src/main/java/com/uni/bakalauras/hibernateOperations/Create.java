@@ -1,4 +1,4 @@
-package com.uni.bakalauras.scripts;
+package com.uni.bakalauras.hibernateOperations;
 
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import org.hibernate.Session;
@@ -6,18 +6,20 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class Delete {
+public class Create {
 
     private static Session session;
     private static Transaction transaction;
 
-    public static void delete(List<?> list) {
+    public static void createAllInList(List<?> list) {
         for (Object element : list) {
             session = HibernateAnnotationUtil.getSessionFactory().getCurrentSession();
-            transaction = session.beginTransaction();
 
-            session.delete(element);
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(element);
+
             transaction.commit();
+
             session.close();
         }
     }

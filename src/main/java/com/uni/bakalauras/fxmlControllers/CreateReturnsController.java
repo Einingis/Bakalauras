@@ -2,8 +2,8 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.model.*;
-import com.uni.bakalauras.scripts.Create;
-import com.uni.bakalauras.scripts.Delete;
+import com.uni.bakalauras.hibernateOperations.Create;
+import com.uni.bakalauras.hibernateOperations.Delete;
 import com.uni.bakalauras.util.MakeObservable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

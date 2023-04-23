@@ -95,7 +95,7 @@ public class PopularProductsController implements Initializable {
 
         List<Have> productsList = getSoldProducts(startDateString, endDateString);
 
-        String fileName = "C:\\Ataskaitos\\pardavimuAtaskaita\\" + "VizituAtaskaita_" + now.format(formatter) + ".pdf";
+        String fileName = "C:\\Ataskaitos\\pardavimuAtaskaita\\" + "PopuliariausiosPrekės_" + now.format(formatter) + ".pdf";
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(fileName));
         document.open();

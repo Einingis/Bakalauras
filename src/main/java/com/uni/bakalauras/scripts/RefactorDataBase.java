@@ -3,19 +3,15 @@ package com.uni.bakalauras.scripts;
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.hibernateOperations.*;
 import com.uni.bakalauras.model.*;
-
-
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RefactorDataBase {
 
     private static Session session;
-    private static Transaction transaction;
-
 
     public static void refactor() {
 
@@ -34,8 +30,6 @@ public class RefactorDataBase {
         fillOrders();
 
         addProductsToOrders();
-
-        fillReturns();
 
         //addReturn();
 
@@ -76,9 +70,6 @@ public class RefactorDataBase {
         haveList.add(have4);
 
         Create.createAllInList(haveList);
-    }
-
-    private static void fillReturns() {
     }
 
     private static void fillOrders() {

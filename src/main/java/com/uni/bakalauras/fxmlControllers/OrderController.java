@@ -4,7 +4,7 @@ import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.model.Employees;
 import com.uni.bakalauras.model.Orders;
-import com.uni.bakalauras.scripts.Delete;
+import com.uni.bakalauras.hibernateOperations.Delete;
 import com.uni.bakalauras.util.MakeObservable;
 import com.uni.bakalauras.util.PopupOperations;
 import javafx.event.ActionEvent;
@@ -97,8 +97,8 @@ public class OrderController implements Initializable {
                 });
 
         payedFilter.getItems().add("Visi");
-        payedFilter.getItems().add("Neapmoketi");
-        payedFilter.getItems().add("Apmoketi");
+        payedFilter.getItems().add("Neapmokėti");
+        payedFilter.getItems().add("Apmokėti");
 
         fillTable();
     }
@@ -132,7 +132,7 @@ public class OrderController implements Initializable {
         createOrderController.setController(createOrderController, orderController, employee);
 
         stage.initModality(Modality.NONE);
-        stage.setTitle("Naujas uzsakymas");
+        stage.setTitle("Naujas užsakymas");
         stage.setScene(new Scene(root));
         stage.show();
     }

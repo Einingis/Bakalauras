@@ -62,7 +62,7 @@ public class HelloController {
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = (Stage) btnLogoff.getScene().getWindow();
 
-        stage.setTitle("prisijungti!");
+        stage.setTitle("prisijungti");
         stage.setScene(scene);
         stage.show();
 

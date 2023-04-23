@@ -50,7 +50,7 @@ public class ProductInStockController implements Initializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH;mm;ss");
         LocalDateTime now = LocalDateTime.now();
 
-        String fileName = "C:\\Ataskaitos\\pardavimuAtaskaita\\" + "VizituAtaskaita_" + now.format(formatter) + ".pdf";
+        String fileName = "C:\\Ataskaitos\\pardavimuAtaskaita\\" + "PrekiųLikučiai_" + now.format(formatter) + ".pdf";
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(fileName));
         document.open();

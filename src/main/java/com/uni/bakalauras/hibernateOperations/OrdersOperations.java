@@ -132,23 +132,4 @@ public class OrdersOperations {
         session.close();
         return results;
     }
-
-
-    public static List<Have> findOrdersProductByDate(Long orderId) {
-        session = HibernateAnnotationUtil.getSessionFactory().openSession();
-
-        cb = session.getCriteriaBuilder();
-        CriteriaQuery<Have> cq = cb.createQuery(Have.class);
-        Root<Have> root = cq.from(Have.class);
-
-        Predicate[] predicates = new Predicate[1];
-        predicates[0] = cb.equal(root.get("order"), orderId);
-        cq.select(root).where(predicates);
-
-        Query<Have> query = session.createQuery(cq);
-
-        List<Have> results = query.getResultList();
-        session.close();
-        return results;
-    }
 }

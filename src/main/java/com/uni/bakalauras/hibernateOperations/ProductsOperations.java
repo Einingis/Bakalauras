@@ -157,31 +157,4 @@ public class ProductsOperations {
 
         return result;
     }
-
-    public static List<Products> findSoldProducts(Long groupId, String startDate, String endDate) {
-        session = HibernateAnnotationUtil.getSessionFactory().openSession();
-
-        cb = session.getCriteriaBuilder();
-        cq = cb.createQuery(Products.class);
-        Root<Products> root = cq.from(Products.class);
-
-        List<Predicate> conditionsList = new ArrayList<Predicate>();
-
-
-
-        if (!Objects.equals(groupId, null)) {
-            conditionsList.add(cb.equal(root.get("group"), groupId));
-        }
-
-
-        cq.select(root).where(cb.and(conditionsList.toArray(new Predicate[]{})));
-
-        Query<Products> query = session.createQuery(cq);
-        List<Products> result = query.getResultList();
-
-        session.close();
-
-        return result;
-
-    }
 }
