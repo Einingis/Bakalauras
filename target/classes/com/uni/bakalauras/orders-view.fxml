@@ -9,6 +9,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -17,7 +18,11 @@
 
 <AnchorPane prefHeight="561.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.OrderController">
    <children>
+<<<<<<< HEAD
       <TableView fx:id="tableOrders" layoutX="33.0" layoutY="140.0" onMouseClicked="#openOrderDetails" prefHeight="397.0" prefWidth="959.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="140.0">
+=======
+      <TableView fx:id="tableOrders" layoutX="14.0" layoutY="91.0" prefHeight="456.0" prefWidth="922.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="173.0" AnchorPane.topAnchor="90.0">
+>>>>>>> origin/main
         <columns>
           <TableColumn fx:id="colId" prefWidth="51.0" text="Nr." />
             <TableColumn fx:id="colData" prefWidth="160.0" text="Data" />
@@ -32,8 +37,8 @@
       <Button fx:id="btnCreate" layoutX="1013.0" layoutY="398.0" mnemonicParsing="false" onAction="#openCreateWindow" prefHeight="25.0" prefWidth="71.0" text="Sukurti" AnchorPane.leftAnchor="1013.0" AnchorPane.topAnchor="398.0" />
       <Group layoutX="65.0" layoutY="10.0">
          <children>
-            <TextField fx:id="startDateFilter" layoutX="23.0" prefHeight="25.0" prefWidth="163.0" />
-            <Text layoutX="3.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo" />
+            <DatePicker fx:id="startDateFilter" prefHeight="25.0" prefWidth="149.0" />
          </children>
       </Group>
       <Group layoutX="15.0" layoutY="35.0">
@@ -41,12 +46,7 @@
             <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr." />
          </children>
       </Group>
-      <Group layoutX="65.0" layoutY="53.0">
-         <children>
-            <Text layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki" />
-            <TextField fx:id="endDateFilter" layoutX="18.0" prefHeight="25.0" prefWidth="163.0" />
-         </children>
-      </Group>
+      <Group layoutX="65.0" layoutY="53.0" />
       <Group layoutX="269.0" layoutY="22.0">
          <children>
             <TextField fx:id="clientFilter" layoutY="-12.0" prefHeight="25.0" prefWidth="149.0" />
@@ -60,6 +60,7 @@
       </Group>
       <ComboBox fx:id="payedFilter" layoutX="499.0" layoutY="41.0" prefHeight="25.0" prefWidth="73.0" />
       <Text layoutX="261.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klientas" />
+<<<<<<< HEAD
       <TextField fx:id="sumFilter" layoutX="635.0" layoutY="41.0" prefHeight="25.0" prefWidth="104.0" />
       <TextField fx:id="statusFilter" layoutX="739.0" layoutY="41.0" prefHeight="25.0" prefWidth="104.0" />
       <TextField fx:id="deliveryFilter" layoutX="843.0" layoutY="41.0" />
@@ -71,5 +72,16 @@
       <Text layoutX="635.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suma" />
       <TextField fx:id="IdFilter" layoutX="13.0" layoutY="51.0" prefHeight="25.0" prefWidth="47.0" />
       <Line endX="100.0" layoutX="261.0" layoutY="112.0" startX="-100.0" strokeMiterLimit="100.0" />
+=======
+      <TextField fx:id="sumFilter" layoutX="585.0" layoutY="66.0" prefHeight="25.0" prefWidth="104.0" />
+      <TextField fx:id="statusFilter" layoutX="689.0" layoutY="66.0" prefHeight="25.0" prefWidth="104.0" />
+      <TextField fx:id="deliveryFilter" layoutX="800.0" layoutY="66.0" />
+      <Button layoutX="967.0" layoutY="66.0" mnemonicParsing="false" onAction="#filterOrders" text="Filtruoti" />
+      <Button layoutX="956.0" layoutY="160.0" mnemonicParsing="false" onAction="#openUpdateWindow" text="Redaguoti" />
+      <Button layoutX="956.0" layoutY="202.0" mnemonicParsing="false" onAction="#deleteOrder" text="Ištrinti" />
+      <Button layoutX="949.0" layoutY="256.0" mnemonicParsing="false" onAction="#createReturn" text="Sukurti Gražinimą" />
+      <Text layoutX="75.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki" />
+      <DatePicker fx:id="endDateFilter" layoutX="75.0" layoutY="54.0" />
+>>>>>>> origin/main
    </children>
 </AnchorPane>

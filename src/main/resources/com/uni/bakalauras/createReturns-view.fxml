@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="621.0" prefWidth="1775.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.CreateReturnsController">
+   <children>
+      <TableView fx:id="tableOrderProducts" layoutX="-7.0" layoutY="60.0" prefHeight="521.0" prefWidth="776.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <columns>
+            <TableColumn fx:id="colType" prefWidth="96.0" text="Prekes rusis" />
+            <TableColumn fx:id="colName" minWidth="0.0" prefWidth="150.0" text="Pavadinimas" />
+            <TableColumn fx:id="colMeasurement" minWidth="0.0" prefWidth="101.0" text="Išmatavimai" />
+            <TableColumn fx:id="colColor" minWidth="0.0" prefWidth="109.0" text="Spalva" />
+            <TableColumn fx:id="colCost" minWidth="0.0" prefWidth="95.0" text="Kaina" />
+            <TableColumn fx:id="colQuantity" minWidth="0.0" prefWidth="104.0" text="Užsakytas kiekis" />
+            <TableColumn fx:id="colSum" minWidth="0.0" prefWidth="119.0" text="Iš viso" />
+         </columns>
+      </TableView>
+      <Group layoutX="25.0" layoutY="14.0" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="16.05078125">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Užsakymo Nr." />
+            <Text fx:id="orderNr" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="71.0" />
+         </children>
+      </Group>
+      <Group layoutX="121.0" layoutY="14.0" AnchorPane.leftAnchor="123.0" AnchorPane.topAnchor="16.05078125">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klientas" textAlignment="CENTER" wrappingWidth="75.103515625" />
+            <Text fx:id="client" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="71.0" />
+         </children>
+      </Group>
+      <Group layoutX="210.0" layoutY="14.0" AnchorPane.leftAnchor="212.0" AnchorPane.topAnchor="16.05078125">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miestas" textAlignment="CENTER" wrappingWidth="98.103515625" />
+            <Text fx:id="city" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="90.0" />
+         </children>
+      </Group>
+      <Group layoutX="320.0" layoutY="14.0" AnchorPane.leftAnchor="322.0" AnchorPane.topAnchor="16.0">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas" textAlignment="CENTER" wrappingWidth="226.103515625" />
+            <Text fx:id="address" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="222.0" />
+         </children>
+      </Group>
+      <Group layoutX="561.0" layoutY="14.0">
+         <children>
+            <Text layoutX="2.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suma" textAlignment="CENTER" wrappingWidth="75.103515625" />
+            <Text fx:id="sum" layoutX="6.0" layoutY="31.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="test" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="71.0" />
+         </children>
+      </Group>
+      <Button layoutX="919.0" layoutY="22.0" mnemonicParsing="false" text="Atgal" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="16.0" />
+      <TableView fx:id="tableOrderProductsReturn" layoutX="924.0" layoutY="100.0" prefHeight="521.0" prefWidth="776.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="100.0">
+         <columns>
+            <TableColumn fx:id="colTypeReturn" prefWidth="96.0" text="Prekes rusis" />
+            <TableColumn fx:id="colNameReturn" minWidth="0.0" prefWidth="150.0" text="Pavadinimas" />
+            <TableColumn fx:id="colMeasurementReturn" minWidth="0.0" prefWidth="101.0" text="Išmatavimai" />
+            <TableColumn fx:id="colColorReturn" minWidth="0.0" prefWidth="109.0" text="Spalva" />
+            <TableColumn fx:id="colCostReturn" minWidth="0.0" prefWidth="95.0" text="Kaina" />
+            <TableColumn fx:id="colQuantityReturn" minWidth="0.0" prefWidth="104.0" text="Užsakytas kiekis" />
+            <TableColumn fx:id="colSumReturn" minWidth="0.0" prefWidth="119.0" text="Iš viso" />
+         </columns>
+      </TableView>
+      <Button layoutX="797.0" layoutY="136.0" mnemonicParsing="false" onAction="#allToReturns" prefHeight="25.0" prefWidth="109.0" text="perkelti visus &gt;&gt;" />
+      <Button layoutX="797.0" layoutY="214.0" mnemonicParsing="false" onAction="#selectedToReturns" prefHeight="25.0" prefWidth="109.0" text="perkelti &gt;&gt;" />
+      <Button layoutX="797.0" layoutY="247.0" mnemonicParsing="false" onAction="#selectedToOrder" prefHeight="25.0" prefWidth="109.0" text="&lt;&lt; perkelti " />
+      <Button layoutX="797.0" layoutY="311.0" mnemonicParsing="false" onAction="#allToOrder" prefHeight="25.0" prefWidth="109.0" text="&lt;&lt; perkelti visus " />
+      <Text layoutX="16.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Užsakymo prekės" />
+      <Text layoutX="924.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prekės grąžinimui" />
+      <TextField fx:id="fldQuantity" layoutX="823.0" layoutY="182.0" prefHeight="25.0" prefWidth="44.0" />
+      <Button layoutX="792.0" layoutY="543.0" mnemonicParsing="false" onAction="#createReturn" text="SukurtiGrąžinimą" />
+   </children>
+</AnchorPane>

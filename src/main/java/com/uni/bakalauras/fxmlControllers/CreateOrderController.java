@@ -5,8 +5,8 @@ import com.uni.bakalauras.hibernateOperations.ClientsOperations;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.*;
-import com.uni.bakalauras.scripts.Create;
-import com.uni.bakalauras.scripts.Delete;
+import com.uni.bakalauras.hibernateOperations.Create;
+import com.uni.bakalauras.hibernateOperations.Delete;
 import com.uni.bakalauras.util.MakeObservable;
 import com.uni.bakalauras.util.PopupOperations;
 import javafx.application.Platform;
@@ -236,12 +236,12 @@ public class CreateOrderController implements Initializable {
 
     public void deleteProduct(ActionEvent actionEvent) {
         if (tableOrderProducts.getSelectionModel().getSelectedItem() == null) {
-            PopupOperations.alertMessage("Pasirinkite produkta");
+            PopupOperations.alertMessage("Pasirinkite produktą");
         } else {
             Dialog<String> dialog = new Dialog<>();
-            dialog.setTitle("pasalinti produkta ");
+            dialog.setTitle("pašalinti produktą ");
 
-            ButtonType btnConfirm = new ButtonType("pasalinti", ButtonBar.ButtonData.OK_DONE);
+            ButtonType btnConfirm = new ButtonType("pašalinti", ButtonBar.ButtonData.OK_DONE);
             ButtonType btnCancel = new ButtonType("atšaukti", ButtonBar.ButtonData.CANCEL_CLOSE);
             dialog.getDialogPane().getButtonTypes().addAll(btnConfirm, btnCancel);
 

@@ -5,11 +5,13 @@ import com.uni.bakalauras.model.Clients;
 import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,7 +21,6 @@ import java.util.Objects;
 public class OrdersOperations {
 
     private static Session session;
-    private static Transaction transaction;
     private static CriteriaBuilder cb;
     private static CriteriaQuery<Orders> cq;
 
@@ -103,7 +104,7 @@ public class OrdersOperations {
 
         }
         if (!Objects.equals(filters.get(4), "")) {
-            conditionsList.add(cb.equal(root.get("orderAddress"), "%" + filters.get(4) + "%"));
+            conditionsList.add(cb.like(root.get("orderAddress"), "%" + filters.get(4) + "%"));
         }
         if (!Objects.equals(filters.get(5), "") && !Objects.equals(filters.get(5), "Visi")) {
             if (Objects.equals(filters.get(5), "Neapmoketi")) {
@@ -116,10 +117,11 @@ public class OrdersOperations {
             conditionsList.add(cb.equal(root.get("sum"), Double.parseDouble(filters.get(6))));
         }
         if (!Objects.equals(filters.get(7), "")) {
-            conditionsList.add(cb.equal(root.get("status"), "%" + filters.get(7) + "%"));
+
+            conditionsList.add(cb.like(root.get("status"), "%" + filters.get(7) + "%"));
         }
         if (!Objects.equals(filters.get(8), "")) {
-            conditionsList.add(cb.equal(root.get("deliveryType"), "%" + filters.get(8) + "%"));
+            conditionsList.add(cb.like(root.get("deliveryType"), "%" + filters.get(8) + "%"));
         }
 
         cq.select(root).where(cb.and(conditionsList.toArray(new Predicate[]{})));

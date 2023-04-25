@@ -3,19 +3,15 @@ package com.uni.bakalauras.scripts;
 import com.uni.bakalauras.config.HibernateAnnotationUtil;
 import com.uni.bakalauras.hibernateOperations.*;
 import com.uni.bakalauras.model.*;
-
-
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RefactorDataBase {
 
     private static Session session;
-    private static Transaction transaction;
-
 
     public static void refactor() {
 
@@ -35,11 +31,23 @@ public class RefactorDataBase {
 
         addProductsToOrders();
 
-        fillReturns();
+        //addReturn();
 
         System.out.println("done");
 
         session.close();
+    }
+
+    private static void addReturn() {
+        List<Orders> orders = OrdersOperations.findAllOrders();
+
+        Returns returns = new Returns(orders.get(0));
+
+        List<Returns> returnsList = new ArrayList<>();
+
+        returnsList.add(returns);
+
+        Create.createAllInList(returnsList);
     }
 
     private static void addProductsToOrders() {
@@ -64,9 +72,6 @@ public class RefactorDataBase {
         Create.createAllInList(haveList);
     }
 
-    private static void fillReturns() {
-    }
-
     private static void fillOrders() {
         List<Orders> ordersList = OrdersOperations.findAllOrders();
         Delete.delete(ordersList);
@@ -79,9 +84,14 @@ public class RefactorDataBase {
 
         Orders order = new Orders(clients.get(0), employees, "sukurtas", false,"Telsiai", "gatve1", "kurjeris", LocalDate.of(2023, 3, 1), 25.5);
         Orders order1 = new Orders(clients.get(1), employees, "sukurtas", false,"Vilnius" ,"gatve2", "Atvaziuos", LocalDate.of(2023, 3, 5), 50.0);
+        Orders order2 = new Orders(clients.get(1), employees, "sukurtas", true,"Vilnius" ,"gatve3", "kurjeris", LocalDate.of(2023, 4, 15), 25.0);
+        Orders order3 = new Orders(clients.get(2), employees, "sukurtas", true,"Siauliai" ,"gatve3", "kurjeris", LocalDate.of(2023, 1, 21), 100.0);
+
 
         ordersList.add(order);
         ordersList.add(order1);
+        ordersList.add(order2);
+        ordersList.add(order3);
 
         Create.createAllInList(ordersList);
     }

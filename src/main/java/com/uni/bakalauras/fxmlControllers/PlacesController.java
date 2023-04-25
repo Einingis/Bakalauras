@@ -2,7 +2,6 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.hibernateOperations.PlacesOperations;
 import com.uni.bakalauras.model.Places;
-import com.uni.bakalauras.model.Products;
 import com.uni.bakalauras.util.MakeObservable;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;

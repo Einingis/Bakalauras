@@ -1,6 +1,7 @@
 package com.uni.bakalauras.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class Returns {
     private Orders order;
 
     @Column(name = "GRAZINIMODATA")
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "GRAZINIMOSUMA")
     private Double sum;
@@ -29,10 +30,23 @@ public class Returns {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "returns")
     private Set<Returning> returning;
 
-    public Returns() {
+    public Returns(Orders order) {
+        this.order = order;
     }
 
-    public Returns(Orders order, Date date, Double sum, String status, Set<Returning> returning) {
+    public Returns() {
+
+
+    }
+
+    public Returns(Orders order, LocalDate date, Double sum, String status) {
+        this.order = order;
+        this.date = date;
+        this.sum = sum;
+        this.status = status;
+    }
+
+    public Returns(Orders order, LocalDate date, Double sum, String status, Set<Returning> returning) {
         this.order = order;
         this.date = date;
         this.sum = sum;
@@ -56,11 +70,11 @@ public class Returns {
         this.order = order;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

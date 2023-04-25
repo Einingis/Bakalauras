@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="243.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.ProductInStockController">
+   <children>
+      <ComboBox fx:id="cmTypes" layoutX="41.0" layoutY="40.0" prefWidth="150.0" />
+      <Text layoutX="41.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rušis" wrappingWidth="40.13671875" />
+      <Button layoutX="180.0" layoutY="190.0" mnemonicParsing="false" onAction="#createReport" text="Sukurti" />
+   </children>
+</AnchorPane>

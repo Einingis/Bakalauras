@@ -6,6 +6,7 @@ module com.uni.bakalauras {
     requires java.naming;
     requires java.sql;
     requires mysql.connector.java;
+    requires itextpdf;
 
 
     opens com.uni.bakalauras to javafx.fxml;

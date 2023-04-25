@@ -4,7 +4,7 @@ import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.model.Employees;
 import com.uni.bakalauras.model.Orders;
-import com.uni.bakalauras.scripts.Delete;
+import com.uni.bakalauras.hibernateOperations.Delete;
 import com.uni.bakalauras.util.MakeObservable;
 import com.uni.bakalauras.util.PopupOperations;
 import javafx.event.ActionEvent;
@@ -16,28 +16,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class OrderController implements Initializable {
 
     @FXML
     public Button btnCreate;
 
-    public TextField startDateFilter;
+    public DatePicker startDateFilter;
     public TextField IdFilter;
-    public TextField endDateFilter;
+    public DatePicker endDateFilter;
     public TextField clientFilter;
     public TextField addressFilter;
     public ComboBox<String> payedFilter;
@@ -64,9 +62,43 @@ public class OrderController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        startDateFilter.setConverter(
+                new StringConverter<>() {
+                    final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                    @Override
+                    public String toString(LocalDate date) {
+                        return (date != null) ? dateFormatter.format(date) : "";
+                    }
+
+                    @Override
+                    public LocalDate fromString(String string) {
+                        return (string != null && !string.isEmpty())
+                                ? LocalDate.parse(string, dateFormatter)
+                                : null;
+                    }
+                });
+
+        endDateFilter.setConverter(
+                new StringConverter<>() {
+                    final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                    @Override
+                    public String toString(LocalDate date) {
+                        return (date != null) ? dateFormatter.format(date) : "";
+                    }
+
+                    @Override
+                    public LocalDate fromString(String string) {
+                        return (string != null && !string.isEmpty())
+                                ? LocalDate.parse(string, dateFormatter)
+                                : null;
+                    }
+                });
+
         payedFilter.getItems().add("Visi");
-        payedFilter.getItems().add("Neapmoketi");
-        payedFilter.getItems().add("Apmoketi");
+        payedFilter.getItems().add("Neapmokėti");
+        payedFilter.getItems().add("Apmokėti");
 
         fillTable();
     }
@@ -91,23 +123,6 @@ public class OrderController implements Initializable {
         tableOrders.setItems(MakeObservable.MakeOrderListObservable(orderList));
     }
 
-    public void openOrderDetails(MouseEvent mouseEvent) throws IOException {
-        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            if (mouseEvent.getClickCount() == 2) {
-                Orders selectedItem = tableOrders.getSelectionModel().getSelectedItem();
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("orderDetails-view.fxml"));
-                Parent root = loader.load();
-                OrderDetailsController orderDetailsView = loader.getController();
-                orderDetailsView.setFormData(selectedItem);
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Update");
-                stage.setScene(new Scene(root));
-                stage.show();
-            }
-        }
-    }
-
     public void openCreateWindow(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("createOrder-view.fxml"));
         Parent root = loader.load();
@@ -117,17 +132,28 @@ public class OrderController implements Initializable {
         createOrderController.setController(createOrderController, orderController, employee);
 
         stage.initModality(Modality.NONE);
-        stage.setTitle("Naujas uzsakymas");
+        stage.setTitle("Naujas užsakymas");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
     public void filterOrders(ActionEvent actionEvent) {
+        String startDateString = "";
+        String endDateString = "";
+
+        if (!Objects.equals(startDateFilter.getValue(), null)) {
+            startDateString = String.valueOf(startDateFilter.getValue());
+        }
+
+        if (!Objects.equals(endDateFilter.getValue(), null)) {
+            endDateString = String.valueOf(endDateFilter.getValue());
+        }
+
         List<String> filters = new ArrayList<>();
 
         filters.add(IdFilter.getText());
-        filters.add(startDateFilter.getText());
-        filters.add(endDateFilter.getText());
+        filters.add(startDateString);
+        filters.add(endDateString);
         filters.add(clientFilter.getText());
         filters.add(addressFilter.getText());
         filters.add(payedFilter.getValue());
@@ -191,5 +217,18 @@ public class OrderController implements Initializable {
             });
             dialog.showAndWait();
         }
+    }
+
+    public void createReturn(ActionEvent actionEvent) throws IOException {
+        Orders selectedItem = tableOrders.getSelectionModel().getSelectedItem();
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("createReturns-view.fxml"));
+        Parent root = loader.load();
+        CreateReturnsController createReturnsController = loader.getController();
+        createReturnsController.setFormData(selectedItem);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Update");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

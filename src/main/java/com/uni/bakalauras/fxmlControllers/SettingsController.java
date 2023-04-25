@@ -2,7 +2,7 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.model.Employees;
-import com.uni.bakalauras.scripts.Create;
+import com.uni.bakalauras.hibernateOperations.Create;
 import com.uni.bakalauras.util.PopupOperations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

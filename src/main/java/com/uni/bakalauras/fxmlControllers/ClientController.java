@@ -2,10 +2,8 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.ClientsOperations;
-import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.model.Clients;
-import com.uni.bakalauras.model.Orders;
-import com.uni.bakalauras.scripts.Delete;
+import com.uni.bakalauras.hibernateOperations.Delete;
 import com.uni.bakalauras.util.MakeObservable;
 import com.uni.bakalauras.util.PopupOperations;
 import javafx.event.ActionEvent;
@@ -68,7 +66,7 @@ public class ClientController implements Initializable {
         CreateClientController createClientController = loader.getController();
         createClientController.setController(createClientController, clientController);
         stage.initModality(Modality.NONE);
-        stage.setTitle("Naujas uzsakymas");
+        stage.setTitle("Naujas užsakymas");
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -79,7 +77,7 @@ public class ClientController implements Initializable {
 
     public void openUpdateClient(ActionEvent actionEvent) throws IOException {
         if (tableClients.getSelectionModel().getSelectedItem() == null) {
-            PopupOperations.alertMessage("Pasirinkite klienta");
+            PopupOperations.alertMessage("Pasirinkite klientą");
         } else {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("createClient-view.fxml"));
             Parent root = loader.load();
@@ -90,7 +88,7 @@ public class ClientController implements Initializable {
             createClientController.setOrder(tableClients.getSelectionModel().getSelectedItem());
 
             stage.initModality(Modality.NONE);
-            stage.setTitle("Naujas uzsakymas");
+            stage.setTitle("Naujas užsakymas");
             stage.setScene(new Scene(root));
             stage.show();
         }
@@ -98,12 +96,12 @@ public class ClientController implements Initializable {
 
     public void deleteClient(ActionEvent actionEvent) {
         if (tableClients.getSelectionModel().getSelectedItem() == null) {
-            PopupOperations.alertMessage("Pasirinkite klienta");
+            PopupOperations.alertMessage("Pasirinkite klientą");
         } else {
             Dialog<String> dialog = new Dialog<>();
-            dialog.setTitle("pasalinti klienta ");
+            dialog.setTitle("pašalinti klientą ");
 
-            ButtonType btnConfirm = new ButtonType("pasalinti", ButtonBar.ButtonData.OK_DONE);
+            ButtonType btnConfirm = new ButtonType("pašalinti", ButtonBar.ButtonData.OK_DONE);
             ButtonType btnCancel = new ButtonType("atšaukti", ButtonBar.ButtonData.CANCEL_CLOSE);
             dialog.getDialogPane().getButtonTypes().addAll(btnConfirm, btnCancel);
 

@@ -49,7 +49,7 @@ public class Orders {
     @Column(name = "SUMA")
     private Double sum;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
     private Set<Have> have;
 
     public Orders() {

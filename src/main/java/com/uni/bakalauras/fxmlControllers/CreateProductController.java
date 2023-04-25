@@ -4,7 +4,7 @@ import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.GroupsOperations;
 import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.*;
-import com.uni.bakalauras.scripts.Create;
+import com.uni.bakalauras.hibernateOperations.Create;
 import com.uni.bakalauras.util.MakeObservable;
 import com.uni.bakalauras.util.PopupOperations;
 import javafx.application.Platform;

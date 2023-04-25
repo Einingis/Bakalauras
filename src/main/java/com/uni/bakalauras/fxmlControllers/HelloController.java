@@ -62,7 +62,7 @@ public class HelloController {
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = (Stage) btnLogoff.getScene().getWindow();
 
-        stage.setTitle("prisijungti!");
+        stage.setTitle("prisijungti");
         stage.setScene(scene);
         stage.show();
 
@@ -92,6 +92,20 @@ public class HelloController {
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Klientai");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void openReports(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("reportsMenu-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+
+        ReportsMenuController reportsMenuController = loader.getController();
+//        clientController.setController(clientController);
+
+        stage.initModality(Modality.NONE);
+        stage.setTitle("Ataskaitos");
         stage.setScene(new Scene(root));
         stage.show();
     }
