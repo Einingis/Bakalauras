@@ -1,3 +1,10 @@
-.bodybg{
-     -fx-background-image: url('bg.jpg');
-  }
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: #36434c;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
