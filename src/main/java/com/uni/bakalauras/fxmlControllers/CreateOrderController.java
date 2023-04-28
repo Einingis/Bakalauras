@@ -38,6 +38,7 @@ public class CreateOrderController implements Initializable {
     public TextField fldDeliveryType;
     public ComboBox<String> cbClient;
     public TextField fldClient;
+    public ComboBox<String> cbStatus;
 
     public TableView<Products> tableOrderProducts;
     public TableColumn<Products, Long> colId;
@@ -63,7 +64,6 @@ public class CreateOrderController implements Initializable {
     public Button btnDelete;
     public Button btnChangeQuantity;
 
-
     public void setController(CreateOrderController createOrderController, OrderController orderController, Employees employee) {
         btnCreateUpdate.setText("Sukurti");
         statusUpdate = false;
@@ -78,12 +78,17 @@ public class CreateOrderController implements Initializable {
         tableOrderProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         clientsList = ClientsOperations.findAllClients();
 
         clientsList.forEach(clients1 ->cbClient.getItems().add(clients1.getFullName()));
+
+        cbStatus.getItems().add("Sukurtas");
+        cbStatus.getItems().add("Surinktas");
+        cbStatus.getItems().add("Išsiųstas");
+        cbStatus.getItems().add("Pristatytas");
+        cbStatus.getItems().add("Atšauktas");
 
         try {
             fillTable();
@@ -102,6 +107,7 @@ public class CreateOrderController implements Initializable {
         fldCity.setText(updateOrder.getOrderCity());
         fldAddress.setText(updateOrder.getOrderAddress());
         fldDeliveryType.setText(updateOrder.getDeliveryType());
+        cbStatus.getSelectionModel().select(updateOrder.getStatus());
 
         productsList.clear();
 
