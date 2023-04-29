@@ -41,6 +41,9 @@ public class CreateProductController implements Initializable {
     public TextField fldStock;
 
     public Button btnCreate;
+    public Button btnAddPlace;
+    public Button btnChangeAmount;
+    public Button btnDelete;
 
     public TableView<Places> tablePlaces;
 
@@ -55,6 +58,7 @@ public class CreateProductController implements Initializable {
     private List<Places> placesList = new ArrayList<>();
     public ProductsController productsController;
     public CreateProductController createProductController;
+    public Employees employee;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -64,10 +68,42 @@ public class CreateProductController implements Initializable {
 
     }
 
-    public void setController(ProductsController productsController, CreateProductController createProductController) {
+    public void setController(ProductsController productsController, CreateProductController createProductController, Employees employee) {
         this.productsController = productsController;
         this.createProductController = createProductController;
+        this.employee = employee;
         btnCreate.setText("Sukurti");
+
+        if (Objects.equals(employee.getPosition(), "Buhalteris")) {
+            cbType.setVisible(true);
+            fldType.setEditable(true);
+
+            fldName.setEditable(true);
+            fldColor.setEditable(true);
+            fldMeasurement.setEditable(true);
+            fldPrimeCost.setEditable(true);
+            fldPrice.setEditable(true);
+            fldStock.setEditable(true);
+
+            btnAddPlace.setVisible(false);
+            btnChangeAmount.setVisible(false);
+            btnDelete.setVisible(false);
+        }
+        else if (Objects.equals(employee.getPosition(), "Sandėlio darbuotojas")) {
+            cbType.setVisible(false);
+            fldType.setEditable(false);
+
+            fldName.setEditable(false);
+            fldColor.setEditable(false);
+            fldMeasurement.setEditable(false);
+            fldPrimeCost.setEditable(false);
+            fldPrice.setEditable(false);
+            fldStock.setEditable(false);
+
+            btnAddPlace.setVisible(true);
+            btnChangeAmount.setVisible(true);
+            btnDelete.setVisible(true);
+        }
     }
 
     public void fillTable() {

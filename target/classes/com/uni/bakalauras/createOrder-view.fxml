@@ -47,7 +47,7 @@
            <TableColumn fx:id="colStock" prefWidth="70.0" text="Kiekis" />
         </columns>
       </TableView>
-      <Button layoutX="906.0" layoutY="104.0" mnemonicParsing="false" onAction="#openProductList" text="Pridėti" />
+      <Button fx:id="btnAddProduct" layoutX="906.0" layoutY="104.0" mnemonicParsing="false" onAction="#openProductList" text="Pridėti" />
       <Button fx:id="btnCreateUpdate" layoutX="905.0" layoutY="142.0" mnemonicParsing="false" onAction="#CreateOrder" text="Sukurti" />
       <Button fx:id="btnDelete" layoutX="906.0" layoutY="491.0" mnemonicParsing="false" onAction="#deleteProduct" text="Ištrinti" />
       <Button fx:id="btnChangeQuantity" layoutX="894.0" layoutY="180.0" mnemonicParsing="false" onAction="#ChangeQuantity" text="Pakeisti kieki" />

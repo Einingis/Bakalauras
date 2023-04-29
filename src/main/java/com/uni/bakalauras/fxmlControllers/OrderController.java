@@ -31,8 +31,6 @@ import java.util.*;
 public class OrderController implements Initializable {
 
     @FXML
-    public Button btnCreate;
-
     public DatePicker startDateFilter;
     public TextField IdFilter;
     public DatePicker endDateFilter;
@@ -42,6 +40,10 @@ public class OrderController implements Initializable {
     public TextField sumFilter;
     public TextField statusFilter;
     public TextField deliveryFilter;
+    public Button btnCreate;
+    public Button btnUpdate;
+    public Button btnDelete;
+    public Button btnReturn;
     @FXML
     private TableView<Orders> tableOrders;
 
@@ -100,12 +102,27 @@ public class OrderController implements Initializable {
         payedFilter.getItems().add("Neapmokėti");
         payedFilter.getItems().add("Apmokėti");
 
+        btnReturn.setVisible(false);
+
         fillTable();
     }
 
     public void setController(OrderController orderController, Employees employee) {
         this.orderController = orderController;
         this.employee = employee;
+
+        if (Objects.equals(employee.getPosition(), "Konsultantas")) {
+            btnCreate.setVisible(true);
+            btnDelete.setVisible(true);
+        }
+        else if (Objects.equals(employee.getPosition(), "Buhalteris")) {
+            btnCreate.setVisible(false);
+            btnDelete.setVisible(false);
+        }
+        else if (Objects.equals(employee.getPosition(), "Sandėlio darbuotojas" )) {
+            btnCreate.setVisible(false);
+            btnDelete.setVisible(false);
+        }
     }
 
     public void fillTable() {
@@ -186,7 +203,6 @@ public class OrderController implements Initializable {
             stage.setScene(new Scene(root));
             stage.show();
         }
-
     }
 
     public void deleteOrder(ActionEvent actionEvent) {

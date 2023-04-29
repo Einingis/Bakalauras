@@ -36,9 +36,17 @@ public class CreateOrderController implements Initializable {
     public TextField fldCity;
     public TextField fldAddress;
     public TextField fldDeliveryType;
+
     public ComboBox<String> cbClient;
     public TextField fldClient;
+
     public ComboBox<String> cbStatus;
+
+    public Button btnCreateUpdate;
+    public Button btnDelete;
+    public Button btnChangeQuantity;
+    public Button btnAddProduct;
+
 
     public TableView<Products> tableOrderProducts;
     public TableColumn<Products, Long> colId;
@@ -60,16 +68,66 @@ public class CreateOrderController implements Initializable {
     static Orders updateOrder;
     static Employees employee;
 
-    public Button btnCreateUpdate;
-    public Button btnDelete;
-    public Button btnChangeQuantity;
-
     public void setController(CreateOrderController createOrderController, OrderController orderController, Employees employee) {
         btnCreateUpdate.setText("Sukurti");
         statusUpdate = false;
         this.createOrderController = createOrderController;
         this.orderController = orderController;
         this.employee = employee;
+
+        if (Objects.equals(employee.getPosition(), "Konsultantas")) {
+            fldCity.setEditable(true);
+            fldAddress.setEditable(true);
+            fldDeliveryType.setEditable(true);
+
+            cbClient.setVisible(true);
+            fldClient.setEditable(true);
+
+            cbStatus.setDisable(false);
+            cbStatus.getItems().add("Sukurtas");
+            cbStatus.getItems().add("Surinktas");
+            cbStatus.getItems().add("Išsiųstas");
+            cbStatus.getItems().add("Pristatytas");
+            cbStatus.getItems().add("Atšauktas");
+
+            btnCreateUpdate.setVisible(true);
+            btnDelete.setVisible(true);
+            btnChangeQuantity.setVisible(true);
+            btnAddProduct.setVisible(true);
+        }
+        else if (Objects.equals(employee.getPosition(), "Buhalteris")) {
+            fldCity.setEditable(false);
+            fldAddress.setEditable(false);
+            fldDeliveryType.setEditable(false);
+
+            cbClient.setVisible(false);
+            fldClient.setEditable(false);
+
+            cbStatus.setDisable(true);
+
+            btnCreateUpdate.setVisible(false);
+            btnDelete.setVisible(false);
+            btnChangeQuantity.setVisible(false);
+            btnAddProduct.setVisible(false);
+        }
+        else if (Objects.equals(employee.getPosition(), "Sandėlio darbuotojas" )) {
+            fldCity.setEditable(false);
+            fldAddress.setEditable(false);
+            fldDeliveryType.setEditable(false);
+
+            cbClient.setVisible(false);
+            fldClient.setEditable(false);
+
+            cbStatus.setDisable(false);
+            cbStatus.getItems().add("Sukurtas");
+            cbStatus.getItems().add("Surinktas");
+            cbStatus.getItems().add("Išsiųstas");
+
+            btnCreateUpdate.setVisible(true);
+            btnDelete.setVisible(false);
+            btnChangeQuantity.setVisible(false);
+            btnAddProduct.setVisible(false);
+        }
     }
 
     public void addProduct(Products selectedItem) {
@@ -83,12 +141,6 @@ public class CreateOrderController implements Initializable {
         clientsList = ClientsOperations.findAllClients();
 
         clientsList.forEach(clients1 ->cbClient.getItems().add(clients1.getFullName()));
-
-        cbStatus.getItems().add("Sukurtas");
-        cbStatus.getItems().add("Surinktas");
-        cbStatus.getItems().add("Išsiųstas");
-        cbStatus.getItems().add("Pristatytas");
-        cbStatus.getItems().add("Atšauktas");
 
         try {
             fillTable();
@@ -189,7 +241,7 @@ public class CreateOrderController implements Initializable {
         if (statusUpdate) {
             updateOrder.setClient(client);
             updateOrder.setEmployee(employee);
-            updateOrder.setStatus("sukurtas");
+            updateOrder.setStatus(cbStatus.getValue());
             updateOrder.setPayedFor(false);
             updateOrder.setOrderCity(fldCity.getText());
             updateOrder.setOrderAddress(fldAddress.getText());
@@ -200,7 +252,7 @@ public class CreateOrderController implements Initializable {
         else {
             updateOrder = new Orders(client,
                     employee,
-                    "sukurtas",
+                    cbStatus.getValue(),
                     false,
                     fldCity.getText(),
                     fldAddress.getText(),
