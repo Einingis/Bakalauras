@@ -101,7 +101,17 @@ public class SellReportController implements Initializable {
 
 
         Paragraph pDateInterval = new Paragraph(dateInterval);
+        Paragraph pName;
 
+        if (witchOption) {
+            pName = new Paragraph("pardavimu ataskaita su prekėmis");
+        }
+        else {
+            pName = new Paragraph("pardavimu ataskaita");
+        }
+
+
+        document.add(pName);
         document.add(pDateInterval);
         document.add(Chunk.NEWLINE);
 
@@ -153,7 +163,7 @@ public class SellReportController implements Initializable {
             table.addCell(orderList.get(i).getOrderAddress());
             table.addCell(orderList.get(i).getStatus());
             table.addCell(orderList.get(i).getDeliveryType());
-            table.addCell(String.valueOf(orderList.get(i).getSum()));
+            table.addCell(orderList.get(i).getSumToString());
             table.addCell(c8);
             if (witchOption && 0<haveList.size()) {
                 table.addCell(c8);
@@ -170,7 +180,7 @@ public class SellReportController implements Initializable {
                     table.addCell(haveList.get(j).getProduct().getName());
                     table.addCell(haveList.get(j).getProduct().getColor());
                     table.addCell(haveList.get(j).getProduct().getMeasurement());
-                    table.addCell(String.valueOf(haveList.get(j).getProduct().getSellCost()));
+                    table.addCell(haveList.get(j).getProduct().getSellCostToString());
                     table.addCell(String.valueOf(haveList.get(j).getQuantity()));
                 }
             }

@@ -1,6 +1,7 @@
 package com.uni.bakalauras.model;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -180,5 +181,10 @@ public class Orders {
 
     public void setHave(Set<Have> have) {
         this.have = have;
+    }
+
+    public String getSumToString() {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return df.format(sum) + "€";
     }
 }

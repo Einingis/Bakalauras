@@ -124,7 +124,7 @@ public class CreateOrderController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         colColor.setCellValueFactory(new PropertyValueFactory<>("Color"));
         colMeasurement.setCellValueFactory(new PropertyValueFactory<>("Measurement"));
-        colSellCost.setCellValueFactory(new PropertyValueFactory<>("SellCost"));
+        colSellCost.setCellValueFactory(new PropertyValueFactory<>("SellCostToString"));
         colStock.setCellValueFactory(new PropertyValueFactory<>("InStock"));
 
         tableOrderProducts.setItems(MakeObservable.MakeProductListObservable(productsList));

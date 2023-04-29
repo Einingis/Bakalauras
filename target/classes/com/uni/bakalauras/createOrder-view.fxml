@@ -51,5 +51,7 @@
       <Button fx:id="btnCreateUpdate" layoutX="905.0" layoutY="142.0" mnemonicParsing="false" onAction="#CreateOrder" text="Sukurti" />
       <Button fx:id="btnDelete" layoutX="906.0" layoutY="491.0" mnemonicParsing="false" onAction="#deleteProduct" text="Ištrinti" />
       <Button fx:id="btnChangeQuantity" layoutX="894.0" layoutY="180.0" mnemonicParsing="false" onAction="#ChangeQuantity" text="Pakeisti kieki" />
+      <ComboBox fx:id="cbStatus" layoutX="13.0" layoutY="337.0" prefWidth="150.0" />
+      <Text layoutX="14.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Būsena" />
    </children>
 </AnchorPane>

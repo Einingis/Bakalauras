@@ -124,8 +124,8 @@ public class ProductsController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         colColor.setCellValueFactory(new PropertyValueFactory<>("Color"));
         colMeasurement.setCellValueFactory(new PropertyValueFactory<>("Measurement"));
-        colPrimeCost.setCellValueFactory(new PropertyValueFactory<>("PrimeCost"));
-        colSellCost.setCellValueFactory(new PropertyValueFactory<>("SellCost"));
+        colPrimeCost.setCellValueFactory(new PropertyValueFactory<>("PrimeCostToString"));
+        colSellCost.setCellValueFactory(new PropertyValueFactory<>("SellCostToString"));
         colStock.setCellValueFactory(new PropertyValueFactory<>("InStock"));
         try {
 

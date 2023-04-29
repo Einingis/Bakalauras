@@ -50,7 +50,7 @@ public class OrderController implements Initializable {
     public TableColumn<Orders, String> colClient;
     public TableColumn<Orders, String> colAddress;
     public TableColumn<Orders, String> colPayed;
-    public TableColumn<Orders, Double> colSum;
+    public TableColumn<Orders, String> colSum;
     public TableColumn<Orders, String> colStatus;
     public TableColumn<Orders, String> colDeliveryType;
 
@@ -114,7 +114,7 @@ public class OrderController implements Initializable {
         colClient.setCellValueFactory(new PropertyValueFactory<>("ClientName"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("OrderAddress"));
         colPayed.setCellValueFactory(new PropertyValueFactory<>("PayedForString"));
-        colSum.setCellValueFactory(new PropertyValueFactory<>("Sum"));
+        colSum.setCellValueFactory(new PropertyValueFactory<>("SumToString"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("Status"));
         colDeliveryType.setCellValueFactory(new PropertyValueFactory<>("DeliveryType"));
 
@@ -143,10 +143,12 @@ public class OrderController implements Initializable {
 
         if (!Objects.equals(startDateFilter.getValue(), null)) {
             startDateString = String.valueOf(startDateFilter.getValue());
+            startDateFilter.setValue(null);
         }
 
         if (!Objects.equals(endDateFilter.getValue(), null)) {
             endDateString = String.valueOf(endDateFilter.getValue());
+            endDateFilter.setValue(null);
         }
 
         List<String> filters = new ArrayList<>();
