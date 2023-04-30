@@ -1,44 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="547.0" prefWidth="992.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.CreateOrderController">
+<AnchorPane prefHeight="547.0" prefWidth="992.0" style="-fx-background-color: #ecf3f3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.CreateOrderController">
    <children>
-      <Group layoutX="14.0" layoutY="179.0">
-         <children>
-            <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miestas" />
-            <TextField fx:id="fldCity" layoutY="21.0" />
-         </children>
-      </Group>
-      <Group layoutX="14.0" layoutY="224.0">
-         <children>
-            <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas" />
-            <TextField fx:id="fldAddress" layoutY="22.94921875" />
-         </children>
-      </Group>
-      <Group layoutX="14.0" layoutY="271.0">
-         <children>
-            <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pristatymo būdas" />
-            <TextField fx:id="fldDeliveryType" layoutY="22.94921875" />
-         </children>
-      </Group>
+      <Group layoutX="14.0" layoutY="179.0" />
+      <Group layoutX="14.0" layoutY="224.0" />
+      <Group layoutX="14.0" layoutY="271.0" />
       <Group layoutX="14.0" layoutY="23.0">
          <children>
-            <Group>
-               <children>
-                  <Text layoutY="1.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="Klientas" />
-                  <ComboBox fx:id="cbClient" layoutY="7.0" onAction="#clientSelected" prefHeight="25.0" prefWidth="170.0" />
-                  <TextField fx:id="fldClient" layoutX="1.0" layoutY="7.0" onKeyReleased="#showClientsByText" />
-               </children>
-            </Group>
+            <Group />
          </children>
       </Group>
-      <TableView fx:id="tableOrderProducts" layoutX="246.0" layoutY="104.0" prefHeight="412.0" prefWidth="645.0">
+      <TableView fx:id="tableOrderProducts" layoutX="281.0" layoutY="43.0" prefHeight="488.0" prefWidth="654.0" stylesheets="@Stylesheets/application.css">
         <columns>
-           <TableColumn fx:id="colId" prefWidth="62.0" text="PrekesNr." />
+           <TableColumn fx:id="colId" prefWidth="62.0" text="Prekės nr." />
            <TableColumn fx:id="colGroup" prefWidth="82.0" text="Rušis" />
            <TableColumn fx:id="colName" prefWidth="124.0" text="Pavadinimas" />
            <TableColumn fx:id="colColor" minWidth="7.0" prefWidth="114.0" text="Spalva" />
@@ -47,11 +27,47 @@
            <TableColumn fx:id="colStock" prefWidth="70.0" text="Kiekis" />
         </columns>
       </TableView>
-      <Button fx:id="btnAddProduct" layoutX="906.0" layoutY="104.0" mnemonicParsing="false" onAction="#openProductList" text="Pridėti" />
-      <Button fx:id="btnCreateUpdate" layoutX="905.0" layoutY="142.0" mnemonicParsing="false" onAction="#CreateOrder" text="Sukurti" />
-      <Button fx:id="btnDelete" layoutX="906.0" layoutY="491.0" mnemonicParsing="false" onAction="#deleteProduct" text="Ištrinti" />
-      <Button fx:id="btnChangeQuantity" layoutX="894.0" layoutY="180.0" mnemonicParsing="false" onAction="#ChangeQuantity" text="Pakeisti kieki" />
-      <ComboBox fx:id="cbStatus" layoutX="13.0" layoutY="337.0" prefWidth="150.0" />
-      <Text layoutX="14.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Būsena" />
+      <Button fx:id="btnAddProduct" layoutX="34.0" layoutY="331.0" mnemonicParsing="false" onAction="#openProductList" prefHeight="32.0" prefWidth="142.0" style="-fx-background-color: #00c5dd;" text="PRIDĖTI PREKES" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnCreateUpdate" layoutX="34.0" layoutY="373.0" mnemonicParsing="false" onAction="#CreateOrder" prefHeight="32.0" prefWidth="142.0" style="-fx-background-color: #00c5dd;" text="SUKURTI UŽSAKYMĄ" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnDelete" layoutX="34.0" layoutY="463.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="32.0" prefWidth="142.0" style="-fx-background-color: #f18c4d;" text="IŠTRINTI" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnChangeQuantity" layoutX="34.0" layoutY="417.0" mnemonicParsing="false" onAction="#ChangeQuantity" prefHeight="32.0" prefWidth="142.0" style="-fx-background-color: #adb8c2;" text="PAKEISTI KIEKĮ" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <ComboBox fx:id="cbStatus" layoutX="34.0" layoutY="274.0" prefWidth="150.0" />
+      <Text fill="#36434c" layoutX="34.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Būsena">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fill="#36434c" layoutX="34.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miestas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldCity" layoutX="34.0" layoutY="111.0" />
+      <Text fill="#36434c" layoutX="34.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldAddress" layoutX="34.0" layoutY="167.0" />
+      <Text fill="#36434c" layoutX="34.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klientas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <ComboBox fx:id="cbClient" layoutX="34.0" layoutY="60.0" onAction="#clientSelected" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="fldClient" layoutX="34.0" layoutY="60.0" onKeyReleased="#showClientsByText" />
+      <Text fill="#36434c" layoutX="34.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pristatymo būdas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldDeliveryType" layoutX="34.0" layoutY="224.0" />
    </children>
 </AnchorPane>
