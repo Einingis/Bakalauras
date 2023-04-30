@@ -101,7 +101,9 @@ public class PopularProductsController implements Initializable {
         document.open();
 
         Paragraph pDateInterval = new Paragraph(dateInterval);
+        Paragraph pName = new Paragraph("populiariausios prekės");
 
+        document.add(pName);
         document.add(pDateInterval);
         document.add(Chunk.NEWLINE);
 

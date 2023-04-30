@@ -1,8 +1,6 @@
 package com.uni.bakalauras.fxmlControllers;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Phrase;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -54,6 +52,14 @@ public class ProductInStockController implements Initializable {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(fileName));
         document.open();
+
+        Paragraph pDateInterval = new Paragraph(now.format(formatter));
+        Paragraph pName = new Paragraph("prekiu likučiai");
+
+        document.add(pName);
+        document.add(pDateInterval);
+        document.add(Chunk.NEWLINE);
+
 
         PdfPTable table = new PdfPTable(6);
 

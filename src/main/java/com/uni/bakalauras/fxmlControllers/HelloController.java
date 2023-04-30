@@ -13,14 +13,33 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class HelloController {
 
     private static Employees employee;
     public Button btnLogoff;
+    public Button btnReport;
+    public Button btnDbReset;
+    public Button btnClients;
 
     public void setEmployee(Employees employee) {
         this.employee = employee;
+
+        btnDbReset.setVisible(false);
+
+        if (Objects.equals(employee.getPosition(), "Konsultantas")) {
+            btnReport.setVisible(false);
+            btnClients.setVisible(true);
+        }
+        else if (Objects.equals(employee.getPosition(), "Buhalteris")) {
+            btnReport.setVisible(true);
+            btnClients.setVisible(false);
+        }
+        else if (Objects.equals(employee.getPosition(), "Sandėlio darbuotojas" )) {
+            btnReport.setVisible(false);
+            btnClients.setVisible(false);
+        }
     }
 
     @FXML
@@ -49,7 +68,7 @@ public class HelloController {
         Stage stage = new Stage();
 
         ProductsController productsController = loader.getController();
-        productsController.setUpFromMain("main", productsController);
+        productsController.setUpFromMain("main", productsController, employee);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Prekės");
@@ -81,7 +100,6 @@ public class HelloController {
         stage.show();
     }
 
-
     public void openClients(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("clients-view.fxml"));
         Parent root = loader.load();
@@ -102,7 +120,7 @@ public class HelloController {
         Stage stage = new Stage();
 
         ReportsMenuController reportsMenuController = loader.getController();
-//        clientController.setController(clientController);
+        reportsMenuController.setController(reportsMenuController, employee);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Ataskaitos");

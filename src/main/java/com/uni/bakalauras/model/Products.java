@@ -1,6 +1,7 @@
 package com.uni.bakalauras.model;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.util.Set;
 
 @Entity
@@ -205,5 +206,15 @@ public class Products {
 
     public void setSum(Double sum) {
         this.sum = sum;
+    }
+
+    public String getSellCostToString() {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return df.format(sellCost) + "€";
+    }
+
+    public String getPrimeCostToString() {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return df.format(primeCost) + "€";
     }
 }

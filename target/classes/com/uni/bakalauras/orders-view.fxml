@@ -77,9 +77,9 @@
       <TextField fx:id="statusFilter" layoutX="689.0" layoutY="66.0" prefHeight="25.0" prefWidth="104.0" />
       <TextField fx:id="deliveryFilter" layoutX="800.0" layoutY="66.0" />
       <Button layoutX="967.0" layoutY="66.0" mnemonicParsing="false" onAction="#filterOrders" text="Filtruoti" />
-      <Button layoutX="956.0" layoutY="160.0" mnemonicParsing="false" onAction="#openUpdateWindow" text="Redaguoti" />
-      <Button layoutX="956.0" layoutY="202.0" mnemonicParsing="false" onAction="#deleteOrder" text="Ištrinti" />
-      <Button layoutX="949.0" layoutY="256.0" mnemonicParsing="false" onAction="#createReturn" text="Sukurti Gražinimą" />
+      <Button fx:id="btnUpdate" layoutX="956.0" layoutY="160.0" mnemonicParsing="false" onAction="#openUpdateWindow" text="Redaguoti" />
+      <Button fx:id="btnDelete" layoutX="956.0" layoutY="202.0" mnemonicParsing="false" onAction="#deleteOrder" text="Ištrinti" />
+      <Button fx:id="btnReturn" layoutX="949.0" layoutY="256.0" mnemonicParsing="false" onAction="#createReturn" text="Sukurti Gražinimą" />
       <Text layoutX="75.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki" />
       <DatePicker fx:id="endDateFilter" layoutX="75.0" layoutY="54.0" />
 >>>>>>> origin/main

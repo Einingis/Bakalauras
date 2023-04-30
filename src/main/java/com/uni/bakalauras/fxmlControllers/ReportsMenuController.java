@@ -1,6 +1,7 @@
 package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
+import com.uni.bakalauras.model.Employees;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ReportsMenuController {
+
+    private static Employees employee;
+    private static ReportsMenuController reportsMenuController;
 
 
     public void sellsReport(ActionEvent actionEvent) throws IOException {
@@ -67,5 +71,10 @@ public class ReportsMenuController {
         stage.setTitle("Ataskaita");
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public void setController(ReportsMenuController reportsMenuController, Employees employee) {
+        this.employee = employee;
+        this.reportsMenuController = reportsMenuController;
     }
 }

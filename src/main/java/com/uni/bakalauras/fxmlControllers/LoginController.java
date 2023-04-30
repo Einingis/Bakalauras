@@ -39,6 +39,5 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
         }
-
     }
 }

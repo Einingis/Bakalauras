@@ -2,6 +2,7 @@ package com.uni.bakalauras.fxmlControllers;
 
 import com.uni.bakalauras.Main;
 import com.uni.bakalauras.hibernateOperations.ProductsOperations;
+import com.uni.bakalauras.model.Employees;
 import com.uni.bakalauras.model.Products;
 import com.uni.bakalauras.hibernateOperations.Delete;
 import com.uni.bakalauras.util.MakeObservable;
@@ -83,6 +84,7 @@ public class ProductsController implements Initializable {
     public String fromWhere = "main";
     public CreateOrderController createOrderController;
     public ProductsController productsController;
+    public Employees employee;
 
     static List<Products> productsList = new ArrayList<>();
     static List<Products> productsInList = new ArrayList<>();
@@ -92,16 +94,29 @@ public class ProductsController implements Initializable {
         fillTable();
     }
 
-    public void setUpFromMain(String fromWhere, ProductsController productsController) {
+    public void setUpFromMain(String fromWhere, ProductsController productsController, Employees employee) {
         this.fromWhere = fromWhere;
         this.productsController = productsController;
+        this.employee = employee;
 
         fldOrderAmount.setVisible(false);
         txtOrderAmount.setVisible(false);
 
-        btnCreate.setVisible(true);
-        btnUpdate.setVisible(true);
-        btnDelete.setVisible(true);
+        if (Objects.equals(employee.getPosition(), "Konsultantas")) {
+            btnCreate.setVisible(false);
+            btnUpdate.setVisible(false);
+            btnDelete.setVisible(false);
+        }
+        else if (Objects.equals(employee.getPosition(), "Buhalteris")) {
+            btnCreate.setVisible(true);
+            btnUpdate.setVisible(true);
+            btnDelete.setVisible(true);
+        }
+        else if (Objects.equals(employee.getPosition(), "Sandėlio darbuotojas")) {
+            btnCreate.setVisible(false);
+            btnUpdate.setVisible(true);
+            btnDelete.setVisible(false);
+        }
     }
 
     public void setUpFromOrder(String fromWhere, CreateOrderController createOrderController, List<Products> productsInList ) {
@@ -124,8 +139,8 @@ public class ProductsController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         colColor.setCellValueFactory(new PropertyValueFactory<>("Color"));
         colMeasurement.setCellValueFactory(new PropertyValueFactory<>("Measurement"));
-        colPrimeCost.setCellValueFactory(new PropertyValueFactory<>("PrimeCost"));
-        colSellCost.setCellValueFactory(new PropertyValueFactory<>("SellCost"));
+        colPrimeCost.setCellValueFactory(new PropertyValueFactory<>("PrimeCostToString"));
+        colSellCost.setCellValueFactory(new PropertyValueFactory<>("SellCostToString"));
         colStock.setCellValueFactory(new PropertyValueFactory<>("InStock"));
         try {
 
@@ -172,7 +187,7 @@ public class ProductsController implements Initializable {
         Stage stage = new Stage();
 
         CreateProductController createProductController = loader.getController();
-        createProductController.setController(productsController, createProductController);
+        createProductController.setController(productsController, createProductController, employee);
 
         stage.initModality(Modality.NONE);
         stage.setTitle("Naujas uzsakymas");
@@ -191,7 +206,7 @@ public class ProductsController implements Initializable {
             Stage stage = new Stage();
 
             CreateProductController createProductController = loader.getController();
-            createProductController.setController(productsController, createProductController);
+            createProductController.setController(productsController, createProductController, employee);
             createProductController.setProduct(tableProducts.getSelectionModel().getSelectedItem());
 
             stage.initModality(Modality.NONE);

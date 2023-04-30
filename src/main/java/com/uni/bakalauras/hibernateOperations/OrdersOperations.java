@@ -107,9 +107,9 @@ public class OrdersOperations {
             conditionsList.add(cb.like(root.get("orderAddress"), "%" + filters.get(4) + "%"));
         }
         if (!Objects.equals(filters.get(5), "") && !Objects.equals(filters.get(5), "Visi")) {
-            if (Objects.equals(filters.get(5), "Neapmoketi")) {
+            if (Objects.equals(filters.get(5), "Neapmokėti")) {
                 conditionsList.add(cb.equal(root.get("payedFor"), false));
-            } else if (Objects.equals(filters.get(5), "Apmoketi")) {
+            } else if (Objects.equals(filters.get(5), "Apmokėti")) {
                 conditionsList.add(cb.equal(root.get("payedFor"), true));
             }
         }
