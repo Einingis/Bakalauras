@@ -39,15 +39,15 @@
       <Group layoutX="65.0" layoutY="53.0" />
       <Group layoutX="269.0" layoutY="22.0" />
       <Group layoutX="259.0" layoutY="49.0" />
-      <ComboBox fx:id="payedFilter" layoutX="769.0" layoutY="27.0" prefHeight="25.0" prefWidth="104.0" />
-      <Text fill="#36434c" layoutX="107.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klientas">
+      <ComboBox fx:id="payedFilter" layoutX="750.0" layoutY="32.0" prefHeight="25.0" prefWidth="104.0" />
+      <Text fill="#36434c" layoutX="114.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klientas">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Text>
-      <TextField fx:id="sumFilter" layoutX="586.0" layoutY="78.0" prefHeight="25.0" prefWidth="97.0" />
-      <TextField fx:id="statusFilter" layoutX="586.0" layoutY="28.0" prefHeight="25.0" prefWidth="97.0" />
-      <TextField fx:id="deliveryFilter" layoutX="769.0" layoutY="78.0" prefHeight="25.0" prefWidth="104.0" />
-      <Button layoutX="950.0" layoutY="79.0" mnemonicParsing="false" onAction="#filterOrders" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: #adb8c2;" text="FILTRUOTI" textFill="WHITE">
+      <TextField fx:id="sumFilter" layoutX="577.0" layoutY="83.0" prefHeight="25.0" prefWidth="97.0" />
+      <TextField fx:id="statusFilter" layoutX="577.0" layoutY="32.0" prefHeight="25.0" prefWidth="97.0" />
+      <TextField fx:id="deliveryFilter" layoutX="750.0" layoutY="83.0" prefHeight="25.0" prefWidth="104.0" />
+      <Button layoutX="950.0" layoutY="80.0" mnemonicParsing="false" onAction="#filterOrders" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: #adb8c2;" text="FILTRUOTI" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -63,43 +63,43 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <DatePicker fx:id="endDateFilter" layoutX="358.0" layoutY="79.0" prefHeight="25.0" prefWidth="149.0" />
-      <DatePicker fx:id="startDateFilter" layoutX="358.0" layoutY="28.0" prefHeight="25.0" prefWidth="149.0" />
-      <Text fill="#36434c" layoutX="330.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo">
+      <DatePicker fx:id="endDateFilter" layoutX="335.0" layoutY="83.0" prefHeight="25.0" prefWidth="149.0" />
+      <DatePicker fx:id="startDateFilter" layoutX="335.0" layoutY="32.0" prefHeight="25.0" prefWidth="149.0" />
+      <Text fill="#36434c" layoutX="335.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Text>
-      <TextField fx:id="addressFilter" layoutX="157.0" layoutY="79.0" />
-      <Text fill="#36434c" layoutX="107.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas">
+      <TextField fx:id="addressFilter" layoutX="114.0" layoutY="83.0" />
+      <Text fill="#36434c" layoutX="114.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Text>
-      <TextField fx:id="clientFilter" layoutX="157.0" layoutY="28.0" prefHeight="25.0" prefWidth="149.0" />
-      <Text fill="#36434c" layoutX="335.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki">
+      <TextField fx:id="clientFilter" layoutX="114.0" layoutY="32.0" prefHeight="25.0" prefWidth="149.0" />
+      <Text fill="#36434c" layoutX="335.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Text>
-      <TextField fx:id="IdFilter" layoutX="41.0" layoutY="31.0" prefHeight="25.0" prefWidth="47.0" />
-      <Text fill="#36434c" layoutX="15.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr.">
+      <TextField fx:id="IdFilter" layoutX="15.0" layoutY="83.0" prefHeight="25.0" prefWidth="47.0" />
+      <Text fill="#36434c" layoutX="15.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr.">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Text>
-      <Text fill="#36434c" layoutX="698.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apmokėtas">
+      <Text fill="#36434c" layoutX="750.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apmokėtas">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text fill="#36434c" layoutX="547.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suma">
+      <Text fill="#36434c" layoutX="577.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suma">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text fill="#36434c" layoutX="543.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Būsena">
+      <Text fill="#36434c" layoutX="577.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Būsena">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text fill="#36434c" layoutX="698.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pristatymas">
+      <Text fill="#36434c" layoutX="750.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pristatymas">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
