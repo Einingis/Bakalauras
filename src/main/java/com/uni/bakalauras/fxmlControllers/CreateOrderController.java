@@ -297,7 +297,7 @@ public class CreateOrderController implements Initializable {
             PopupOperations.alertMessage("Pasirinkite produktą");
         } else {
             Dialog<String> dialog = new Dialog<>();
-            dialog.setTitle("pašalinti produktą ");
+            dialog.setTitle("Pašalinti produktą ");
 
             ButtonType btnConfirm = new ButtonType("pašalinti", ButtonBar.ButtonData.OK_DONE);
             ButtonType btnCancel = new ButtonType("atšaukti", ButtonBar.ButtonData.CANCEL_CLOSE);

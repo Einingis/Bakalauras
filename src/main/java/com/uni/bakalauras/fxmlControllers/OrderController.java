@@ -188,7 +188,7 @@ public class OrderController implements Initializable {
 
     public void openUpdateWindow(ActionEvent actionEvent) throws IOException, SQLException {
         if (tableOrders.getSelectionModel().getSelectedItem() == null) {
-            PopupOperations.alertMessage("Pasirinkite Uzsakyma");
+            PopupOperations.alertMessage("Pasirinkite užsakymą");
         } else {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("createOrder-view.fxml"));
             Parent root = loader.load();
@@ -199,7 +199,7 @@ public class OrderController implements Initializable {
             createOrderController.setOrder(tableOrders.getSelectionModel().getSelectedItem());
 
             stage.initModality(Modality.NONE);
-            stage.setTitle("Naujas uzsakymas");
+            stage.setTitle("Naujas užsakymas");
             stage.setScene(new Scene(root));
             stage.show();
         }
@@ -210,9 +210,9 @@ public class OrderController implements Initializable {
             PopupOperations.alertMessage("Pasirinkite produkta");
         } else {
             Dialog<String> dialog = new Dialog<>();
-            dialog.setTitle("pašalinti Užsakymą");
+            dialog.setTitle("Pašalinti Užsakymą");
 
-            ButtonType btnConfirm = new ButtonType("pasalinti", ButtonBar.ButtonData.OK_DONE);
+            ButtonType btnConfirm = new ButtonType("pašalinti", ButtonBar.ButtonData.OK_DONE);
             ButtonType btnCancel = new ButtonType("atšaukti", ButtonBar.ButtonData.CANCEL_CLOSE);
             dialog.getDialogPane().getButtonTypes().addAll(btnConfirm, btnCancel);
 
