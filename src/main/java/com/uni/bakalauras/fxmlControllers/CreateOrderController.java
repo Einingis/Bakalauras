@@ -216,80 +216,86 @@ public class CreateOrderController implements Initializable {
         Double OrderSum = 0.0;
         Clients client;
 
-        for (Products product : productsList) {
-            OrderSum += product.getSellCost() * product.getInStock();
-        }
-
-        if (clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().isEmpty()) {
-
-            String[] parts = fldClient.getText().split(" ", 2);
-            client = new Clients(parts[0], parts[1], fldCity.getText(), fldAddress.getText());
-
-            List<Clients> clientsList = new ArrayList<>();
-
-            clientsList.add(client);
-
-            Create.createAllInList(clientsList);
-
-            client = ClientsOperations.findByFullNameAlways(client.getName(), client.getSurname());
-
+        if (productsList.isEmpty()) {
+            PopupOperations.alertMessage("Nepasirinkta jokių prekių");
         }
         else {
-            client = clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().get();
+            if (fldClient.getText().isEmpty()) {
+                PopupOperations.alertMessage("Nenurodytas klientas");
+            } else {
+                for (Products product : productsList) {
+                    OrderSum += product.getSellCost() * product.getInStock();
+                }
+
+                if (clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().isEmpty()) {
+
+                    String[] parts = fldClient.getText().split(" ", 2);
+                    client = new Clients(parts[0], parts[1], fldCity.getText(), fldAddress.getText());
+
+                    List<Clients> clientsList = new ArrayList<>();
+
+                    clientsList.add(client);
+
+                    Create.createAllInList(clientsList);
+
+                    client = ClientsOperations.findByFullNameAlways(client.getName(), client.getSurname());
+
+                } else {
+                    client = clientsList.stream().filter(c -> Objects.equals(c.getFullName(), fldClient.getText())).findFirst().get();
+                }
+
+                if (statusUpdate) {
+                    updateOrder.setClient(client);
+                    updateOrder.setEmployee(employee);
+                    updateOrder.setStatus(cbStatus.getValue());
+                    updateOrder.setPayedFor(false);
+                    updateOrder.setOrderCity(fldCity.getText());
+                    updateOrder.setOrderAddress(fldAddress.getText());
+                    updateOrder.setDeliveryType(fldDeliveryType.getText());
+                    updateOrder.setSum(OrderSum);
+                    Delete.delete(OrdersOperations.findOrdersProduct(updateOrder.getId()));
+                } else {
+                    updateOrder = new Orders(client,
+                            employee,
+                            cbStatus.getValue(),
+                            false,
+                            fldCity.getText(),
+                            fldAddress.getText(),
+                            fldDeliveryType.getText(),
+                            now(),
+                            OrderSum);
+                }
+                List<Orders> ordersList = new ArrayList<>();
+
+                ordersList.add(updateOrder);
+
+                Create.createAllInList(ordersList);
+
+                Create.createAllInList(updateProductsStock);
+
+                List<Have> haveList = new ArrayList<>();
+
+                for (Products product : productsList) {
+                    Have h = new Have();
+                    h.setProduct(product);
+                    h.setOrder(updateOrder);
+                    h.setQuantity(product.getInStock());
+
+                    haveList.add(h);
+                }
+                Create.createAllInList(haveList);
+
+                orderController.fillTable();
+
+                productsList.clear();
+                fldClient.clear();
+                fldAddress.clear();
+                fldCity.clear();
+                fldDeliveryType.clear();
+
+                tableOrderProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
+            }
         }
-
-        if (statusUpdate) {
-            updateOrder.setClient(client);
-            updateOrder.setEmployee(employee);
-            updateOrder.setStatus(cbStatus.getValue());
-            updateOrder.setPayedFor(false);
-            updateOrder.setOrderCity(fldCity.getText());
-            updateOrder.setOrderAddress(fldAddress.getText());
-            updateOrder.setDeliveryType(fldDeliveryType.getText());
-            updateOrder.setSum(OrderSum);
-            Delete.delete(OrdersOperations.findOrdersProduct(updateOrder.getId()));
-        }
-        else {
-            updateOrder = new Orders(client,
-                    employee,
-                    cbStatus.getValue(),
-                    false,
-                    fldCity.getText(),
-                    fldAddress.getText(),
-                    fldDeliveryType.getText(),
-                    now(),
-                    OrderSum);
-        }
-        List<Orders> ordersList = new ArrayList<>();
-
-        ordersList.add(updateOrder);
-
-        Create.createAllInList(ordersList);
-
-        Create.createAllInList(updateProductsStock);
-
-        List<Have> haveList = new ArrayList<>();
-
-        for (Products product : productsList) {
-            Have h = new Have();
-            h.setProduct(product);
-            h.setOrder(updateOrder);
-            h.setQuantity(product.getInStock());
-
-            haveList.add(h);
-        }
-            Create.createAllInList(haveList);
-
-        orderController.fillTable();
-
-        productsList.clear();
-        fldClient.clear();
-        fldAddress.clear();
-        fldCity.clear();
-        fldDeliveryType.clear();
-
-        tableOrderProducts.setItems(MakeObservable.MakeProductListObservable(productsList));
-
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
