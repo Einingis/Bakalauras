@@ -3,19 +3,39 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="474.0" style="-fx-background-color: #ecf3f3;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.HelloController">
    <children>
-      <Group layoutX="40.0" layoutY="34.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#clickOrders" prefHeight="47.0" prefWidth="158.0" text="Uzsakymai" />
-            <Button alignment="CENTER" layoutX="236.0" mnemonicParsing="false" onAction="#clickProducts" prefHeight="47.0" prefWidth="158.0" text="Prekės" />
-            <Button fx:id="btnClients" layoutX="236.0" layoutY="80.0" mnemonicParsing="false" onAction="#openClients" prefHeight="47.0" prefWidth="158.0" text="Klientai" />
-            <Button fx:id="btnReport" layoutX="-8.0" layoutY="80.0" mnemonicParsing="false" onAction="#openReports" prefHeight="47.0" prefWidth="158.0" text="Ataskaitos" />
-         </children>
-      </Group>
-      <Button fx:id="btnDbReset" layoutX="382.0" layoutY="342.0" mnemonicParsing="false" onAction="#update" text="Button" />
-      <Button fx:id="btnLogoff" layoutX="24.0" layoutY="342.0" mnemonicParsing="false" onAction="#logoff" text="Atsijungti" />
-      <Button layoutX="382.0" layoutY="294.0" mnemonicParsing="false" onAction="#openSettings" text="Nustatymai" />
+      <Group layoutX="40.0" layoutY="34.0" />
+      <Button fx:id="btnDbReset" layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#update" text="Button" />
+      <Button fx:id="btnLogoff" layoutX="338.0" layoutY="338.0" mnemonicParsing="false" onAction="#logoff" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #f18c4d;" text="ATSIJUNGTI" textFill="WHITE" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="29.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="28.0" layoutY="338.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="35.0" prefWidth="123.0" style="-fx-background-color: #adb8c2;" text="NUSTATYMAI" textFill="WHITE" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="28.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnReport" layoutX="54.0" layoutY="200.0" mnemonicParsing="false" onAction="#openReports" prefHeight="47.0" prefWidth="158.0" style="-fx-background-color: #00c5dd;" text="ATASKAITOS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnClients" layoutX="259.0" layoutY="200.0" mnemonicParsing="false" onAction="#openClients" prefHeight="47.0" prefWidth="158.0" style="-fx-background-color: #00c5dd;" text="KLIENTAI" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" layoutX="54.0" layoutY="103.0" mnemonicParsing="false" onAction="#clickOrders" prefHeight="47.0" prefWidth="158.0" style="-fx-background-color: #00c5dd;" text="UŽSAKYMAI" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" layoutX="259.0" layoutY="103.0" mnemonicParsing="false" onAction="#clickProducts" prefHeight="47.0" prefWidth="158.0" style="-fx-background-color: #00c5dd;" text="PREKĖS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

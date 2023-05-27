@@ -7,6 +7,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.uni.bakalauras.hibernateOperations.OrdersOperations;
 import com.uni.bakalauras.model.Have;
 import com.uni.bakalauras.model.Orders;
+import com.uni.bakalauras.util.PopupOperations;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
@@ -104,10 +105,10 @@ public class SellReportController implements Initializable {
         Paragraph pName;
 
         if (witchOption) {
-            pName = new Paragraph("pardavimu ataskaita su prekėmis");
+            pName = new Paragraph("Pardavimu ataskaita su prekėmis");
         }
         else {
-            pName = new Paragraph("pardavimu ataskaita");
+            pName = new Paragraph("Pardavimu ataskaita");
         }
 
 
@@ -116,6 +117,7 @@ public class SellReportController implements Initializable {
         document.add(Chunk.NEWLINE);
 
         PdfPTable table = new PdfPTable(7);
+        table.setWidthPercentage(100);
 
         PdfPCell c2 = new PdfPCell(new Phrase("Data"));
         PdfPCell c3 = new PdfPCell(new Phrase("Klientas"));
@@ -124,7 +126,7 @@ public class SellReportController implements Initializable {
         PdfPCell c6= new PdfPCell(new Phrase("Pristatymo būsena"));
         PdfPCell c7 = new PdfPCell(new Phrase("Suma"));
         PdfPCell c8 = new PdfPCell(new Phrase(""));
-        PdfPCell c9 = new PdfPCell(new Phrase("Rušis"));
+        PdfPCell c9 = new PdfPCell(new Phrase("Rūšis"));
         PdfPCell c10 = new PdfPCell(new Phrase("Pavadinimas"));
         PdfPCell c11 = new PdfPCell(new Phrase("Spalva"));
         PdfPCell c12 = new PdfPCell(new Phrase("Išmatavimas"));
@@ -188,5 +190,6 @@ public class SellReportController implements Initializable {
         }
         document.add(table);
         document.close();
+        PopupOperations.alertMessage("Ataskaita sukurta");
     }
 }

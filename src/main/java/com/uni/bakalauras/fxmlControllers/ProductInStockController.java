@@ -8,6 +8,7 @@ import com.uni.bakalauras.hibernateOperations.GroupsOperations;
 import com.uni.bakalauras.hibernateOperations.ProductsOperations;
 import com.uni.bakalauras.model.Groups;
 import com.uni.bakalauras.model.Products;
+import com.uni.bakalauras.util.PopupOperations;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -54,7 +55,7 @@ public class ProductInStockController implements Initializable {
         document.open();
 
         Paragraph pDateInterval = new Paragraph(now.format(formatter));
-        Paragraph pName = new Paragraph("prekiu likučiai");
+        Paragraph pName = new Paragraph("Prekių likučiai");
 
         document.add(pName);
         document.add(pDateInterval);
@@ -62,8 +63,9 @@ public class ProductInStockController implements Initializable {
 
 
         PdfPTable table = new PdfPTable(6);
+        table.setWidthPercentage(100);
 
-        PdfPCell c9 = new PdfPCell(new Phrase("Rušis"));
+        PdfPCell c9 = new PdfPCell(new Phrase("Rūšis"));
         PdfPCell c10 = new PdfPCell(new Phrase("Pavadinimas"));
         PdfPCell c11 = new PdfPCell(new Phrase("Spalva"));
         PdfPCell c12 = new PdfPCell(new Phrase("Išmatavimas"));
@@ -87,5 +89,6 @@ public class ProductInStockController implements Initializable {
         }
         document.add(table);
         document.close();
+        PopupOperations.alertMessage("Ataskaita sukurta");
     }
 }

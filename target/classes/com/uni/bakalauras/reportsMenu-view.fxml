@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="226.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.ReportsMenuController">
+<AnchorPane prefHeight="400.0" prefWidth="226.0" style="-fx-background-color: #ecf3f3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.ReportsMenuController">
    <children>
-      <Button layoutX="34.0" layoutY="35.0" mnemonicParsing="false" onAction="#sellsReport" prefHeight="25.0" prefWidth="134.0" text="pardavimu ataskaita" />
-      <Button layoutX="18.0" layoutY="71.0" mnemonicParsing="false" onAction="#sellsReportWithProducts" prefHeight="25.0" prefWidth="191.0" text="pardavimu ataskaita su prekėmis" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
-      <Button layoutX="34.0" layoutY="110.0" mnemonicParsing="false" onAction="#productInStock" prefHeight="25.0" prefWidth="134.0" text="prekiu likučiai" />
-      <Button layoutX="44.0" layoutY="149.0" mnemonicParsing="false" onAction="#popularProducts" text="populiariausios prekės " />
+      <Button layoutX="18.0" layoutY="59.0" mnemonicParsing="false" onAction="#sellsReport" prefHeight="53.0" prefWidth="191.0" style="-fx-background-color: #00c5dd;" text="PARVADIMŲ ATASKAITA" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="19.0" layoutY="137.0" mnemonicParsing="false" onAction="#sellsReportWithProducts" prefHeight="53.0" prefWidth="191.0" style="-fx-background-color: #00c5dd;" text="PARDAVIMŲ ATASKAITA SU PREKĖMIS" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="19.0" layoutY="213.0" mnemonicParsing="false" onAction="#productInStock" prefHeight="53.0" prefWidth="191.0" style="-fx-background-color: #00c5dd;" text="PREKIŲ LIKUČIAI" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="19.0" layoutY="290.0" mnemonicParsing="false" onAction="#popularProducts" prefHeight="53.0" prefWidth="191.0" style="-fx-background-color: #00c5dd;" text="POPULIARIAUSIOS PREKĖS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

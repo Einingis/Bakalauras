@@ -37,7 +37,7 @@ public class SettingsController {
             return;
         }
         if (!Objects.equals(fldNewPassword.getText(), fldNewRepeat.getText())) {
-            PopupOperations.alertMessage("Naujas slaptažodis nesutampa ");
+            PopupOperations.alertMessage("Naujas slaptažodis nesutampa");
             return;
         }
 
@@ -59,7 +59,7 @@ public class SettingsController {
         helloController.setEmployee(employee);
 
         Stage stage = (Stage) fldOldPassword.getScene().getWindow();
-        stage.setTitle("Uzsakymai");
+        stage.setTitle("Meniu");
         stage.setScene(new Scene(root));
         stage.show();
     }

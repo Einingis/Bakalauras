@@ -207,7 +207,7 @@ public class OrderController implements Initializable {
 
     public void deleteOrder(ActionEvent actionEvent) {
         if (tableOrders.getSelectionModel().getSelectedItem() == null) {
-            PopupOperations.alertMessage("Pasirinkite produkta");
+            PopupOperations.alertMessage("Pasirinkite produktą");
         } else {
             Dialog<String> dialog = new Dialog<>();
             dialog.setTitle("Pašalinti Užsakymą");
@@ -245,7 +245,7 @@ public class OrderController implements Initializable {
         createReturnsController.setFormData(selectedItem);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Update");
+        stage.setTitle("");
         stage.setScene(new Scene(root));
         stage.show();
     }

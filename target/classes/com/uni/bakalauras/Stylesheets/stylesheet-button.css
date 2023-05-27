@@ -1,0 +1,8 @@
+.button {
+   -fx-background-color: #e21141;
+   -fx-text-fill: white;
+}
+
+.AnchorPane {
+  -fx-background-color: #785451;
+}

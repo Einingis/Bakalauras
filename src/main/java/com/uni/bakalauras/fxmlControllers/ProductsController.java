@@ -190,7 +190,7 @@ public class ProductsController implements Initializable {
         createProductController.setController(productsController, createProductController, employee);
 
         stage.initModality(Modality.NONE);
-        stage.setTitle("Naujas uzsakymas");
+        stage.setTitle("Naujas užsakymas");
         stage.setScene(new Scene(root));
         stage.show();
 
@@ -198,7 +198,7 @@ public class ProductsController implements Initializable {
 
     public void updateProduct(ActionEvent actionEvent) throws IOException {
         if (tableProducts.getSelectionModel().getSelectedItem() == null) {
-            PopupOperations.alertMessage("Pasirinkite Uzsakyma");
+            PopupOperations.alertMessage("Pasirinkite Užsakymą");
         }
         else {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("CreateProduct-view.fxml"));

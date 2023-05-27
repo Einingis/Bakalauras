@@ -238,7 +238,7 @@ public class CreateProductController implements Initializable {
             Places selectedItem = tablePlaces.getSelectionModel().getSelectedItem();
 
             Dialog<String> dialog = new Dialog<>();
-            dialog.setTitle("Pakeisti kieki");
+            dialog.setTitle("Pakeisti kiekį");
 
             ButtonType btnConfirm = new ButtonType("Pakeisti", ButtonBar.ButtonData.OK_DONE);
             ButtonType btnCancel = new ButtonType("atšaukti", ButtonBar.ButtonData.CANCEL_CLOSE);

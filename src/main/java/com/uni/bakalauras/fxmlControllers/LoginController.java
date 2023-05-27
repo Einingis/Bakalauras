@@ -35,7 +35,7 @@ public class LoginController {
             helloController.setEmployee(employee.get());
 
             Stage stage = (Stage) fldName.getScene().getWindow();
-            stage.setTitle("Uzsakymai");
+            stage.setTitle("Meniu");
             stage.setScene(new Scene(root));
             stage.show();
         }

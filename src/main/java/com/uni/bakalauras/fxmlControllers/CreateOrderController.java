@@ -69,7 +69,7 @@ public class CreateOrderController implements Initializable {
     static Employees employee;
 
     public void setController(CreateOrderController createOrderController, OrderController orderController, Employees employee) {
-        btnCreateUpdate.setText("Sukurti");
+        btnCreateUpdate.setText("SUKURTI UŽSAKYMĄ");
         statusUpdate = false;
         this.createOrderController = createOrderController;
         this.orderController = orderController;
@@ -140,6 +140,8 @@ public class CreateOrderController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         clientsList = ClientsOperations.findAllClients();
 
+        productsList.clear();
+
         clientsList.forEach(clients1 ->cbClient.getItems().add(clients1.getFullName()));
 
         try {
@@ -151,7 +153,7 @@ public class CreateOrderController implements Initializable {
 
     public void setOrder(Orders updateOrder) throws SQLException {
         this.updateOrder = updateOrder;
-        btnCreateUpdate.setText("Pakeisti");
+        btnCreateUpdate.setText("REDAGUOTI");
 
         statusUpdate = true;
 
@@ -160,8 +162,6 @@ public class CreateOrderController implements Initializable {
         fldAddress.setText(updateOrder.getOrderAddress());
         fldDeliveryType.setText(updateOrder.getDeliveryType());
         cbStatus.getSelectionModel().select(updateOrder.getStatus());
-
-        productsList.clear();
 
         for (Have have : OrdersOperations.findOrdersProduct(updateOrder.getId())) {
             have.getProduct().setInStock(have.getQuantity());

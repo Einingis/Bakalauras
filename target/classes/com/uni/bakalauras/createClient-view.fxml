@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="181.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.CreateClientController">
+<AnchorPane prefHeight="400.0" prefWidth="181.0" style="-fx-background-color: #ecf3f3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.CreateClientController">
    <children>
       <TextField fx:id="fldName" layoutX="14.0" layoutY="38.0" />
       <TextField fx:id="fldSurname" layoutX="14.0" layoutY="93.0" />
       <TextField fx:id="fldNumber" layoutX="14.0" layoutY="143.0" />
       <TextField fx:id="fldCity" layoutX="14.0" layoutY="194.0" />
       <TextField fx:id="fldAddress" layoutX="14.0" layoutY="245.0" />
-      <Text layoutX="18.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vardas" />
-      <Text layoutX="14.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pavarde" />
-      <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numeris" />
-      <Text layoutX="14.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mietas" />
-      <Text layoutX="14.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas" />
-      <Button fx:id="btnCreateUpdate" layoutX="18.0" layoutY="300.0" mnemonicParsing="false" onAction="#createClient" text="Sukurti" />
+      <Text fill="#36434c" layoutX="18.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vardas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fill="#36434c" layoutX="14.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pavardė">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fill="#36434c" layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numeris">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fill="#36434c" layoutX="14.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miestas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fill="#36434c" layoutX="14.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Button fx:id="btnCreateUpdate" layoutX="14.0" layoutY="287.0" mnemonicParsing="false" onAction="#createClient" prefHeight="34.0" prefWidth="85.0" style="-fx-background-color: #00c5dd;" text="SUKURTI" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

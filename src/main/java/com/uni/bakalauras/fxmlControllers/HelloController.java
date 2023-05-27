@@ -52,7 +52,7 @@ public class HelloController {
         orderController.setController(orderController, employee);
 
         stage.initModality(Modality.NONE);
-        stage.setTitle("Uzsakymai");
+        stage.setTitle("Užsakymai");
         stage.setScene(new Scene(root));
         stage.show();
     }

@@ -1,53 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="566.0" prefWidth="1025.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.ProductsController">
+<AnchorPane prefHeight="566.0" prefWidth="1025.0" style="-fx-background-color: #ecf3f3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.ProductsController">
    <children>
-      <TableView fx:id="tableProducts" layoutX="25.0" layoutY="135.0" onMouseClicked="#onClick" prefHeight="336.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="120.0">
+      <TableView fx:id="tableProducts" layoutX="25.0" layoutY="150.0" onMouseClicked="#onClick" prefHeight="401.0" prefWidth="860.0" stylesheets="@Stylesheets/application.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
         <columns>
-          <TableColumn fx:id="colId" prefWidth="59.0" text="PrekesNr." />
-          <TableColumn fx:id="colGroup" prefWidth="129.0" text="Rušis" />
-            <TableColumn fx:id="colName" prefWidth="150.0" text="Pavadinimas" />
-            <TableColumn fx:id="colColor" minWidth="7.0" prefWidth="125.0" text="Spalva" />
-            <TableColumn fx:id="colMeasurement" minWidth="0.0" prefWidth="121.0" text="Išmatavimai" />
-            <TableColumn fx:id="colPrimeCost" minWidth="0.0" prefWidth="96.0" text="Savikaina" />
-            <TableColumn fx:id="colSellCost" prefWidth="97.0" text="Kaina" />
-            <TableColumn fx:id="colStock" prefWidth="82.0" text="Kiekis" />
+          <TableColumn fx:id="colId" prefWidth="87.0" text="Prekės nr." />
+          <TableColumn fx:id="colGroup" prefWidth="124.0" text="Rušis" />
+            <TableColumn fx:id="colName" prefWidth="163.0" text="Pavadinimas" />
+            <TableColumn fx:id="colColor" minWidth="7.0" prefWidth="121.0" text="Spalva" />
+            <TableColumn fx:id="colMeasurement" minWidth="0.0" prefWidth="143.0" text="Išmatavimai" />
+            <TableColumn fx:id="colPrimeCost" minWidth="0.0" prefWidth="113.0" text="Savikaina" />
+            <TableColumn fx:id="colSellCost" prefWidth="85.0" text="Kaina" />
+            <TableColumn fx:id="colStock" prefWidth="109.0" text="Kiekis" />
         </columns>
       </TableView>
       <TextField fx:id="fldOrderAmount" layoutX="15.0" layoutY="88.0" prefHeight="25.0" prefWidth="90.0" />
-      <Button fx:id="btnCreate" layoutX="894.0" layoutY="120.0" mnemonicParsing="false" onAction="#createProduct" text="Sukurti Preke" />
-      <Button fx:id="btnUpdate" layoutX="894.0" layoutY="158.0" mnemonicParsing="false" onAction="#updateProduct" text="Atnaujinti Preke" />
-      <Button fx:id="btnDelete" layoutX="894.0" layoutY="194.0" mnemonicParsing="false" onAction="#deleteProduct" text="Ištrinti Preke" />
-      <Button fx:id="btnFilter" layoutX="914.0" layoutY="88.0" mnemonicParsing="false" onAction="#filterProducts" text="Filtruoti " />
-      <TextField fx:id="fldFilterId" layoutX="15.0" layoutY="54.0" prefHeight="25.0" prefWidth="90.0" />
-      <Text fx:id="txtNr" layoutX="16.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prekes Nr." />
-      <TextField fx:id="fldFilterType" layoutX="113.0" layoutY="50.0" prefHeight="25.0" prefWidth="90.0" />
-      <Text fx:id="txtType" layoutX="114.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rušis" />
-      <TextField fx:id="fldFilterName" layoutX="214.0" layoutY="50.0" prefHeight="25.0" prefWidth="90.0" />
-      <Text fx:id="txtName" layoutX="215.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pavadinimas" />
-      <TextField fx:id="fldFilterColor" layoutX="355.0" layoutY="50.0" prefHeight="25.0" prefWidth="90.0" />
-      <Text fx:id="txtColor" layoutX="356.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spalva" />
-      <TextField fx:id="fldFilterMeasurement" layoutX="478.0" layoutY="46.0" prefHeight="25.0" prefWidth="90.0" />
-      <Text fx:id="txtMeasurement" layoutX="479.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Išmatavimai" />
-      <TextField fx:id="fldFilterPrimeCostMin" layoutX="601.0" layoutY="45.0" prefHeight="25.0" prefWidth="90.0" />
-      <Text fx:id="txtPrimeCost" layoutX="599.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savikaina" />
-      <TextField fx:id="fldFilterPrimeCostMax" layoutX="601.0" layoutY="88.0" prefHeight="25.0" prefWidth="90.0" />
-      <TextField fx:id="fldFilterPriceMin" layoutX="691.0" layoutY="45.0" prefHeight="25.0" prefWidth="90.0" />
-      <Text fx:id="txtCost" layoutX="691.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kaina" />
-      <TextField fx:id="fldFilterPriceMax" layoutX="691.0" layoutY="88.0" prefHeight="25.0" prefWidth="90.0" />
-      <TextField fx:id="fldFilterStockMin" layoutX="781.0" layoutY="45.0" prefHeight="25.0" prefWidth="90.0" />
-      <Text fx:id="txtStock" layoutX="781.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis" />
-      <TextField fx:id="fldFilterStockMax" layoutX="781.0" layoutY="88.0" prefHeight="25.0" prefWidth="90.0" />
-      <Text fx:id="txtMin1" layoutX="601.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo" />
-      <Text fx:id="txtMin2" layoutX="694.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo" />
-      <Text fx:id="txtMin3" layoutX="785.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo" />
-      <Text fx:id="txtMax1" layoutX="601.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki" />
-      <Text fx:id="txtMax2" layoutX="688.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki" />
-      <Text fx:id="txtMax3" layoutX="779.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki" />
-      <Text fx:id="txtOrderAmount" layoutX="15.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis" />
+      <Button fx:id="btnCreate" layoutX="977.0" layoutY="150.0" mnemonicParsing="false" onAction="#createProduct" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: #00c5dd;" text="SUKURTI" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnUpdate" layoutX="977.0" layoutY="243.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: #adb8c2;" text="REDAGUOTI" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnDelete" layoutX="977.0" layoutY="195.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: #f18c4d;" text="IŠTRINTI" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnFilter" layoutX="977.0" layoutY="86.0" mnemonicParsing="false" onAction="#filterProducts" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: #adb8c2;" text="FILTRUOTI" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <TextField fx:id="fldFilterId" layoutX="15.0" layoutY="40.0" prefHeight="25.0" prefWidth="90.0" />
+      <Text fx:id="txtNr" fill="#36434c" layoutX="16.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prekės nr.">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldFilterType" layoutX="131.0" layoutY="40.0" prefHeight="25.0" prefWidth="90.0" />
+      <Text fx:id="txtType" fill="#36434c" layoutX="132.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rūšis">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldFilterName" layoutX="131.0" layoutY="88.0" prefHeight="25.0" prefWidth="90.0" />
+      <Text fx:id="txtName" fill="#36434c" layoutX="132.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pavadinimas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldFilterColor" layoutX="242.0" layoutY="41.0" prefHeight="25.0" prefWidth="90.0" />
+      <Text fx:id="txtColor" fill="#36434c" layoutX="243.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spalva">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldFilterMeasurement" layoutX="242.0" layoutY="88.0" prefHeight="25.0" prefWidth="90.0" />
+      <Text fx:id="txtMeasurement" fill="#36434c" layoutX="243.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Išmatavimai">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldFilterPrimeCostMin" layoutX="423.0" layoutY="41.0" prefHeight="25.0" prefWidth="70.0" />
+      <Text fx:id="txtPrimeCost" fill="#36434c" layoutX="421.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savikaina">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldFilterPrimeCostMax" layoutX="423.0" layoutY="88.0" prefHeight="25.0" prefWidth="70.0" />
+      <TextField fx:id="fldFilterPriceMin" layoutX="542.0" layoutY="41.0" prefHeight="25.0" prefWidth="70.0" />
+      <Text fx:id="txtCost" fill="#36434c" layoutX="542.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kaina">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldFilterPriceMax" layoutX="542.0" layoutY="88.0" prefHeight="25.0" prefWidth="70.0" />
+      <TextField fx:id="fldFilterStockMin" layoutX="651.0" layoutY="41.0" prefHeight="25.0" prefWidth="70.0" />
+      <Text fx:id="txtStock" fill="#36434c" layoutX="651.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <TextField fx:id="fldFilterStockMax" layoutX="651.0" layoutY="88.0" prefHeight="25.0" prefWidth="70.0" />
+      <Text fx:id="txtMin1" fill="#36434c" layoutX="423.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fx:id="txtMin2" fill="#36434c" layoutX="545.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fx:id="txtMin3" fill="#36434c" layoutX="653.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuo">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fx:id="txtMax1" fill="#36434c" layoutX="423.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fx:id="txtMax2" fill="#36434c" layoutX="545.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fx:id="txtMax3" fill="#36434c" layoutX="653.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iki">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fx:id="txtOrderAmount" fill="#36434c" layoutX="15.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Line endX="1110.0" layoutY="132.0" opacity="0.9" stroke="#36434c" strokeMiterLimit="20.0" />
    </children>
 </AnchorPane>

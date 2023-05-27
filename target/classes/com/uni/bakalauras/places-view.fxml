@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.PlacesController">
-    <TableView fx:id="tablePlaces" layoutX="31.0" layoutY="30.0" onMouseClicked="#addPlaceMouse" prefHeight="342.0" prefWidth="299.0">
-        <columns>
-            <TableColumn fx:id="clmWarehouse" prefWidth="92.0" text="Sandelis" />
-            <TableColumn fx:id="clmShelf" prefWidth="107.0" text="Lentyna" />
-            <TableColumn fx:id="clmPlace" prefWidth="98.0" text="Vieta" />
-        </columns>
-    </TableView>
-   <Text layoutX="353.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis" />
-   <TextField fx:id="fldQuantity" layoutX="339.0" layoutY="47.0" prefHeight="25.0" prefWidth="59.0" />
-   <Button layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#addPlaceBtn" text="Pridėti vietą" />
+<AnchorPane prefHeight="400.0" prefWidth="450.0" style="-fx-background-color: #ecf3f3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.PlacesController">
+   <children>
+       <TableView fx:id="tablePlaces" layoutX="22.0" layoutY="29.0" onMouseClicked="#addPlaceMouse" prefHeight="342.0" prefWidth="299.0" stylesheets="@Stylesheets/application.css">
+           <columns>
+               <TableColumn fx:id="clmWarehouse" prefWidth="92.0" text="Sandėlis" />
+               <TableColumn fx:id="clmShelf" prefWidth="107.0" text="Lentyna" />
+               <TableColumn fx:id="clmPlace" prefWidth="98.0" text="Vieta" />
+           </columns>
+       </TableView>
+      <Text fill="#36434c" layoutX="327.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <TextField fx:id="fldQuantity" layoutX="327.0" layoutY="49.0" prefHeight="25.0" prefWidth="71.0" />
+      <Button layoutX="327.0" layoutY="88.0" mnemonicParsing="false" onAction="#addPlaceBtn" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: #00c5dd;" text="PRIDĖTI VIETĄ" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
 
 </AnchorPane>

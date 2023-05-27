@@ -1,41 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="290.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.CreateProductController">
-    <Group layoutX="26.0" layoutY="34.0">
-        <children>
-            <Text layoutY="1.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="Rušis" />
-            <ComboBox fx:id="cbType" layoutY="7.0" onAction="#typeSelected" prefHeight="25.0" prefWidth="170.0" />
-            <TextField fx:id="fldType" layoutX="1.0" layoutY="7.0" onKeyReleased="#showProductByText" />
-        </children>
-    </Group>
-    <TextField fx:id="fldName" layoutX="139.0" layoutY="96.0" prefHeight="25.0" prefWidth="114.0" />
-    <Text fx:id="txtName" layoutX="139.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pavadinimas" />
-    <TextField fx:id="fldColor" layoutX="26.0" layoutY="186.0" prefHeight="25.0" prefWidth="90.0" />
-    <Text fx:id="txtColor" layoutX="29.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spalva" />
-    <TextField fx:id="fldMeasurement" layoutX="141.0" layoutY="186.0" prefHeight="25.0" prefWidth="90.0" />
-    <Text fx:id="txtMeasurement" layoutX="142.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Išmatavimai" />
-    <TextField fx:id="fldPrimeCost" layoutX="27.0" layoutY="136.0" prefHeight="25.0" prefWidth="90.0" />
-    <Text fx:id="txtPrimeCost" layoutX="30.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savikaina" />
-    <TextField fx:id="fldPrice" layoutX="142.0" layoutY="136.0" prefHeight="25.0" prefWidth="90.0" />
-    <Text fx:id="txtCost" layoutX="143.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kaina" />
-    <TextField fx:id="fldStock" layoutX="27.0" layoutY="96.0" prefHeight="25.0" prefWidth="90.0" />
-    <Text fx:id="txtStock" layoutX="26.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis" />
-   <Button fx:id="btnCreate" layoutX="29.0" layoutY="232.0" mnemonicParsing="false" onAction="#createProduct" text="Sukurti" />
-   <TableView fx:id="tablePlaces" layoutX="274.0" layoutY="38.0" prefHeight="241.0" prefWidth="377.0">
-     <columns>
-       <TableColumn fx:id="clmWarehouse" prefWidth="92.0" text="Sandelis" />
-       <TableColumn fx:id="clmShelf" prefWidth="107.0" text="Lentyna" />
-         <TableColumn fx:id="clmPlace" prefWidth="98.0" text="Vieta" />
-         <TableColumn fx:id="clmPlaced" prefWidth="79.0" text="Prekiu kiekis" />
-     </columns>
-   </TableView>
-   <Button fx:id="btnAddPlace" layoutX="666.0" layoutY="38.0" mnemonicParsing="false" onAction="#openAddPlaces" text="Pridėti vieta" />
-   <Button fx:id="btnChangeAmount" layoutX="666.0" layoutY="74.0" mnemonicParsing="false" onAction="#updatePlaced" text="Pakeisti kieki" />
-   <Button fx:id="btnDelete" layoutX="664.0" layoutY="109.0" mnemonicParsing="false" onAction="#deletePlace" text="Pašalinti vieta" />
+<AnchorPane prefHeight="350.0" prefWidth="800.0" style="-fx-background-color: #ecf3f3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uni.bakalauras.fxmlControllers.CreateProductController">
+   <children>
+       <Group layoutX="26.0" layoutY="34.0" AnchorPane.leftAnchor="16.0">
+           <children>
+               <Text fill="#36434c" layoutX="-10.0" layoutY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rūšis">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+               <ComboBox fx:id="cbType" layoutX="-10.0" layoutY="8.0" onAction="#typeSelected" prefHeight="25.0" prefWidth="170.0" />
+               <TextField fx:id="fldType" layoutX="-10.0" layoutY="8.0" onKeyReleased="#showProductByText" />
+           </children>
+       </Group>
+       <TextField fx:id="fldName" layoutX="119.0" layoutY="95.0" prefHeight="25.0" prefWidth="114.0" />
+       <Text fx:id="txtName" fill="#36434c" layoutX="119.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pavadinimas">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+       <TextField fx:id="fldColor" layoutX="19.0" layoutY="202.0" prefHeight="25.0" prefWidth="90.0" />
+       <Text fx:id="txtColor" fill="#36434c" layoutX="19.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spalva">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+       <TextField fx:id="fldMeasurement" layoutX="119.0" layoutY="202.0" prefHeight="25.0" prefWidth="90.0" />
+       <Text fx:id="txtMeasurement" fill="#36434c" layoutX="119.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Išmatavimai">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+       <TextField fx:id="fldPrimeCost" layoutX="19.0" layoutY="149.0" prefHeight="25.0" prefWidth="90.0" />
+       <Text fx:id="txtPrimeCost" fill="#36434c" layoutX="19.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savikaina">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+       <TextField fx:id="fldPrice" layoutX="119.0" layoutY="149.0" prefHeight="25.0" prefWidth="90.0" />
+       <Text fx:id="txtCost" fill="#36434c" layoutX="119.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kaina">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+       <TextField fx:id="fldStock" layoutX="19.0" layoutY="95.0" prefHeight="25.0" prefWidth="90.0" />
+       <Text fx:id="txtStock" fill="#36434c" layoutX="19.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiekis" AnchorPane.leftAnchor="19.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnCreate" layoutX="19.0" layoutY="249.0" mnemonicParsing="false" onAction="#createProduct" style="-fx-background-color: #00c5dd;" text="SUKURTI PREKĘ" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TableView fx:id="tablePlaces" layoutX="274.0" layoutY="38.0" prefHeight="294.0" prefWidth="377.0" stylesheets="@Stylesheets/application.css">
+        <columns>
+          <TableColumn fx:id="clmWarehouse" prefWidth="92.0" text="Sandėlis" />
+          <TableColumn fx:id="clmShelf" prefWidth="107.0" text="Lentyna" />
+            <TableColumn fx:id="clmPlace" prefWidth="98.0" text="Vieta" />
+            <TableColumn fx:id="clmPlaced" prefWidth="79.0" text="Prekių kiekis" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnAddPlace" layoutX="666.0" layoutY="38.0" mnemonicParsing="false" onAction="#openAddPlaces" style="-fx-background-color: #00c5dd;" text="PRIDĖTI VIETĄ" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnChangeAmount" layoutX="666.0" layoutY="74.0" mnemonicParsing="false" onAction="#updatePlaced" style="-fx-background-color: #adb8c2;" text="PAKEISTI KIEKĮ" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDelete" layoutX="664.0" layoutY="109.0" mnemonicParsing="false" onAction="#deletePlace" style="-fx-background-color: #f18c4d;" text="PAŠALINTI VIETĄ" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
 
 </AnchorPane>
